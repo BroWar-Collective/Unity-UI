@@ -1,0 +1,16 @@
+{
+  "name": "com.browar.TODO",
+  "displayName": "TODO",
+  "version": "0.0.0",
+  "unity": "2018.1",
+  "description": "TODO.",
+  "keywords": [
+    "TODO",
+  ],
+  "category": "TODO",
+  "author": {
+    "name": "BroWar Collective",
+    "email": "browar.collective@gmail.com",
+    "url": "https://github.com/BroWar-Collective"
+  }
+}
