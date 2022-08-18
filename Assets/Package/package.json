@@ -1,13 +1,13 @@
 {
-  "name": "com.browar.TODO",
-  "displayName": "TODO",
+  "name": "com.browar.ui",
+  "displayName": "UI",
   "version": "0.0.0",
   "unity": "2018.1",
-  "description": "TODO.",
+  "description": "UI core system for the Unity engine.",
   "keywords": [
-    "TODO",
+    "ui",
   ],
-  "category": "TODO",
+  "category": "ui",
   "author": {
     "name": "BroWar Collective",
     "email": "browar.collective@gmail.com",

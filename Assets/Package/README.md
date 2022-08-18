@@ -1,1 +1,8 @@
-# <package_name>
+# UI
+
+### Structure
+```
+├── Editor
+├── Runtime
+├── Tests
+```
