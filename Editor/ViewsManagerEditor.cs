@@ -6,7 +6,7 @@ namespace BroWar.Editor.UI
 
     using Editor = UnityEditor.Editor;
 
-    [CustomEditor(typeof(CanvasManager))]
-    public class CanvasManagerEditor : Editor
+    [CustomEditor(typeof(ViewsManager))]
+    public class ViewsManagerEditor : Editor
     { }
 }
