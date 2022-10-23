@@ -13,12 +13,10 @@ namespace BroWar.UI
     {
         private readonly Dictionary<Type, UiView> viewsByTypes = new Dictionary<Type, UiView>();
 
-        //TODO: better names
+        private readonly List<UiView> activeViews = new List<UiView>();
 
         [SerializeField]
-        private List<UiView> predfinedViews;
-        [SerializeField]
-        private List<UiView> prewarmedViews;
+        private List<UiView> views;
 
         //TODO: events
 
@@ -29,7 +27,7 @@ namespace BroWar.UI
 
         private void CacheViews()
         {
-            foreach (var view in prewarmedViews)
+            foreach (var view in views)
             {
                 CacheView(view);
             }
@@ -54,44 +52,42 @@ namespace BroWar.UI
 
         //TODO: move public API to interface
 
-        public T Show<T>() where T : UiView
+        private void Show(UiView view)
         {
-            if (TryGetView<T>(out var view))
-            {
-                view.Show();
-            }
-
-            return view;
+            view.Show();
+            activeViews.Add(view);
         }
 
-        public UiView Show(Type viewType)
+        private void Hide(UiView view)
+        {
+            view.Hide();
+            activeViews.Remove(view);
+        }
+
+        public void Show<T>() where T : UiView
+        {
+            Show(typeof(T));
+        }
+
+        public void Show(Type viewType)
         {
             if (TryGetView(viewType, out var view))
             {
-                view.Show();
+                Show(view);
             }
-
-            return view;
         }
 
-        public T Hide<T>() where T : UiView
+        public void Hide<T>() where T : UiView
         {
-            if (TryGetView<T>(out var view))
-            {
-                view.Hide();
-            }
-
-            return view;
+            Hide(typeof(T));
         }
 
-        public UiView Hide(Type viewType)
+        public void Hide(Type viewType)
         {
             if (TryGetView(viewType, out var view))
             {
-                view.Hide();
+                Hide(view);
             }
-
-            return view;
         }
 
         public bool TryGetView(Type type, out UiView view)
@@ -121,7 +117,15 @@ namespace BroWar.UI
         {
             foreach (var view in Views)
             {
-                view.Hide();
+                Hide(view);
+            }
+        }
+
+        public void HideActiveViews()
+        {
+            foreach (var view in activeViews)
+            {
+                Hide(view);
             }
         }
 
