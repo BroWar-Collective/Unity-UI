@@ -7,18 +7,10 @@ namespace BroWar.UI
     {
         protected RectTransform rectTransform;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
         }
-
-        private void Start()
-        {
-            Initialize();
-        }
-
-        protected virtual void Initialize()
-        { }
 
         public override void Show()
         {
