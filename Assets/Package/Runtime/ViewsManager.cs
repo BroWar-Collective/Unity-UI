@@ -15,6 +15,10 @@ namespace BroWar.UI
 
         private readonly List<UiView> activeViews = new List<UiView>();
 
+        //TODO: inject main camera
+        //TODO: inject tooltip system
+        //TODO: inject game references
+
         [SerializeField]
         private List<UiView> views;
 
