@@ -9,27 +9,27 @@ namespace BroWar.UI
             Ease ease = Ease.OutCubic, float duration = 1.0f)
         {
             var sequence = DOTween.Sequence();
-            Vector2 inPos;
+            Vector2 inPosition;
             switch (direction)
             {
                 case AnimationDirection.Left:
-                    inPos = new Vector2(rectTransform.rect.width, 0);
+                    inPosition = new Vector2(rectTransform.rect.width, 0);
                     break;
                 case AnimationDirection.Right:
-                    inPos = new Vector2(-rectTransform.rect.width, 0);
+                    inPosition = new Vector2(-rectTransform.rect.width, 0);
                     break;
                 case AnimationDirection.Up:
-                    inPos = new Vector2(0, -rectTransform.rect.height);
+                    inPosition = new Vector2(0, -rectTransform.rect.height);
                     break;
                 case AnimationDirection.Down:
-                    inPos = new Vector2(0, rectTransform.rect.height);
+                    inPosition = new Vector2(0, rectTransform.rect.height);
                     break;
                 default:
-                    inPos = Vector2.zero;
+                    inPosition = Vector2.zero;
                     break;
             }
 
-            rectTransform.anchoredPosition = inPos;
+            rectTransform.anchoredPosition = inPosition;
             Tween anchorMoveTween =
                 rectTransform.DOAnchorPos(Vector2.zero, duration).SetEase(ease);
             sequence.Insert(0, anchorMoveTween);
@@ -37,33 +37,33 @@ namespace BroWar.UI
             return sequence;
         }
 
-        public static Sequence SlideOut(RectTransform rectTransform, AnimationDirection dir,
+        public static Sequence SlideOut(RectTransform rectTransform, AnimationDirection direction,
             Ease ease = Ease.OutCubic, float duration = 1.0f)
         {
             var sequence = DOTween.Sequence();
             rectTransform.anchoredPosition = Vector2.zero;
-            Vector2 outPos;
-            switch (dir)
+            Vector2 outPosition;
+            switch (direction)
             {
                 case AnimationDirection.Left:
-                    outPos = new Vector2(-rectTransform.rect.width, 0);
+                    outPosition = new Vector2(-rectTransform.rect.width, 0);
                     break;
                 case AnimationDirection.Right:
-                    outPos = new Vector2(rectTransform.rect.width, 0);
+                    outPosition = new Vector2(rectTransform.rect.width, 0);
                     break;
                 case AnimationDirection.Up:
-                    outPos = new Vector2(0, rectTransform.rect.height);
+                    outPosition = new Vector2(0, rectTransform.rect.height);
                     break;
                 case AnimationDirection.Down:
-                    outPos = new Vector2(0, -rectTransform.rect.height);
+                    outPosition = new Vector2(0, -rectTransform.rect.height);
                     break;
                 default:
-                    outPos = Vector2.zero;
+                    outPosition = Vector2.zero;
                     break;
             }
 
             Tween anchorMoveTween =
-                rectTransform.DOAnchorPos(outPos, duration).SetEase(ease);
+                rectTransform.DOAnchorPos(outPosition, duration).SetEase(ease);
             sequence.Insert(0, anchorMoveTween);
             return sequence;
         }

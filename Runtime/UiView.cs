@@ -1,33 +1,28 @@
-﻿using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BroWar.UI
 {
-    public class UiView : UiObject
+    public class UiView : UiPanel
     {
-        protected RectTransform rectTransform;
+        [SerializeField]
+        private UiPanel[] panels;
 
-        private void Awake()
+        public override void Hide()
         {
-            rectTransform = GetComponent<RectTransform>();
+            base.Hide();
+            foreach (var panel in panels)
+            {
+                panel.Show();
+            }
         }
 
         public override void Show()
         {
             base.Show();
-            //TODO: temporary solution, we should run animation from the manager
-            Sequence inSequence = GetTransitionInSequence();
-            inSequence.Play();
-        }
-
-        public virtual Sequence GetTransitionInSequence()
-        {
-            return AnimationUtility.SlideIn(rectTransform, AnimationDirection.Left);
-        }
-
-        public virtual Sequence GetTransitionOutSequence()
-        {
-            return AnimationUtility.SlideOut(rectTransform, AnimationDirection.Right);
+            foreach (var panel in panels)
+            {
+                panel.Hide();
+            }
         }
     }
 }
