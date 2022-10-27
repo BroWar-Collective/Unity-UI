@@ -1,5 +1,23 @@
 {
   "dependencies": {
+    "com.browar.editor-toolbox": {
+      "version": "0.11.9",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.editorcoroutines": "1.0.0"
+      },
+      "url": "https://npm.cloudsmith.io/browar-collective/browar"
+    },
+    "com.browar.injection": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.browar.editor-toolbox": "0.11.9"
+      },
+      "url": "https://npm.cloudsmith.io/browar-collective/browar"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
