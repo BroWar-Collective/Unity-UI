@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace BroWar.UI
 {
-    /// <summary>
-    /// TODO
-    /// </summary>
+    //TODO: make it abstract? & initialization method
+
+    /// <inheritdoc cref="IViewsManager"/>
     [DisallowMultipleComponent]
     [AddComponentMenu("BroWar/UI/Views Manager")]
     public class ViewsManager : MonoBehaviour, IViewsManager
@@ -55,6 +55,7 @@ namespace BroWar.UI
         }
 
         //TODO: move public API to interface
+        //TODO: event when view is completly visible
 
         private void Show(UiView view)
         {
@@ -133,6 +134,9 @@ namespace BroWar.UI
             }
         }
 
+        /// <inheritdoc cref="IViewsManager"/>
         public IReadOnlyCollection<UiView> Views => viewsByTypes.Values;
+        /// <inheritdoc cref="IViewsManager"/>
+        public IReadOnlyCollection<UiView> ActiveViews => activeViews;
     }
 }
