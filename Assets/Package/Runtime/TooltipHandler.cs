@@ -1,10 +1,20 @@
-﻿namespace BroWar.UI
+﻿using UnityEngine;
+
+namespace BroWar.UI
 {
-    public class TooltipHandler : UiView
+    [AddComponentMenu("BroWar/UI/Tooltip Handler")]
+    public class TooltipHandler : UiHandler
     {
         private void Update()
         {
+            if (!IsTooltipActive)
+            {
+                return;
+            }
+
             //TODO: update tooltips
         }
+
+        public bool IsTooltipActive { get; private set; }
     }
 }

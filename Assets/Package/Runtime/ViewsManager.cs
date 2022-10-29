@@ -15,18 +15,26 @@ namespace BroWar.UI
 
         private readonly List<UiView> activeViews = new List<UiView>();
 
-        //TODO: inject main camera
-        //TODO: inject tooltip system
+        //TODO: inject tooltip handler
+        //TODO: inject popup handler
         //TODO: inject game references
 
         [SerializeField]
         private List<UiView> views;
 
+        private Camera targetCamera;
+
         //TODO: events
 
         protected virtual void Awake()
+        { }
+
+        private void PrepareViews()
         {
-            CacheViews();
+            foreach (var view in views)
+            {
+                view.Initialize(targetCamera);
+            }
         }
 
         private void CacheViews()
@@ -67,6 +75,13 @@ namespace BroWar.UI
         {
             view.Hide();
             activeViews.Remove(view);
+        }
+
+        public void Initialize(Camera targetCamera, IReadOnlyList<UiHandler> handlers)
+        {
+            this.targetCamera = targetCamera;
+            PrepareViews();
+            CacheViews();
         }
 
         public void Show<T>() where T : UiView
