@@ -16,6 +16,8 @@ namespace BroWar.UI
                 targetCamera = Camera.main;
                 Debug.LogWarning("[UI] Target camera is no assigned.");
             }
+
+            Initialize(targetCamera, null);
         }
     }
 }

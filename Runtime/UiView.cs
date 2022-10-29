@@ -16,7 +16,7 @@ namespace BroWar.UI
             canvas = GetComponent<Canvas>();
         }
 
-        public void Initialize(Camera camera)
+        public virtual void Initialize(Camera camera)
         {
             if (camera == null)
             {
