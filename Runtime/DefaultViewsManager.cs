@@ -5,12 +5,11 @@ namespace BroWar.UI
     [AddComponentMenu("BroWar/UI/Default Views Manager")]
     public class DefaultViewsManager : ViewsManager
     {
-        [SerializeField]
+        [SerializeField, Line]
         private Camera targetCamera;
 
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
             if (targetCamera == null)
             {
                 targetCamera = Camera.main;

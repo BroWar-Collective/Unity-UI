@@ -19,21 +19,18 @@ namespace BroWar.UI
         //TODO: inject popup handler
         //TODO: inject game references
 
-        [SerializeField]
+        [SerializeField, ReorderableList]
         private List<UiView> views;
 
-        private Camera targetCamera;
+        private Camera canvasCamera;
 
         //TODO: events
-
-        protected virtual void Awake()
-        { }
 
         private void PrepareViews()
         {
             foreach (var view in views)
             {
-                view.Initialize(targetCamera);
+                view.Initialize(canvasCamera);
             }
         }
 
@@ -77,9 +74,9 @@ namespace BroWar.UI
             activeViews.Remove(view);
         }
 
-        public void Initialize(Camera targetCamera, IReadOnlyList<UiHandler> handlers)
+        public void Initialize(Camera canvasCamera, IReadOnlyList<UiHandler> handlers)
         {
-            this.targetCamera = targetCamera;
+            this.canvasCamera = canvasCamera;
             PrepareViews();
             CacheViews();
         }

@@ -23,6 +23,7 @@ namespace BroWar.UI
         public override void Hide()
         {
             base.Hide();
+            //TODO: set active => false
             //TODO: animation
         }
 

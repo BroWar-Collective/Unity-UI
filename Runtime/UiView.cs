@@ -10,12 +10,6 @@ namespace BroWar.UI
         [SerializeField, Tooltip("Nested, optional, UI panels maintained by this view.")]
         private UiPanel[] panels;
 
-        protected override void Awake()
-        {
-            base.Awake();
-            canvas = GetComponent<Canvas>();
-        }
-
         public virtual void Initialize(Camera camera)
         {
             if (camera == null)
@@ -23,6 +17,7 @@ namespace BroWar.UI
                 camera = Camera.main;
             }
 
+            canvas = GetComponent<Canvas>();
             canvas.worldCamera = camera;
         }
 
