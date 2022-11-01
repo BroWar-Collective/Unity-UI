@@ -20,16 +20,23 @@ namespace BroWar.UI.Elements
 
         public event Action OnClicked;
 
-        public bool HasLabel => label != null;
+        public bool HasText => label != null;
 
-        public string Label
+        public string Text
         {
             get => label.text;
             set => label.text = value;
         }
 
-        private void Awake()
+        public Sprite Icon
         {
+            get => icon.sprite;
+            set => icon.sprite = value;
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
             if (button == null)
             {
                 button = GetComponent<Button>();
