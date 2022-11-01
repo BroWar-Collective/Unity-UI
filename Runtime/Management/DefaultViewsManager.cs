@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BroWar.UI
+namespace BroWar.UI.Management
 {
     [AddComponentMenu("BroWar/UI/Default Views Manager")]
     public class DefaultViewsManager : ViewsManager

@@ -2,7 +2,8 @@
     "name": "BroWar.UI.Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:82a70dc6e2bc6db42a62c8ab92cb5cc6"
+        "GUID:82a70dc6e2bc6db42a62c8ab92cb5cc6",
+        "GUID:1b845e2499b39be4aab3e6ac2c8aa02a"
     ],
     "includePlatforms": [
         "Editor"

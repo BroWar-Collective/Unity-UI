@@ -1,4 +1,4 @@
-﻿namespace BroWar.UI
+﻿namespace BroWar.UI.Animation
 {
     public enum AnimationDirection
     {

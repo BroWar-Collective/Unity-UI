@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-namespace BroWar.UI
+namespace BroWar.UI.Animation
 {
     public static class AnimationUtility
     {

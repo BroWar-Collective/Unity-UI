@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BroWar.UI
+namespace BroWar.UI.Management
 {
+    using BroWar.UI.Elements;
+
     //TODO: make it abstract? & initialization method
 
     /// <inheritdoc cref="IViewsManager"/>
