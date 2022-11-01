@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BroWar.UI
+namespace BroWar.UI.Elements
 {
     /// <summary>
     /// Custom overlay on <see cref="Button"/>.

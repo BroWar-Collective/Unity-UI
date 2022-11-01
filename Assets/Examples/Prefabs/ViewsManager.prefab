@@ -79,7 +79,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5384140137440897075}
-  - component: {fileID: 4453464293289951810}
+  - component: {fileID: 4574005156485039313}
   m_Layer: 5
   m_Name: ViewsManager
   m_TagString: Untagged
@@ -103,7 +103,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4453464293289951810
+--- !u!114 &4574005156485039313
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5384140137440897072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b46bcd94cb2b34a85a22c2830498d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 598d85320b93e5440977912f16997afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   views: []

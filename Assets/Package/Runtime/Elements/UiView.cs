@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BroWar.UI
+namespace BroWar.UI.Elements
 {
     [RequireComponent(typeof(Canvas))]
     public class UiView : UiPanel

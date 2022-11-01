@@ -1,5 +1,6 @@
 ﻿using System;
-using BroWar.UI;
+using BroWar.UI.Elements;
+using BroWar.UI.Management;
 using UnityEngine;
 
 namespace Examples

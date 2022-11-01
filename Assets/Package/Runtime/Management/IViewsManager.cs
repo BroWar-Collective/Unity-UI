@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BroWar.UI
+namespace BroWar.UI.Management
 {
+    using BroWar.UI.Elements;
+
     /// <summary>
     /// TODO
     /// </summary>

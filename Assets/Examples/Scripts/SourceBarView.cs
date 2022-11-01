@@ -1,4 +1,5 @@
-﻿using BroWar.UI;
+﻿using BroWar.UI.Animation;
+using BroWar.UI.Elements;
 using DG.Tweening;
 
 namespace Examples

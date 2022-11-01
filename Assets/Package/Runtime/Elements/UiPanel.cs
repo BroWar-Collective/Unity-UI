@@ -1,7 +1,9 @@
 ﻿using DG.Tweening;
 
-namespace BroWar.UI
+namespace BroWar.UI.Elements
 {
+    using BroWar.UI.Animation;
+
     public class UiPanel : UiObject
     {
         //TODO: serializable animation data

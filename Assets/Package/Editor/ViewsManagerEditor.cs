@@ -1,12 +1,11 @@
-﻿using UnityEditor;
+﻿using Toolbox.Editor;
+using UnityEditor;
 
 namespace BroWar.Editor.UI
 {
-    using BroWar.UI;
-
-    using Editor = UnityEditor.Editor;
+    using BroWar.UI.Management;
 
     [CustomEditor(typeof(ViewsManager))]
-    public class ViewsManagerEditor : Editor
+    public class ViewsManagerEditor : ToolboxEditor
     { }
 }
