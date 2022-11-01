@@ -33,7 +33,6 @@ namespace BroWar.UI
             Tween anchorMoveTween =
                 rectTransform.DOAnchorPos(Vector2.zero, duration).SetEase(ease);
             sequence.Insert(0, anchorMoveTween);
-
             return sequence;
         }
 

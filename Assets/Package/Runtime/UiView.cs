@@ -7,7 +7,7 @@ namespace BroWar.UI
     {
         private Canvas canvas;
 
-        [SerializeField, Tooltip("Nested, optional, UI panels maintained by this view.")]
+        [SerializeField, ReorderableList, Tooltip("Nested, optional, UI panels maintained by this view.")]
         private UiPanel[] panels;
 
         public virtual void Initialize(Camera camera)

@@ -1,30 +1,43 @@
 ﻿using DG.Tweening;
-using UnityEngine;
 
 namespace BroWar.UI
 {
     public class UiPanel : UiObject
     {
-        protected RectTransform rectTransform;
+        //TODO: serializable animation data
+        private Sequence sequence;
 
-        protected virtual void Awake()
+        private void ResetAnimation()
         {
-            rectTransform = GetComponent<RectTransform>();
+            if (sequence != null)
+            {
+                sequence.Kill();
+            }
         }
 
         public override void Show()
         {
             base.Show();
-            //TODO: temporary solution
-            Sequence inSequence = GetTransitionInSequence();
-            inSequence.Play();
+            if (UseAnimations)
+            {
+                ResetAnimation();
+                sequence = GetTransitionInSequence();
+                sequence.Play();
+            }
         }
 
         public override void Hide()
         {
+            if (UseAnimations)
+            {
+                ResetAnimation();
+                sequence = GetTransitionOutSequence();
+                sequence.AppendCallback(base.Hide);
+                sequence.Play();
+                return;
+            }
+
             base.Hide();
-            //TODO: set active => false
-            //TODO: animation
         }
 
         public virtual Sequence GetTransitionInSequence()
@@ -36,5 +49,7 @@ namespace BroWar.UI
         {
             return AnimationUtility.SlideOut(rectTransform, AnimationDirection.Right);
         }
+
+        public virtual bool UseAnimations { get; private set; } = true;
     }
 }

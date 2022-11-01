@@ -777,7 +777,7 @@ GameObject:
   - component: {fileID: 2068101163}
   - component: {fileID: 2068101164}
   m_Layer: 0
-  m_Name: ShowViewOnStart [SourceBar]
+  m_Name: ViewController [SourceBar]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -810,7 +810,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewsManager: {fileID: 1614791250}
-  prewarmedView: {fileID: 2044245592}
+  showOnStart: 1
+  targetView: {fileID: 2044245592}
 --- !u!1001 &4211374092465818145
 PrefabInstance:
   m_ObjectHideFlags: 0
