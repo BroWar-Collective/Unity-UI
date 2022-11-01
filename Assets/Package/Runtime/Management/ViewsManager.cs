@@ -10,8 +10,7 @@ namespace BroWar.UI.Management
 
     /// <inheritdoc cref="IViewsManager"/>
     [DisallowMultipleComponent]
-    [AddComponentMenu("BroWar/UI/Views Manager")]
-    public class ViewsManager : MonoBehaviour, IViewsManager
+    public abstract class ViewsManager : MonoBehaviour, IViewsManager
     {
         private readonly Dictionary<Type, UiView> viewsByTypes = new Dictionary<Type, UiView>();
 
