@@ -7,6 +7,7 @@ namespace BroWar.UI.Elements
     {
         private Canvas canvas;
 
+        [Title("General")]
         [SerializeField, ReorderableList, Tooltip("Nested, optional, UI panels maintained by this view.")]
         private UiPanel[] panels;
 

@@ -673,7 +673,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e967c8689c9b65d45ae30632fdbe54b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showAnimationContext:
+    id: 0
+  hideAnimationContext:
+    id: 1
   panels: []
+  references:
+    version: 1
+    00000000:
+      type: {class: SlideInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
+      data:
+        direction: 3
+        ease: 9
+        duration: 1
+    00000001:
+      type: {class: SlideOutAnimationContext, ns: BroWar.UI.Animation.Animations,
+        asm: BroWar.UI}
+      data:
+        direction: 2
+        ease: 9
+        duration: 1
 --- !u!223 &2044245593
 Canvas:
   m_ObjectHideFlags: 0
