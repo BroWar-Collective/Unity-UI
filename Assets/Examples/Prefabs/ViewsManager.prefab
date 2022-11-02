@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3655903584278785248}
-  - component: {fileID: 2907666446594484536}
   - component: {fileID: 7354151157730120270}
   m_Layer: 5
   m_Name: PopupHandler
@@ -37,18 +36,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2907666446594484536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2942049742408606852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 034de7533c67d5748a67f053e076e0c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!223 &7354151157730120270
 Canvas:
   m_ObjectHideFlags: 0
@@ -117,6 +104,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   views: []
   targetCamera: {fileID: 0}
+  handlers:
+  - id: 0
+  - id: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: PopupHandler, ns: BroWar.UI, asm: BroWar.UI}
+    00000001:
+      type: {class: TooltipHandler, ns: BroWar.UI, asm: BroWar.UI}
+      data:
+        canvas: {fileID: 5929387634519958146}
 --- !u!1 &6667553434589909274
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +124,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3411458281096128988}
-  - component: {fileID: 6062322701670407087}
   - component: {fileID: 5929387634519958146}
   m_Layer: 5
   m_Name: TooltipHandler
@@ -154,18 +151,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6062322701670407087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6667553434589909274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e25f5fcbdf0fd9542a816f64ecadfedc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!223 &5929387634519958146
 Canvas:
   m_ObjectHideFlags: 0

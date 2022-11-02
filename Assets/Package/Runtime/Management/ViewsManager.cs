@@ -16,10 +16,6 @@ namespace BroWar.UI.Management
 
         private readonly List<UiView> activeViews = new List<UiView>();
 
-        //TODO: inject tooltip handler
-        //TODO: inject popup handler
-        //TODO: inject game references
-
         [SerializeField, ReorderableList]
         private List<UiView> views;
 
@@ -60,9 +56,6 @@ namespace BroWar.UI.Management
             viewsByTypes.Add(type, view);
         }
 
-        //TODO: move public API to interface
-        //TODO: event when view is completly visible
-
         private void Show(UiView view)
         {
             view.Show();
@@ -75,7 +68,7 @@ namespace BroWar.UI.Management
             activeViews.Remove(view);
         }
 
-        public void Initialize(Camera canvasCamera, IReadOnlyList<UiHandler> handlers)
+        public void Initialize(Camera canvasCamera)
         {
             this.canvasCamera = canvasCamera;
             PrepareViews();

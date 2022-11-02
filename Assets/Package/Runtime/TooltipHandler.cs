@@ -1,11 +1,25 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BroWar.UI
 {
-    [AddComponentMenu("BroWar/UI/Tooltip Handler")]
-    public class TooltipHandler : UiHandler
+    [Serializable]
+    public class TooltipHandler : IUiFeatureHandler
     {
-        private void Update()
+        [SerializeField]
+        private Canvas canvas;
+
+        public void Prepare()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Tick()
         {
             if (!IsTooltipActive)
             {

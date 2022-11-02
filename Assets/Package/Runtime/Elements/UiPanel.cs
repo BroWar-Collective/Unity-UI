@@ -17,13 +17,14 @@ namespace BroWar.UI.Elements
             }
         }
 
+        //TODO: internal show in time
         public override void Show()
         {
             base.Show();
             if (UseAnimations)
             {
                 ResetAnimation();
-                sequence = GetTransitionInSequence();
+                sequence = GetShowSequence();
                 sequence.Play();
             }
         }
@@ -33,7 +34,7 @@ namespace BroWar.UI.Elements
             if (UseAnimations)
             {
                 ResetAnimation();
-                sequence = GetTransitionOutSequence();
+                sequence = GetHideSequence();
                 sequence.AppendCallback(base.Hide);
                 sequence.Play();
                 return;
@@ -42,12 +43,12 @@ namespace BroWar.UI.Elements
             base.Hide();
         }
 
-        public virtual Sequence GetTransitionInSequence()
+        public virtual Sequence GetShowSequence()
         {
             return AnimationUtility.SlideIn(rectTransform, AnimationDirection.Left);
         }
 
-        public virtual Sequence GetTransitionOutSequence()
+        public virtual Sequence GetHideSequence()
         {
             return AnimationUtility.SlideOut(rectTransform, AnimationDirection.Right);
         }
