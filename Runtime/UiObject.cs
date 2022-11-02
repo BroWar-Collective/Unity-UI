@@ -22,18 +22,24 @@ namespace BroWar.UI
         public virtual void SetActive(bool value)
         {
             gameObject.SetActive(value);
+            if (value)
+            {
+                OnShow?.Invoke();
+            }
+            else
+            {
+                OnHide?.Invoke();
+            }
         }
 
         public virtual void Show()
         {
             SetActive(true);
-            OnShow?.Invoke();
         }
 
         public virtual void Hide()
         {
             SetActive(false);
-            OnHide?.Invoke();
         }
 
         public bool IsActive => gameObject.activeSelf;

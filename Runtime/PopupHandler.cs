@@ -1,8 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
 
 namespace BroWar.UI
 {
-    [AddComponentMenu("BroWar/UI/Popup Handler")]
-    public class PopupHandler : UiHandler
-    { }
+    public class PopupHandler : IUiFeatureHandler
+    {
+        public void Prepare()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Tick()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

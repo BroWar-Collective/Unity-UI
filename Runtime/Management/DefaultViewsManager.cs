@@ -7,6 +7,8 @@ namespace BroWar.UI.Management
     {
         [SerializeField, Line]
         private Camera targetCamera;
+        [SerializeField, SerializeReference, ReferencePicker]
+        private IUiFeatureHandler[] handlers;
 
         private void Awake()
         {
@@ -16,7 +18,7 @@ namespace BroWar.UI.Management
                 Debug.LogWarning("[UI] Target camera is no assigned.");
             }
 
-            Initialize(targetCamera, null);
+            Initialize(targetCamera, new IUiFeatureHandler[] { });
         }
     }
 }
