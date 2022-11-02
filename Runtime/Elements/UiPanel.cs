@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using UnityEngine;
 
 namespace BroWar.UI.Elements
 {
@@ -6,7 +7,14 @@ namespace BroWar.UI.Elements
 
     public class UiPanel : UiObject
     {
-        //TODO: serializable animation data
+        [Title("Animations")]
+        [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
+        [NewLabel("-> Animation Context")]
+        private IAnimationContext showAnimationContext;
+        [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
+        [NewLabel("<- Animation Context")]
+        private IAnimationContext hideAnimationContext;
+
         private Sequence sequence;
 
         private void ResetAnimation()
@@ -17,7 +25,16 @@ namespace BroWar.UI.Elements
             }
         }
 
-        //TODO: internal show in time
+        protected virtual Sequence GetShowSequence()
+        {
+            return showAnimationContext?.GetSequence(rectTransform);
+        }
+
+        protected virtual Sequence GetHideSequence()
+        {
+            return hideAnimationContext?.GetSequence(rectTransform);
+        }
+
         public override void Show()
         {
             base.Show();
@@ -25,7 +42,10 @@ namespace BroWar.UI.Elements
             {
                 ResetAnimation();
                 sequence = GetShowSequence();
-                sequence.Play();
+                if (sequence != null)
+                {
+                    sequence.Play();
+                }
             }
         }
 
@@ -35,24 +55,19 @@ namespace BroWar.UI.Elements
             {
                 ResetAnimation();
                 sequence = GetHideSequence();
-                sequence.AppendCallback(base.Hide);
-                sequence.Play();
-                return;
+                if (sequence != null)
+                {
+                    sequence.AppendCallback(base.Hide);
+                    sequence.Play();
+                    return;
+                }
             }
 
             base.Hide();
         }
 
-        public virtual Sequence GetShowSequence()
-        {
-            return AnimationUtility.SlideIn(rectTransform, AnimationDirection.Left);
-        }
-
-        public virtual Sequence GetHideSequence()
-        {
-            return AnimationUtility.SlideOut(rectTransform, AnimationDirection.Right);
-        }
-
         public virtual bool UseAnimations { get; private set; } = true;
+        public virtual IAnimationContext ShowAnimationContext { get => showAnimationContext; set => showAnimationContext = value; }
+        public virtual IAnimationContext HideAnimationContext { get => hideAnimationContext; set => hideAnimationContext = value; }
     }
 }
