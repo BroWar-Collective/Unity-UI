@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using BroWar.UI.Management;
+using UnityEngine;
 
-namespace BroWar.UI
+namespace BroWar.UI.Handlers
 {
     public class PopupHandler : MonoBehaviour, IUiFeatureHandler
     {
+        [SerializeField]
+        private ViewsManager viewsManager;
+
         public void Prepare()
         { }
 
