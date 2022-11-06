@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace BroWar.UI
+namespace BroWar.UI.Handlers
 {
     [Serializable]
     public class TooltipHandler : MonoBehaviour, IUiFeatureHandler
