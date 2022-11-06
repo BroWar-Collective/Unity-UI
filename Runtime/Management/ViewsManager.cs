@@ -6,8 +6,6 @@ namespace BroWar.UI.Management
 {
     using BroWar.UI.Elements;
 
-    //TODO: make it abstract? & initialization method
-
     /// <inheritdoc cref="IViewsManager"/>
     [DisallowMultipleComponent]
     public abstract class ViewsManager : MonoBehaviour, IViewsManager
