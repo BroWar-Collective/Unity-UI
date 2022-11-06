@@ -946,31 +946,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4453464293289951810, guid: 8ce9699d677b2104ea781e06293a1973,
-        type: 3}
-      propertyPath: targetCamera
-      value: 
-      objectReference: {fileID: 1715507020}
-    - target: {fileID: 4453464293289951810, guid: 8ce9699d677b2104ea781e06293a1973,
-        type: 3}
-      propertyPath: views.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4453464293289951810, guid: 8ce9699d677b2104ea781e06293a1973,
-        type: 3}
-      propertyPath: views.Array.data[0]
-      value: 
-      objectReference: {fileID: 2044245592}
     - target: {fileID: 4574005156485039313, guid: 8ce9699d677b2104ea781e06293a1973,
         type: 3}
       propertyPath: targetCamera
       value: 
       objectReference: {fileID: 1715507020}
-    - target: {fileID: 4574005156485039313, guid: 8ce9699d677b2104ea781e06293a1973,
-        type: 3}
-      propertyPath: views.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4574005156485039313, guid: 8ce9699d677b2104ea781e06293a1973,
         type: 3}
       propertyPath: views.Array.data[0]
@@ -981,11 +961,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ViewsManager
       objectReference: {fileID: 0}
-    - target: {fileID: 5384140137440897074, guid: 8ce9699d677b2104ea781e06293a1973,
-        type: 3}
-      propertyPath: views.Array.data[0]
-      value: 
-      objectReference: {fileID: 2044245592}
     - target: {fileID: 5384140137440897075, guid: 8ce9699d677b2104ea781e06293a1973,
         type: 3}
       propertyPath: m_RootOrder

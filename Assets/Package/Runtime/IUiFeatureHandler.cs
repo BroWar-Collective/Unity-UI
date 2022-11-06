@@ -1,9 +1,12 @@
-﻿namespace BroWar.UI
+﻿using System;
+
+namespace BroWar.UI
 {
-    public interface IUiFeatureHandler
+    public interface IUiFeatureHandler : IDisposable
     {
         void Prepare();
-        void Dispose();
         void Tick();
+
+        bool IsTickable { get; }
     }
 }
