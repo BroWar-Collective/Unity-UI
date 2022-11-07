@@ -1,22 +1,15 @@
-﻿using BroWar.UI.Management;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BroWar.UI.Handlers
 {
-    public class PopupHandler : MonoBehaviour, IUiFeatureHandler
+    using BroWar.UI.Management;
+
+    [AddComponentMenu("BroWar/UI/Handler/Popup Handler")]
+    public class PopupHandler : ComponentBasedHandler
     {
         [SerializeField]
-        private ViewsManager viewsManager;
+        private ViewsManagerBase viewsManager;
 
-        public void Prepare()
-        { }
-
-        public void Dispose()
-        { }
-
-        public void Tick()
-        { }
-
-        public bool IsTickable => false;
+        public override bool IsTickable => false;
     }
 }

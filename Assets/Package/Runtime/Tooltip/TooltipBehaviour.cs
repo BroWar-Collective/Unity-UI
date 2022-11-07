@@ -3,16 +3,10 @@ using UnityEngine;
 
 namespace BroWar.UI.Tooltip
 {
+    [AddComponentMenu("BroWar/UI/Tooltip/Tooltip Behaviour")]
     public class TooltipBehaviour : UiObject
     {
-        private ITooltipHandler tooltipHandler;
         [SerializeField]
         private TextMeshProUGUI contentText;
-
-        //TODO: inject
-        internal void Inject(ITooltipHandler tooltipHandler)
-        {
-            this.tooltipHandler = tooltipHandler;
-        }
     }
 }
