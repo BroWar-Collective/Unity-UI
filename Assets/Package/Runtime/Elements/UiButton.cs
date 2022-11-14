@@ -14,26 +14,14 @@ namespace BroWar.UI.Elements
     {
         [SerializeField, NotNull]
         private Button button;
+
+        [Title("Content")]
         [SerializeField]
         private Image labelIcon;
         [SerializeField]
         private TextMeshProUGUI labelText;
 
         public event Action OnClicked;
-
-        public bool HasText => labelText != null;
-
-        public string Text
-        {
-            get => labelText.text;
-            set => labelText.text = value;
-        }
-
-        public Sprite Icon
-        {
-            get => labelIcon.sprite;
-            set => labelIcon.sprite = value;
-        }
 
         protected override void Awake()
         {
@@ -49,6 +37,20 @@ namespace BroWar.UI.Elements
         private void OnClick()
         {
             OnClicked?.Invoke();
+        }
+
+        public bool HasText => labelText != null;
+
+        public string Text
+        {
+            get => labelText.text;
+            set => labelText.text = value;
+        }
+
+        public Sprite Icon
+        {
+            get => labelIcon.sprite;
+            set => labelIcon.sprite = value;
         }
     }
 }

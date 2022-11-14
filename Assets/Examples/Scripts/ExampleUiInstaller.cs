@@ -7,7 +7,7 @@ namespace Examples
     public class ExampleUiInstaller : MonoInstaller
     {
         [SerializeField, ScriptablesList]
-        private ComponentBasedHandler[] handlers;
+        private UiHandlerBehaviour[] handlers;
 
         public override void InstallBindings()
         {

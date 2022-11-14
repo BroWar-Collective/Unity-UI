@@ -5,7 +5,7 @@ namespace BroWar.UI.Handlers
     using BroWar.UI.Management;
 
     [AddComponentMenu("BroWar/UI/Handler/Popup Handler")]
-    public class PopupHandler : ComponentBasedHandler
+    public class PopupHandler : UiHandlerBehaviour
     {
         [SerializeField]
         private ViewsManagerBase viewsManager;

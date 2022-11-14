@@ -7,10 +7,16 @@ namespace BroWar.UI.Handlers
     //https://www.youtube.com/watch?v=HXFoUGw7eKk&t=227s&ab_channel=GameDevGuide
 
     [AddComponentMenu("BroWar/UI/Handler/Tooltip Handler")]
-    public class TooltipHandler : ComponentBasedHandler, ITooltipHandler
+    public class TooltipHandler : UiHandlerBehaviour, ITooltipHandler
     {
         [SerializeField]
         private Canvas canvas;
+
+        //TODO: temporary
+        private void Update()
+        {
+            Tick();
+        }
 
         public override void Tick()
         {

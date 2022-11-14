@@ -2,7 +2,6 @@
 
 namespace BroWar.UI.Management
 {
-    //TODO: rethink the name
     [AddComponentMenu("BroWar/UI/Views Manager")]
     public class ViewsManager : ViewsManagerBase
     {
