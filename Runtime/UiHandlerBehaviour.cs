@@ -2,7 +2,7 @@
 
 namespace BroWar.UI
 {
-    public abstract class ComponentBasedHandler : MonoBehaviour, IUiHandler
+    public abstract class UiHandlerBehaviour : MonoBehaviour, IUiHandler
     {
         public virtual void Dispose()
         { }

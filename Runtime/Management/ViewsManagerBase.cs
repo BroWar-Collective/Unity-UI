@@ -11,14 +11,16 @@ namespace BroWar.UI.Management
     public abstract class ViewsManagerBase : MonoBehaviour, IViewsManager
     {
         private readonly Dictionary<Type, UiView> viewsByTypes = new Dictionary<Type, UiView>();
-
         private readonly List<UiView> activeViews = new List<UiView>();
 
         [SerializeField, ReorderableList]
         private List<UiView> views;
 
         private Camera canvasCamera;
+        private bool isInitialized;
 
+        public event Action<UiView> OnShowView;
+        public event Action<UiView> OnHideView;
         //TODO:
         // - events
         // - what about views between scenes?
@@ -61,19 +63,35 @@ namespace BroWar.UI.Management
         {
             view.Show();
             activeViews.Add(view);
+            OnShowView?.Invoke(view);
         }
 
         private void Hide(UiView view)
         {
             view.Hide();
-            activeViews.Remove(view);
+            if (activeViews.Remove(view))
+            {
+                OnHideView?.Invoke(view);
+            }
         }
 
-        public virtual void Initialize(Camera canvasCamera)
+        protected virtual void OnInitialize()
         {
-            this.canvasCamera = canvasCamera;
             PrepareViews();
             CacheViews();
+        }
+
+        public void Initialize(Camera canvasCamera)
+        {
+            if (isInitialized)
+            {
+                Debug.LogWarning($"[UI] {GetType().Name} is already initialized.");
+                return;
+            }
+
+            this.canvasCamera = canvasCamera;
+            OnInitialize();
+            isInitialized = true;
         }
 
         public void Show<T>() where T : UiView
