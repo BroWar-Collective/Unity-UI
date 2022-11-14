@@ -5,6 +5,7 @@ namespace BroWar.UI.Elements
 {
     using BroWar.UI.Animation;
 
+    [AddComponentMenu("BroWar/UI/Elements/UI Panel")]
     public class UiPanel : UiObject
     {
         [Title("Animations")]

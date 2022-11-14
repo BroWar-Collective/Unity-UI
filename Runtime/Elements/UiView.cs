@@ -3,6 +3,7 @@
 namespace BroWar.UI.Elements
 {
     [RequireComponent(typeof(Canvas))]
+    [AddComponentMenu("BroWar/UI/Elements/UI View")]
     public class UiView : UiPanel
     {
         private Canvas canvas;

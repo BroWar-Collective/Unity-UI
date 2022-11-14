@@ -7,7 +7,7 @@ namespace BroWar.UI
     /// Base class for all UI-related objects.
     /// </summary>
     [DisallowMultipleComponent, RequireComponent(typeof(RectTransform))]
-    public class UiObject : MonoBehaviour
+    public abstract class UiObject : MonoBehaviour
     {
         protected RectTransform rectTransform;
 

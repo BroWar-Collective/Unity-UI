@@ -19,7 +19,10 @@ namespace BroWar.UI.Management
 
         private Camera canvasCamera;
 
-        //TODO: events
+        //TODO:
+        // - events
+        // - what about views between scenes?
+        // - better initialization
 
         private void PrepareViews()
         {
@@ -66,7 +69,6 @@ namespace BroWar.UI.Management
             activeViews.Remove(view);
         }
 
-        //TODO: public? Check if already initialized
         public virtual void Initialize(Camera canvasCamera)
         {
             this.canvasCamera = canvasCamera;
