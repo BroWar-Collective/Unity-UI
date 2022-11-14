@@ -18,7 +18,7 @@ namespace BroWar.UI.Tooltip
 
         //TODO: temporary
         [Inject]
-        internal void Inject(List<IUiFeatureHandler> handlers)
+        internal void Inject(List<IUiHandler> handlers)
         { }
     }
 }

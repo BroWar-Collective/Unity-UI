@@ -9,29 +9,30 @@ namespace BroWar.UI.Elements
     /// Custom overlay on <see cref="Button"/>.
     /// </summary>
     [RequireComponent(typeof(Button))]
+    [AddComponentMenu("BroWar/UI/Elements/UI Button")]
     public class UiButton : UiObject
     {
         [SerializeField, NotNull]
         private Button button;
         [SerializeField]
-        private Image icon;
+        private Image labelIcon;
         [SerializeField]
-        private TextMeshProUGUI label;
+        private TextMeshProUGUI labelText;
 
         public event Action OnClicked;
 
-        public bool HasText => label != null;
+        public bool HasText => labelText != null;
 
         public string Text
         {
-            get => label.text;
-            set => label.text = value;
+            get => labelText.text;
+            set => labelText.text = value;
         }
 
         public Sprite Icon
         {
-            get => icon.sprite;
-            set => icon.sprite = value;
+            get => labelIcon.sprite;
+            set => labelIcon.sprite = value;
         }
 
         protected override void Awake()

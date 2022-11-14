@@ -2,7 +2,7 @@
 
 namespace BroWar.UI
 {
-    public interface IUiFeatureHandler : IDisposable
+    public interface IUiHandler : IDisposable
     {
         void Prepare();
         void Tick();
