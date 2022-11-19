@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BroWar.UI.Tooltip
 {
@@ -7,21 +8,57 @@ namespace BroWar.UI.Tooltip
     public class TooltipBehaviour : UiObject
     {
         [SerializeField, NotNull]
+        private RectTransform contentRect;
+        [SerializeField, NotNull]
         private TextMeshProUGUI contentText;
         [SerializeField]
-        private Vector2 positionOffset;
+        private float maxWidth = 250.0f;
+        [SerializeField]
+        private TooltipSettings defaultSettings;
+        private TooltipSettings currentSettings;
 
-        public void UpdateText(string text)
+        //TODO: temporary solution
+        private void FixRectSize()
         {
-            contentText.SetText(text);
+            var parentSize = rectTransform.sizeDelta;
+            parentSize.x = maxWidth;
+            rectTransform.sizeDelta = parentSize;
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
+            if (contentRect.sizeDelta.x < maxWidth)
+            {
+                parentSize.x = contentRect.sizeDelta.x;
+            }
+            else
+            {
+                parentSize.x = maxWidth;
+            }
+
+            rectTransform.sizeDelta = parentSize;
         }
 
-        public void UpdateRect(Vector2 position)
+        public void UpdateContent(string text)
         {
-            position += positionOffset;
-            var pivotX = position.x / Screen.width;
-            var pivotY = position.y / Screen.height;
-            rectTransform.pivot = new Vector2(pivotX, pivotY);
+            UpdateContent(text, in defaultSettings);
+        }
+
+        public void UpdateContent(string text, in TooltipSettings settings)
+        {
+            contentText.SetText(text);
+            currentSettings = settings;
+            FixRectSize();
+        }
+
+        public void UpdatePosition(Vector2 position)
+        {
+            //TODO: test different cases and pivots
+            var rect = contentRect.rect;
+            var w = Screen.width;
+            var h = Screen.height;
+            var pivot = currentSettings.positionPivot;
+            position += currentSettings.positionOffset;
+            position.x = Mathf.Clamp(position.x, rect.width * pivot.x, w - rect.width * (1.0f - pivot.x));
+            position.y = Mathf.Clamp(position.y, rect.height * pivot.y, h - rect.height * (1.0f - pivot.y));
+            rectTransform.pivot = currentSettings.positionPivot;
             rectTransform.position = position;
         }
     }

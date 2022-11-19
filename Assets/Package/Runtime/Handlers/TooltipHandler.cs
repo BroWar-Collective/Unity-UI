@@ -47,8 +47,9 @@ namespace BroWar.UI.Handlers
                 return;
             }
 
+            //TODO: better way to handle input?
             var position = Mouse.current.position.ReadValue();
-            tooltip.UpdateRect(position);
+            tooltip.UpdatePosition(position);
         }
 
         public override void Dispose()
@@ -57,10 +58,10 @@ namespace BroWar.UI.Handlers
             HideTooltip();
         }
 
-        public void ShowTooltip(string contentText)
+        public void ShowTooltip(string contentText, in TooltipSettings settings)
         {
-            tooltip.UpdateText(contentText);
             tooltip.Show();
+            tooltip.UpdateContent(contentText, in settings);
         }
 
         public void HideTooltip()

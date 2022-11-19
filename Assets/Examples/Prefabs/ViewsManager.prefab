@@ -56,7 +56,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 32766
   m_TargetDisplay: 0
 --- !u!114 &6594417797729951795
 MonoBehaviour:
@@ -81,6 +81,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5384140137440897075}
   - component: {fileID: 5177111691664495695}
+  - component: {fileID: 364868322079319431}
+  - component: {fileID: 3511300076047724070}
   m_Layer: 5
   m_Name: ViewsManager
   m_TagString: Untagged
@@ -119,6 +121,30 @@ MonoBehaviour:
   views:
   - {fileID: 0}
   targetCamera: {fileID: 0}
+--- !u!114 &364868322079319431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5384140137440897072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02b4944a657b3fd438a747139f53bfbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3511300076047724070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5384140137440897072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ffc3190da3b7f54cb34c85811e0e6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6667553434589909274
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25f5fcbdf0fd9542a816f64ecadfedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputModule: {fileID: 0}
   canvas: {fileID: 5929387634519958146}
   tooltipPrefab: {fileID: 2888309395328228474, guid: 53b2d8eee57738d48aa8ea5891057224,
     type: 3}
