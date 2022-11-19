@@ -14,6 +14,8 @@ namespace BroWar.UI.Tooltip
     {
         [SerializeField, TextArea(4, 8)]
         private string tooltipContent;
+        [SerializeField]
+        private TooltipSettings settings;
         [SerializeField, Min(0)]
         [Tooltip("Time needed to show tooltip content.")]
         private float offsetTime = 0.0f;
@@ -23,7 +25,7 @@ namespace BroWar.UI.Tooltip
 
         private void ShowTooltip()
         {
-            tooltipHandler.ShowTooltip(tooltipContent);
+            tooltipHandler.ShowTooltip(tooltipContent, in settings);
         }
 
         private void HideTooltip()

@@ -2,7 +2,7 @@
 {
     public interface ITooltipHandler
     {
-        void ShowTooltip(string contentText);
+        void ShowTooltip(string contentText, in TooltipSettings settings);
         void HideTooltip();
     }
 }
