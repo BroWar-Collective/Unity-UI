@@ -9,8 +9,9 @@
   ],
   "category": "ui",
   "dependencies": {
-	"com.browar.injection": "1.0.0",
-	"com.browar.editor-toolbox": "0.11.9"
+    "com.browar.common": "1.0.0",
+    "com.browar.injection": "1.0.0",
+    "com.browar.editor-toolbox": "0.11.9"
   },
   "author": {
     "name": "BroWar Collective",

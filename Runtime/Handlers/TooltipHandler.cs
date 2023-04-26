@@ -10,6 +10,8 @@ namespace BroWar.UI.Handlers
     {
         [SerializeField]
         private Canvas canvas;
+
+        [Line]
         [SerializeField, NotNull]
         private TooltipBehaviour tooltipPrefab;
         [SerializeField, Disable]
@@ -48,6 +50,7 @@ namespace BroWar.UI.Handlers
             }
 
             //TODO: better way to handle input?
+            //TODO: none mouse position
             var position = Mouse.current.position.ReadValue();
             tooltip.UpdatePosition(position);
         }
