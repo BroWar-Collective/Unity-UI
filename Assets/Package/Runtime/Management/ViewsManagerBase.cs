@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace BroWar.UI.Management
 {
+    using BroWar.Common;
     using BroWar.UI.Elements;
 
     /// <inheritdoc cref="IViewsManager"/>
     [DisallowMultipleComponent]
-    public abstract class ViewsManagerBase : MonoBehaviour, IViewsManager
+    public abstract class ViewsManagerBase : StandaloneManager, IViewsManager, IInitializableWithArgument<Camera>
     {
         private readonly Dictionary<Type, UiView> viewsByTypes = new Dictionary<Type, UiView>();
         private readonly List<UiView> activeViews = new List<UiView>();
@@ -17,57 +18,56 @@ namespace BroWar.UI.Management
         private List<UiView> views;
 
         private Camera canvasCamera;
-        private bool isInitialized;
 
         public event Action<UiView> OnShowView;
         public event Action<UiView> OnHideView;
+
         //TODO:
         // - events
         // - what about views between scenes?
-        // - better initialization
+        // - better initialization (better settings?)
+        // - handle initial active views (data structure for it?)
 
-        private void PrepareViews()
+        private void InitializeViews()
         {
             foreach (var view in views)
             {
+                if (view == null)
+                {
+                    return;
+                }
+
+                var type = view.GetType();
+                if (viewsByTypes.ContainsKey(type))
+                {
+                    LogHandler.Log($"[UI] View ({type.Name}) is cached multiple times.", LogType.Warning);
+                    return;
+                }
+
+                viewsByTypes.Add(type, view);
                 view.Initialize(canvasCamera);
             }
         }
 
-        private void CacheViews()
-        {
-            foreach (var view in views)
-            {
-                CacheView(view);
-            }
-        }
-
-        private void CacheView(UiView view)
+        private void ShowInternally(UiView view)
         {
             if (view == null)
             {
                 return;
             }
 
-            var type = view.GetType();
-            if (viewsByTypes.ContainsKey(type))
-            {
-                Debug.LogWarning($"[UI] View ({type.Name}) is cached multiple times.");
-                return;
-            }
-
-            viewsByTypes.Add(type, view);
-        }
-
-        private void Show(UiView view)
-        {
             view.Show();
             activeViews.Add(view);
             OnShowView?.Invoke(view);
         }
 
-        private void Hide(UiView view)
+        private void HideInternally(UiView view)
         {
+            if (view == null)
+            {
+                return;
+            }
+
             view.Hide();
             if (activeViews.Remove(view))
             {
@@ -77,21 +77,25 @@ namespace BroWar.UI.Management
 
         protected virtual void OnInitialize()
         {
-            PrepareViews();
-            CacheViews();
+            InitializeViews();
+        }
+
+        public void Initialize()
+        {
+            Initialize(Camera.main);
         }
 
         public void Initialize(Camera canvasCamera)
         {
-            if (isInitialized)
+            if (IsInitialized)
             {
-                Debug.LogWarning($"[UI] {GetType().Name} is already initialized.");
+                LogHandler.Log($"[UI] {GetType().Name} is already initialized.", LogType.Warning);
                 return;
             }
 
             this.canvasCamera = canvasCamera;
             OnInitialize();
-            isInitialized = true;
+            IsInitialized = true;
         }
 
         public void Show<T>() where T : UiView
@@ -107,6 +111,11 @@ namespace BroWar.UI.Management
             }
         }
 
+        public void Show(UiView view)
+        {
+            ShowInternally(view);
+        }
+
         public void Hide<T>() where T : UiView
         {
             Hide(typeof(T));
@@ -116,8 +125,13 @@ namespace BroWar.UI.Management
         {
             if (TryGetView(viewType, out var view))
             {
-                Hide(view);
+                HideInternally(view);
             }
+        }
+
+        public void Hide(UiView view)
+        {
+            HideInternally(view);
         }
 
         public bool TryGetView(Type type, out UiView view)
@@ -147,7 +161,7 @@ namespace BroWar.UI.Management
         {
             foreach (var view in Views)
             {
-                Hide(view);
+                HideInternally(view);
             }
         }
 
@@ -155,7 +169,7 @@ namespace BroWar.UI.Management
         {
             foreach (var view in activeViews)
             {
-                Hide(view);
+                HideInternally(view);
             }
         }
 
@@ -163,5 +177,7 @@ namespace BroWar.UI.Management
         public IReadOnlyCollection<UiView> Views => viewsByTypes.Values;
         /// <inheritdoc cref="IViewsManager"/>
         public IReadOnlyCollection<UiView> ActiveViews => activeViews;
+
+        public bool IsInitialized { get; private set; }
     }
 }

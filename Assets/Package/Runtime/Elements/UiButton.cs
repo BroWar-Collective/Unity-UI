@@ -34,12 +34,24 @@ namespace BroWar.UI.Elements
             button.onClick.AddListener(OnClick);
         }
 
-        private void OnClick()
+        protected virtual void OnClick()
         {
             OnClicked?.Invoke();
         }
 
+        /// <summary>
+        /// Indicates if <see cref="Button"/> has associated label component.
+        /// </summary>
         public bool HasText => labelText != null;
+
+        /// <summary>
+        /// Indicates if <see cref="Button"/> is interactable.
+        /// </summary>
+        public bool IsInteractable
+        {
+            get => button.interactable;
+            set => button.interactable = true;
+        }
 
         public string Text
         {
