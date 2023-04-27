@@ -8,7 +8,7 @@ namespace Examples
     public class ViewController : MonoBehaviour
     {
         [SerializeField]
-        private ViewsManagerBase viewsManager;
+        private UiViewsManagerBase viewsManager;
         [SerializeField]
         private bool showOnStart = true;
 

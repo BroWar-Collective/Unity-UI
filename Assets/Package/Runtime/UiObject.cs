@@ -9,15 +9,13 @@ namespace BroWar.UI
     [DisallowMultipleComponent, RequireComponent(typeof(RectTransform))]
     public abstract class UiObject : MonoBehaviour
     {
-        protected RectTransform rectTransform;
+        private RectTransform rectTransform;
 
         public event Action OnShow;
         public event Action OnHide;
 
         protected virtual void Awake()
-        {
-            rectTransform = GetComponent<RectTransform>();
-        }
+        { }
 
         public virtual void SetActive(bool value)
         {
@@ -40,6 +38,19 @@ namespace BroWar.UI
         public virtual void Hide()
         {
             SetActive(false);
+        }
+
+        protected RectTransform RectTransform
+        {
+            get
+            {
+                if (rectTransform == null)
+                {
+                    rectTransform = GetComponent<RectTransform>();
+                }
+
+                return rectTransform;
+            }
         }
 
         public bool IsActive => gameObject.activeSelf;

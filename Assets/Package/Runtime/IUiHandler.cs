@@ -2,10 +2,11 @@
 
 namespace BroWar.UI
 {
-    public interface IUiHandler : IDisposable
+    using BroWar.Common;
+
+    public interface IUiHandler : IDisposable, ITickable
     {
         void Prepare();
-        void Tick();
 
         bool IsTickable { get; }
     }
