@@ -5,7 +5,7 @@ namespace BroWar.Editor.UI
 {
     using BroWar.UI.Management;
 
-    [CustomEditor(typeof(ViewsManagerBase))]
+    [CustomEditor(typeof(UiViewsManagerBase))]
     public class ViewsManagerEditor : ToolboxEditor
     { }
 }

@@ -18,12 +18,12 @@ namespace BroWar.UI.Tooltip
         private TooltipSettings currentSettings;
 
         //TODO: temporary solution
-        private void FixRectSize()
+        public void FixRectSize()
         {
-            var parentSize = rectTransform.sizeDelta;
+            var parentSize = RectTransform.sizeDelta;
             parentSize.x = maxWidth;
-            rectTransform.sizeDelta = parentSize;
-            LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
+            RectTransform.sizeDelta = parentSize;
+            LayoutRebuilder.ForceRebuildLayoutImmediate(RectTransform);
             if (contentRect.sizeDelta.x < maxWidth)
             {
                 parentSize.x = contentRect.sizeDelta.x;
@@ -33,7 +33,7 @@ namespace BroWar.UI.Tooltip
                 parentSize.x = maxWidth;
             }
 
-            rectTransform.sizeDelta = parentSize;
+            RectTransform.sizeDelta = parentSize;
         }
 
         public void UpdateContent(string text)
@@ -45,7 +45,6 @@ namespace BroWar.UI.Tooltip
         {
             contentText.SetText(text);
             currentSettings = settings;
-            FixRectSize();
         }
 
         public void UpdatePosition(Vector2 position)
@@ -58,8 +57,8 @@ namespace BroWar.UI.Tooltip
             position += currentSettings.positionOffset;
             position.x = Mathf.Clamp(position.x, rect.width * pivot.x, w - rect.width * (1.0f - pivot.x));
             position.y = Mathf.Clamp(position.y, rect.height * pivot.y, h - rect.height * (1.0f - pivot.y));
-            rectTransform.pivot = currentSettings.positionPivot;
-            rectTransform.position = position;
+            RectTransform.pivot = currentSettings.positionPivot;
+            RectTransform.position = position;
         }
     }
 }

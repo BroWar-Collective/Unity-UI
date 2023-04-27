@@ -8,7 +8,7 @@ namespace BroWar.UI.Handlers
     public class PopupHandler : UiHandlerBehaviour
     {
         [SerializeField]
-        private ViewsManagerBase viewsManager;
+        private UiViewsManagerBase viewsManager;
 
         public override bool IsTickable => false;
     }

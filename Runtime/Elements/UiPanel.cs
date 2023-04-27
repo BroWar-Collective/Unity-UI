@@ -28,12 +28,12 @@ namespace BroWar.UI.Elements
 
         protected virtual Sequence GetShowSequence()
         {
-            return showAnimationContext?.GetSequence(rectTransform);
+            return showAnimationContext?.GetSequence(RectTransform);
         }
 
         protected virtual Sequence GetHideSequence()
         {
-            return hideAnimationContext?.GetSequence(rectTransform);
+            return hideAnimationContext?.GetSequence(RectTransform);
         }
 
         public override void Show()

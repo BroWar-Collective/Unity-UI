@@ -9,7 +9,7 @@ namespace BroWar.UI.Management
 
     /// <inheritdoc cref="IViewsManager"/>
     [DisallowMultipleComponent]
-    public abstract class ViewsManagerBase : StandaloneManager, IViewsManager, IInitializableWithArgument<Camera>
+    public abstract class UiViewsManagerBase : StandaloneManager, IViewsManager, IInitializableWithArgument<Camera>
     {
         private readonly Dictionary<Type, UiView> viewsByTypes = new Dictionary<Type, UiView>();
         private readonly List<UiView> activeViews = new List<UiView>();
@@ -173,11 +173,11 @@ namespace BroWar.UI.Management
             }
         }
 
+        public bool IsInitialized { get; private set; }
+
         /// <inheritdoc cref="IViewsManager"/>
         public IReadOnlyCollection<UiView> Views => viewsByTypes.Values;
         /// <inheritdoc cref="IViewsManager"/>
         public IReadOnlyCollection<UiView> ActiveViews => activeViews;
-
-        public bool IsInitialized { get; private set; }
     }
 }

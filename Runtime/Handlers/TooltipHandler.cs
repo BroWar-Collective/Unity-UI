@@ -18,7 +18,7 @@ namespace BroWar.UI.Handlers
         [Tooltip("Tooltip instance created in runtime.")]
         private TooltipBehaviour tooltip;
 
-        //TODO: temporary
+        //TODO: temporary, will be handled by the HandlersManager
         private void OnEnable()
         {
             Prepare();
@@ -61,10 +61,13 @@ namespace BroWar.UI.Handlers
             HideTooltip();
         }
 
+        //TODO: separate method to set content and separate to show tooltip
+        //TODO: rename it to TooltipData?
         public void ShowTooltip(string contentText, in TooltipSettings settings)
         {
-            tooltip.Show();
             tooltip.UpdateContent(contentText, in settings);
+            tooltip.Show();
+            tooltip.FixRectSize();
         }
 
         public void HideTooltip()
