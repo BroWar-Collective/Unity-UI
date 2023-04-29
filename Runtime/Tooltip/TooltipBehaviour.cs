@@ -8,56 +8,42 @@ namespace BroWar.UI.Tooltip
     public class TooltipBehaviour : UiObject
     {
         [SerializeField, NotNull]
+        private LayoutGroup contentGroup;
+        [SerializeField, NotNull]
         private RectTransform contentRect;
         [SerializeField, NotNull]
         private TextMeshProUGUI contentText;
         [SerializeField]
-        private float maxWidth = 250.0f;
-        [SerializeField]
-        private TooltipSettings defaultSettings;
-        private TooltipSettings currentSettings;
+        private TooltipData defaultData;
+        private TooltipData currentData;
 
-        //TODO: temporary solution
-        public void FixRectSize()
+        public void UpdatePositionAndData(Vector2 position)
         {
-            var parentSize = RectTransform.sizeDelta;
-            parentSize.x = maxWidth;
-            RectTransform.sizeDelta = parentSize;
-            LayoutRebuilder.ForceRebuildLayoutImmediate(RectTransform);
-            if (contentRect.sizeDelta.x < maxWidth)
-            {
-                parentSize.x = contentRect.sizeDelta.x;
-            }
-            else
-            {
-                parentSize.x = maxWidth;
-            }
-
-            RectTransform.sizeDelta = parentSize;
+            UpdatePositionAndData(position, in defaultData);
         }
 
-        public void UpdateContent(string text)
+        public void UpdatePositionAndData(Vector2 position, in TooltipData data)
         {
-            UpdateContent(text, in defaultSettings);
+            currentData = data;
+            contentGroup.childAlignment = currentData.childAlignment;
+            UpdatePosition(position);
         }
 
-        public void UpdateContent(string text, in TooltipSettings settings)
+        public virtual void UpdateContent(string text)
         {
             contentText.SetText(text);
-            currentSettings = settings;
         }
 
-        public void UpdatePosition(Vector2 position)
+        public virtual void UpdatePosition(Vector2 position)
         {
-            //TODO: test different cases and pivots
-            var rect = contentRect.rect;
+            var rect = RectTransform.rect;
             var w = Screen.width;
             var h = Screen.height;
-            var pivot = currentSettings.positionPivot;
-            position += currentSettings.positionOffset;
+            var pivot = currentData.positionPivot;
+            position += currentData.positionOffset;
             position.x = Mathf.Clamp(position.x, rect.width * pivot.x, w - rect.width * (1.0f - pivot.x));
             position.y = Mathf.Clamp(position.y, rect.height * pivot.y, h - rect.height * (1.0f - pivot.y));
-            RectTransform.pivot = currentSettings.positionPivot;
+            RectTransform.pivot = pivot;
             RectTransform.position = position;
         }
     }

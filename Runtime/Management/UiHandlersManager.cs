@@ -7,7 +7,7 @@ namespace BroWar.UI.Management
 
     public class UiHandlersManager : StandaloneManager
     {
-        [SerializeField, SerializeReference, ReferencePicker, ReorderableList]
+        [SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName), ReorderableList(HasLabels = false)]
         private IUiHandler[] handlers;
 
         private void OnEnable()
