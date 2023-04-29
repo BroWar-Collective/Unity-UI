@@ -1,4 +1,4 @@
-﻿using BroWar.UI;
+﻿using BroWar.UI.Management;
 using UnityEngine;
 using Zenject;
 
@@ -6,11 +6,12 @@ namespace Examples
 {
     public class ExampleUiInstaller : MonoInstaller
     {
-        [SerializeField, ScriptablesList]
-        private UiHandlerBehaviour[] handlers;
+        [SerializeField]
+        private UiHandlersManager handlersMananger;
 
         public override void InstallBindings()
         {
+            var handlers = handlersMananger.Handlers;
             foreach (var handler in handlers)
             {
                 if (handler == null)

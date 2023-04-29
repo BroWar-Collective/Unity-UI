@@ -1,13 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using Object = UnityEngine.Object;
 
 namespace BroWar.UI.Handlers
 {
     using BroWar.UI.Tooltip;
 
-    [AddComponentMenu("BroWar/UI/Handler/Tooltip Handler")]
-    public class TooltipHandler : UiHandlerBehaviour, ITooltipHandler
+    /// <summary>
+    /// <see cref="IUiHandler"/> responsible for showing and updating tooltips.
+    /// </summary>
+    [Serializable]
+    public class TooltipHandler : IUiHandler, ITooltipHandler
     {
+        private readonly Dictionary<Object, TooltipBehaviour> tooltipsByPrefabs = new Dictionary<Object, TooltipBehaviour>();
+
         [SerializeField]
         private Canvas canvas;
 
@@ -18,56 +26,62 @@ namespace BroWar.UI.Handlers
         [Tooltip("Tooltip instance created in runtime.")]
         private TooltipBehaviour tooltip;
 
-        //TODO: temporary, will be handled by the HandlersManager
-        private void OnEnable()
+        private Vector2 ScreenPosition
         {
-            Prepare();
+            get
+            {
+                //TODO: better way to handle input?
+                //TODO: none mouse position
+                return Mouse.current.position.ReadValue();
+            }
         }
 
-        private void Update()
-        {
-            Tick();
-        }
+        public void Prepare()
+        { }
 
-        private void OnDisable()
-        {
-            Dispose();
-        }
-
-        public override void Prepare()
-        {
-            base.Prepare();
-            tooltip = Instantiate(tooltipPrefab, CanvasParent);
-            tooltip.name = tooltipPrefab.name;
-            HideTooltip();
-        }
-
-        public override void Tick()
+        public void Tick()
         {
             if (!IsTooltipActive)
             {
                 return;
             }
 
-            //TODO: better way to handle input?
-            //TODO: none mouse position
-            var position = Mouse.current.position.ReadValue();
-            tooltip.UpdatePosition(position);
+            tooltip.UpdatePosition(ScreenPosition);
         }
 
-        public override void Dispose()
+        public void Dispose()
         {
-            base.Dispose();
             HideTooltip();
         }
 
         //TODO: separate method to set content and separate to show tooltip
-        //TODO: rename it to TooltipData?
-        public void ShowTooltip(string contentText, in TooltipSettings settings)
+        public void ShowTooltip(string contentText, in TooltipData data)
         {
-            tooltip.UpdateContent(contentText, in settings);
+            tooltip.UpdatePositionAndData(ScreenPosition, in data);
+            tooltip.UpdateContent(contentText);
             tooltip.Show();
-            tooltip.FixRectSize();
+        }
+
+        //TODO: refactor
+        public TooltipBehaviour ShowTooltip(string contentText, in TooltipData data, TooltipBehaviour tooltipPrefab)
+        {
+            if (tooltipPrefab == null)
+            {
+                tooltipPrefab = this.tooltipPrefab;
+            }
+
+            if (!tooltipsByPrefabs.TryGetValue(tooltipPrefab, out var instance))
+            {
+                instance = Object.Instantiate(tooltipPrefab, CanvasParent);
+                instance.name = tooltipPrefab.name;
+                tooltipsByPrefabs[tooltipPrefab] = instance;
+            }
+
+            instance.UpdatePositionAndData(ScreenPosition, in data);
+            instance.UpdateContent(contentText);
+            instance.Show();
+            tooltip = instance;
+            return instance;
         }
 
         public void HideTooltip()
@@ -80,7 +94,7 @@ namespace BroWar.UI.Handlers
 
         private Transform CanvasParent => canvas.transform;
 
-        public override bool IsTickable => IsTooltipActive;
+        public bool IsTickable => IsTooltipActive;
         public bool IsTooltipActive => tooltip != null && tooltip.IsActive;
     }
 }
