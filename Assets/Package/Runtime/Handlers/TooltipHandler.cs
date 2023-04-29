@@ -54,12 +54,9 @@ namespace BroWar.UI.Handlers
             HideTooltip();
         }
 
-        //TODO: separate method to set content and separate to show tooltip
         public void ShowTooltip(string contentText, in TooltipData data)
         {
-            tooltip.UpdatePositionAndData(ScreenPosition, in data);
-            tooltip.UpdateContent(contentText);
-            tooltip.Show();
+            ShowTooltip(contentText, in data, null);
         }
 
         //TODO: refactor
@@ -70,6 +67,7 @@ namespace BroWar.UI.Handlers
                 tooltipPrefab = this.tooltipPrefab;
             }
 
+            //TODO: move it to a factory
             if (!tooltipsByPrefabs.TryGetValue(tooltipPrefab, out var instance))
             {
                 instance = Object.Instantiate(tooltipPrefab, CanvasParent);
@@ -80,6 +78,7 @@ namespace BroWar.UI.Handlers
             instance.UpdatePositionAndData(ScreenPosition, in data);
             instance.UpdateContent(contentText);
             instance.Show();
+            //TODO: dedicated property to handle reference to an active tooltip
             tooltip = instance;
             return instance;
         }
