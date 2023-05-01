@@ -34,17 +34,17 @@ namespace BroWar.UI.Tooltip
             contentText.SetText(text);
         }
 
-        public virtual void UpdatePosition(Vector2 position)
+        public virtual void UpdatePosition(Vector2 screenPosition)
         {
             var rect = RectTransform.rect;
             var w = Screen.width;
             var h = Screen.height;
             var pivot = currentData.positionPivot;
-            position += currentData.positionOffset;
-            position.x = Mathf.Clamp(position.x, rect.width * pivot.x, w - rect.width * (1.0f - pivot.x));
-            position.y = Mathf.Clamp(position.y, rect.height * pivot.y, h - rect.height * (1.0f - pivot.y));
+            screenPosition += currentData.positionOffset;
+            screenPosition.x = Mathf.Clamp(screenPosition.x, rect.width * pivot.x, w - rect.width * (1.0f - pivot.x));
+            screenPosition.y = Mathf.Clamp(screenPosition.y, rect.height * pivot.y, h - rect.height * (1.0f - pivot.y));
             RectTransform.pivot = pivot;
-            RectTransform.position = position;
+            RectTransform.position = screenPosition;
         }
     }
 }

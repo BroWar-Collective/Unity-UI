@@ -6,36 +6,39 @@ using Zenject;
 
 namespace BroWar.UI.Tooltip
 {
+    //TODO: generic 
+    // - possibility to define custom tooltips
+
     /// <summary>
     /// Component responsible for showing/hiding tooltips on an associated UI object.
     /// </summary>
     [DisallowMultipleComponent]
     [AddComponentMenu("BroWar/UI/Tooltip/Tooltip Target")]
-    public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public abstract class TooltipTarget<T> : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler where T : TooltipBehaviour
     {
-        [SerializeField, TextArea(4, 8)]
-        private string tooltipContent;
         [SerializeField, FormerlySerializedAs("settings")]
         private TooltipData data;
         [SerializeField, Min(0)]
         [Tooltip("Time needed to show tooltip content.")]
         private float offsetTime = 0.0f;
         [SerializeField]
-        [Tooltip("Optional, custom prefab. If null the default one will be used.")]
-        private TooltipBehaviour customTooltip;
+        [Tooltip("TODO")]
+        private T customPrefab;
 
         private ITooltipHandler tooltipHandler;
         private Sequence sequence;
 
-        private void ShowTooltip()
+        protected virtual void ShowTooltip()
         {
-            tooltipHandler.ShowTooltip(tooltipContent, in data, customTooltip);
+            //tooltipHandler.ShowTooltip(tooltipContent, in data, customTooltip);
         }
 
-        private void HideTooltip()
+        protected virtual void HideTooltip()
         {
             tooltipHandler.HideTooltip();
         }
+
+        protected abstract void UpdateContent(T tooltip);
 
         [Inject]
         internal void Inject(ITooltipHandler tooltipHandler)
@@ -61,6 +64,6 @@ namespace BroWar.UI.Tooltip
             HideTooltip();
         }
 
-        private bool ShouldShowContent => !string.IsNullOrEmpty(tooltipContent);
+        protected virtual bool ShouldShowContent => true;
     }
 }
