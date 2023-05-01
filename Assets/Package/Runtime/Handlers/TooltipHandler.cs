@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using Object = UnityEngine.Object;
+using UnityEngine.EventSystems;
 
 namespace BroWar.UI.Handlers
 {
+    using BroWar.Common;
     using BroWar.UI.Tooltip;
 
     /// <summary>
@@ -18,22 +20,49 @@ namespace BroWar.UI.Handlers
 
         [SerializeField]
         private Canvas canvas;
+        [SerializeField]
+        private InputSystemUIInputModule inputModule;
 
         [Line]
-        [SerializeField, NotNull]
-        private TooltipBehaviour tooltipPrefab;
+        [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
+        private ITooltipFactory factory;
+
+        [SpaceArea]
         [SerializeField, Disable]
-        [Tooltip("Tooltip instance created in runtime.")]
-        private TooltipBehaviour tooltip;
+        [Tooltip("Currently active tooltip instance.")]
+        private TooltipBehaviour activeTooltip;
+
+        private TooltipBehaviour ActiveTooltip
+        {
+            get => activeTooltip;
+            set
+            {
+                HideTooltip();
+                activeTooltip = value;
+            }
+        }
 
         private Vector2 ScreenPosition
         {
             get
             {
-                //TODO: better way to handle input?
-                //TODO: none mouse position
-                return Mouse.current.position.ReadValue();
+                //TODO: UI-based interface to handle input
+                //TODO: get it from the EventSystem
+                var pointInputReference = inputModule.point;
+                return pointInputReference.action.ReadValue<Vector2>();
             }
+        }
+
+        private void ShowTooltip(TooltipBehaviour tooltip)
+        {
+            if (tooltip == null)
+            {
+                LogHandler.Log("[UI] Cannot show tooltip. Instance is null.", LogType.Error);
+                return;
+            }
+
+            ActiveTooltip = tooltip;
+            ActiveTooltip.Show();
         }
 
         public void Prepare()
@@ -46,7 +75,7 @@ namespace BroWar.UI.Handlers
                 return;
             }
 
-            tooltip.UpdatePosition(ScreenPosition);
+            activeTooltip.UpdatePosition(ScreenPosition);
         }
 
         public void Dispose()
@@ -54,18 +83,19 @@ namespace BroWar.UI.Handlers
             HideTooltip();
         }
 
-        public void ShowTooltip(string contentText, in TooltipData data)
+        public TooltipBehaviour ShowTooltip(string contentText, in TooltipData data)
         {
-            ShowTooltip(contentText, in data, null);
+            //return ShowTooltip(contentText, in data, tooltipPrefab);
+            return null;
         }
 
         //TODO: refactor
         public TooltipBehaviour ShowTooltip(string contentText, in TooltipData data, TooltipBehaviour tooltipPrefab)
         {
-            if (tooltipPrefab == null)
-            {
-                tooltipPrefab = this.tooltipPrefab;
-            }
+            //if (tooltipPrefab == null)
+            //{
+            //    tooltipPrefab = this.tooltipPrefab;
+            //}
 
             //TODO: move it to a factory
             if (!tooltipsByPrefabs.TryGetValue(tooltipPrefab, out var instance))
@@ -77,23 +107,25 @@ namespace BroWar.UI.Handlers
 
             instance.UpdatePositionAndData(ScreenPosition, in data);
             instance.UpdateContent(contentText);
-            instance.Show();
-            //TODO: dedicated property to handle reference to an active tooltip
-            tooltip = instance;
+            ShowTooltip(instance);
             return instance;
         }
 
         public void HideTooltip()
         {
-            if (tooltip != null && tooltip.IsActive)
+            if (!IsTooltipActive)
             {
-                tooltip.Hide();
+                return;
             }
+
+            ActiveTooltip.Hide();
+            ActiveTooltip = null;
         }
 
         private Transform CanvasParent => canvas.transform;
 
-        public bool IsTickable => IsTooltipActive;
-        public bool IsTooltipActive => tooltip != null && tooltip.IsActive;
+        bool IUiHandler.IsTickable => IsTooltipActive;
+
+        public bool IsTooltipActive => ActiveTooltip != null && ActiveTooltip.IsActive;
     }
 }

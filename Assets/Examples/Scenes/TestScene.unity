@@ -150,12 +150,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 694553498}
   - {fileID: 1715507021}
   - {fileID: 1145190371}
-  - {fileID: 1540832769}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &50676616
 GameObject:
@@ -170,7 +168,6 @@ GameObject:
   - component: {fileID: 50676619}
   - component: {fileID: 50676618}
   - component: {fileID: 50676621}
-  - component: {fileID: 50676622}
   m_Layer: 5
   m_Name: SampleButton1
   m_TagString: Untagged
@@ -296,25 +293,6 @@ MonoBehaviour:
   button: {fileID: 50676618}
   labelIcon: {fileID: 1852460090}
   labelText: {fileID: 1904438827}
---- !u!114 &50676622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 50676616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 827082413b5213740b4ee710fd0cc3a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tooltipContent: Very important tooltip information
-  data:
-    positionOffset: {x: 10, y: -10}
-    positionPivot: {x: 0, y: 0}
-    childAlignment: 0
-  offsetTime: 0.25
-  customTooltip: {fileID: 0}
 --- !u!1 &369468257
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +304,6 @@ GameObject:
   - component: {fileID: 369468258}
   - component: {fileID: 369468261}
   - component: {fileID: 369468260}
-  - component: {fileID: 369468259}
   m_Layer: 5
   m_Name: SampleText2
   m_TagString: Untagged
@@ -353,26 +330,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -256}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &369468259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 369468257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 827082413b5213740b4ee710fd0cc3a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tooltipContent: Lorem ipsum
-  data:
-    positionOffset: {x: 0, y: 0}
-    positionPivot: {x: 0, y: 0}
-    childAlignment: 0
-  offsetTime: 0
-  customTooltip: {fileID: 8332164750516034109, guid: 5904c075d402f554595809c8228b176c,
-    type: 3}
 --- !u!114 &369468260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,7 +458,7 @@ Transform:
   - {fileID: 558847057}
   - {fileID: 780610639}
   m_Father: {fileID: 721938269}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &468884790
 MonoBehaviour:
@@ -517,15 +474,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handlers:
   - id: 0
+  - id: 1
+  - id: 2
   references:
     version: 1
     00000000:
+      type: {class: InputHandler, ns: BroWar.UI.Handlers, asm: BroWar.UI}
+      data:
+        inputModule: {fileID: 0}
+    00000001:
+      type: {class: PopupHandler, ns: BroWar.UI.Handlers, asm: BroWar.UI}
+    00000002:
       type: {class: TooltipHandler, ns: BroWar.UI.Handlers, asm: BroWar.UI}
       data:
         canvas: {fileID: 780610641}
-        tooltipPrefab: {fileID: 2888309395328228474, guid: 53b2d8eee57738d48aa8ea5891057224,
-          type: 3}
-        tooltip: {fileID: 0}
+        inputModule: {fileID: 1540832767}
+        factory:
+          id: 3
+        activeTooltip: {fileID: 0}
+    00000003:
+      type: {class: StandardTooltipFactory, ns: BroWar.UI.Tooltip.Factories, asm: BroWar.UI}
+      data:
+        parent: {fileID: 780610639}
+        tooltipPrefabs: []
 --- !u!1 &522047277
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,7 +591,7 @@ RectTransform:
   - {fileID: 2044245591}
   - {fileID: 1956203760}
   m_Father: {fileID: 721938269}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -637,7 +608,6 @@ GameObject:
   m_Component:
   - component: {fileID: 558847057}
   - component: {fileID: 558847059}
-  - component: {fileID: 558847058}
   m_Layer: 5
   m_Name: PopupHandler
   m_TagString: Untagged
@@ -664,19 +634,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &558847058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558847056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 034de7533c67d5748a67f053e076e0c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewsManager: {fileID: 0}
 --- !u!223 &558847059
 Canvas:
   m_ObjectHideFlags: 0
@@ -709,7 +666,6 @@ GameObject:
   - component: {fileID: 647265957}
   - component: {fileID: 647265959}
   - component: {fileID: 647265958}
-  - component: {fileID: 647265960}
   m_Layer: 5
   m_Name: SampleText1
   m_TagString: Untagged
@@ -833,25 +789,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647265956}
   m_CullTransparentMesh: 1
---- !u!114 &647265960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 647265956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 827082413b5213740b4ee710fd0cc3a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tooltipContent: Lorem ipsum
-  data:
-    positionOffset: {x: 0, y: 0}
-    positionPivot: {x: 0, y: 0}
-    childAlignment: 0
-  offsetTime: 0
-  customTooltip: {fileID: 0}
 --- !u!1 &694553497
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,7 +818,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6620144}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &694553499
@@ -963,6 +900,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1540832769}
   - {fileID: 522047281}
   - {fileID: 704783722}
   - {fileID: 468884789}
@@ -1039,7 +977,6 @@ GameObject:
   - component: {fileID: 1085050659}
   - component: {fileID: 1085050658}
   - component: {fileID: 1085050657}
-  - component: {fileID: 1085050656}
   m_Layer: 5
   m_Name: SampleButton2
   m_TagString: Untagged
@@ -1067,28 +1004,6 @@ RectTransform:
   m_AnchoredPosition: {x: -30, y: 0}
   m_SizeDelta: {x: 41, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1085050656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1085050654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 827082413b5213740b4ee710fd0cc3a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tooltipContent: 'Very important tooltip information
-
-    Very important tooltip
-    information'
-  data:
-    positionOffset: {x: 0, y: 0}
-    positionPivot: {x: 0, y: 0}
-    childAlignment: 2
-  offsetTime: 0.5
-  customTooltip: {fileID: 0}
 --- !u!114 &1085050657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1277,7 +1192,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6620144}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1391877071
 GameObject:
@@ -1472,8 +1387,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6620144}
-  m_RootOrder: 3
+  m_Father: {fileID: 721938269}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1715507018
 GameObject:
@@ -1556,7 +1471,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6620144}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1852460088
 GameObject:
@@ -2028,7 +1943,7 @@ PrefabInstance:
     - target: {fileID: 5384140137440897075, guid: 8ce9699d677b2104ea781e06293a1973,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5384140137440897075, guid: 8ce9699d677b2104ea781e06293a1973,
         type: 3}

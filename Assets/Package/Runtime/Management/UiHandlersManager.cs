@@ -5,9 +5,10 @@ namespace BroWar.UI.Management
 {
     using BroWar.Common;
 
+    [DisallowMultipleComponent]
     public class UiHandlersManager : StandaloneManager
     {
-        [SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName), ReorderableList(HasLabels = false)]
+        [SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName), ReorderableList]
         private IUiHandler[] handlers;
 
         private void OnEnable()
