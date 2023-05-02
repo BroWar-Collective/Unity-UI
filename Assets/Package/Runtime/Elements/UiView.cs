@@ -23,21 +23,21 @@ namespace BroWar.UI.Elements
             canvas.worldCamera = camera;
         }
 
-        public override void Hide()
-        {
-            base.Hide();
-            foreach (var panel in panels)
-            {
-                panel.Show();
-            }
-        }
-
         public override void Show()
         {
             base.Show();
             foreach (var panel in panels)
             {
                 panel.Hide();
+            }
+        }
+
+        public override void Hide()
+        {
+            base.Hide();
+            foreach (var panel in panels)
+            {
+                panel.Show();
             }
         }
     }

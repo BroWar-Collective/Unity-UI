@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem.UI;
-using Object = UnityEngine.Object;
-using UnityEngine.EventSystems;
 
 namespace BroWar.UI.Handlers
 {
@@ -13,13 +9,10 @@ namespace BroWar.UI.Handlers
     /// <summary>
     /// <see cref="IUiHandler"/> responsible for showing and updating tooltips.
     /// </summary>
-    [Serializable]
-    public class TooltipHandler : IUiHandler, ITooltipHandler
+    [DisallowMultipleComponent]
+    [AddComponentMenu("BroWar/UI/Handlers/Tooltip Handler")]
+    public class TooltipHandler : UiHandlerBehaviour, ITooltipHandler
     {
-        private readonly Dictionary<Object, TooltipBehaviour> tooltipsByPrefabs = new Dictionary<Object, TooltipBehaviour>();
-
-        [SerializeField]
-        private Canvas canvas;
         [SerializeField]
         private InputSystemUIInputModule inputModule;
 
@@ -65,11 +58,14 @@ namespace BroWar.UI.Handlers
             ActiveTooltip.Show();
         }
 
-        public void Prepare()
-        { }
-
-        public void Tick()
+        public override void Prepare()
         {
+            base.Prepare();
+        }
+
+        public override void Tick()
+        {
+            base.Tick();
             if (!IsTooltipActive)
             {
                 return;
@@ -78,35 +74,21 @@ namespace BroWar.UI.Handlers
             activeTooltip.UpdatePosition(ScreenPosition);
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
+            base.Dispose();
             HideTooltip();
         }
 
-        public TooltipBehaviour ShowTooltip(string contentText, in TooltipData data)
+        public T ShowTooltip<T>(in TooltipData data) where T : TooltipBehaviour
         {
-            //return ShowTooltip(contentText, in data, tooltipPrefab);
-            return null;
+            return ShowTooltip<T>(in data, null);
         }
 
-        //TODO: refactor
-        public TooltipBehaviour ShowTooltip(string contentText, in TooltipData data, TooltipBehaviour tooltipPrefab)
+        public T ShowTooltip<T>(in TooltipData data, T tooltipPrefab) where T : TooltipBehaviour
         {
-            //if (tooltipPrefab == null)
-            //{
-            //    tooltipPrefab = this.tooltipPrefab;
-            //}
-
-            //TODO: move it to a factory
-            if (!tooltipsByPrefabs.TryGetValue(tooltipPrefab, out var instance))
-            {
-                instance = Object.Instantiate(tooltipPrefab, CanvasParent);
-                instance.name = tooltipPrefab.name;
-                tooltipsByPrefabs[tooltipPrefab] = instance;
-            }
-
+            var instance = factory.Create(tooltipPrefab);
             instance.UpdatePositionAndData(ScreenPosition, in data);
-            instance.UpdateContent(contentText);
             ShowTooltip(instance);
             return instance;
         }
@@ -118,13 +100,13 @@ namespace BroWar.UI.Handlers
                 return;
             }
 
+            factory.Dispose(ActiveTooltip);
+
             ActiveTooltip.Hide();
             ActiveTooltip = null;
         }
 
-        private Transform CanvasParent => canvas.transform;
-
-        bool IUiHandler.IsTickable => IsTooltipActive;
+        public override bool IsTickable => IsTooltipActive;
 
         public bool IsTooltipActive => ActiveTooltip != null && ActiveTooltip.IsActive;
     }

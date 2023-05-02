@@ -7,7 +7,7 @@ namespace Examples
     public class ExampleUiInstaller : MonoInstaller
     {
         [SerializeField]
-        private UiHandlersManager handlersMananger;
+        private UiManager handlersMananger;
 
         public override void InstallBindings()
         {

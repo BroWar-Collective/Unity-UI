@@ -6,9 +6,6 @@ using Zenject;
 
 namespace BroWar.UI.Tooltip
 {
-    //TODO: generic 
-    // - possibility to define custom tooltips
-
     /// <summary>
     /// Component responsible for showing/hiding tooltips on an associated UI object.
     /// </summary>
@@ -22,7 +19,7 @@ namespace BroWar.UI.Tooltip
         [Tooltip("Time needed to show tooltip content.")]
         private float offsetTime = 0.0f;
         [SerializeField]
-        [Tooltip("TODO")]
+        [Tooltip("Optional, custom tooltip prefab. If null, the default one will be used.")]
         private T customPrefab;
 
         private ITooltipHandler tooltipHandler;
@@ -30,7 +27,11 @@ namespace BroWar.UI.Tooltip
 
         protected virtual void ShowTooltip()
         {
-            //tooltipHandler.ShowTooltip(tooltipContent, in data, customTooltip);
+            var tooltip = tooltipHandler.ShowTooltip(in data, customPrefab);
+            if (tooltip != null)
+            {
+                UpdateContent(tooltip);
+            }
         }
 
         protected virtual void HideTooltip()
