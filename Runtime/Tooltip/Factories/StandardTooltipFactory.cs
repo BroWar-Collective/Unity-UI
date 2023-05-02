@@ -4,87 +4,102 @@ using UnityEngine;
 
 namespace BroWar.UI.Tooltip.Factories
 {
-    using BroWar.Common.Factories;
+    using BroWar.Common;
     using BroWar.Common.Patterns;
 
     [Serializable]
     public class StandardTooltipFactory : ITooltipFactory
     {
-        private readonly Dictionary<TooltipBehaviour, NativeObjectPool<TooltipBehaviour>> poolsByPrefabs = new Dictionary<TooltipBehaviour, NativeObjectPool<TooltipBehaviour>>();
+        private readonly Dictionary<string, NativeObjectPool<TooltipBehaviour>> poolsByIds
+            = new Dictionary<string, NativeObjectPool<TooltipBehaviour>>();
 
         [SerializeField]
         private Transform parent;
-        [SerializeField, NotNull, ReorderableList(HasLabels = false)]
-        [Tooltip("Default tooltip prefab.")]
-        private TooltipBehaviour[] tooltipPrefabs;
+        [SerializeField, NotNull]
+        [Tooltip("TODO")]
+        private TooltipBehaviour defaultPrefab;
 
-        private void CachePrefabs()
+        private void CachePrefab(TooltipBehaviour prefab)
         {
-            CachePrefabs(tooltipPrefabs, parent);
-        }
-
-        private void CachePrefabs(IReadOnlyList<TooltipBehaviour> prefabs, Transform parent)
-        {
-            foreach (var prefab in prefabs)
-            {
-                //CachePrefab(prefab, parent, 0);
-            }
+            CachePrefab(prefab, parent);
         }
 
         private void CachePrefab(TooltipBehaviour prefab, Transform parent)
         {
             if (prefab == null)
             {
-                //Debug.LogError($"[Factories] Given prefab is invalid.");
+                LogHandler.Log($"[UI][Tooltip] Given prefab is invalid.", LogType.Error);
                 return;
             }
 
-            var type = prefab.GetType();
-            if (poolsByPrefabs.TryGetValue(prefab, out _))
+            var id = GenerateId(prefab);
+            if (poolsByIds.TryGetValue(id, out _))
             {
-                //Debug.LogError($"[Factories] Prefab with type {type} is already cached.");
+                LogHandler.Log($"[UI][Tooltip] Prefab with ID: '{id}' is already cached.", LogType.Warning);
                 return;
             }
 
             var pool = new NativeObjectPool<TooltipBehaviour>(prefab, parent);
-            poolsByPrefabs.Add(prefab, pool);
+            poolsByIds.Add(id, pool);
             pool.FillPool(0);
         }
 
-        public void Initialize()
+        private string GenerateId(TooltipBehaviour prefab)
         {
-            CachePrefabs();
-            IsInitialized = true;
+            //TODO: temporary
+            return prefab.GetInstanceID().ToString();
         }
 
-        public bool IsTooltipSupported<T>() where T : TooltipBehaviour
+        public TooltipBehaviour Create()
         {
-            return true;
-            //return 
-        }
-
-        public virtual T Create<T>(T prefab) where T : TooltipBehaviour
-        {
-            if (poolsByPrefabs.TryGetValue(prefab, out var pool))
+            if (defaultPrefab == null)
             {
-                return pool.Get() as T;
+                return null;
             }
 
-            //Debug.LogError($"[Factories] Cannot create instance for type - {type}.");
-            return null;
+            return Create(defaultPrefab);
+        }
+
+        //TODO: refactor
+        public T Create<T>(T prefab) where T : TooltipBehaviour
+        {
+            if (prefab == null)
+            {
+                return Create() as T;
+            }
+
+            var id = GenerateId(prefab);
+            if (poolsByIds.TryGetValue(id, out var pool))
+            {
+                var instance = pool.Get() as T;
+                if (instance != null)
+                {
+                    instance.Id = id;
+                }
+
+                return instance;
+            }
+
+            CachePrefab(prefab);
+            return Create(prefab);
         }
 
         public virtual void Dispose(TooltipBehaviour target)
         {
-            if (!target)
+            if (target == null)
             {
                 return;
             }
 
-            //if (poolsByPrefabs.TryGetValue(prefab, out var pool))
-            //{
-            //    pool.Release(target);
-            //}
+            var id = target.Id;
+            if (!poolsByIds.TryGetValue(id, out var pool))
+            {
+                LogHandler.Log($"[UI][Tooltip] Cannot dispose tooltip with ID: '{id}'.", LogType.Error);
+                return;
+            }
+
+            target.Id = null;
+            pool.Release(target);
         }
 
         public bool IsInitialized { get; private set; }

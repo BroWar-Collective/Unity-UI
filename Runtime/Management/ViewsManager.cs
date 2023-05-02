@@ -2,7 +2,7 @@
 
 namespace BroWar.UI.Management
 {
-    //TODO: move to examples
+    //TODO: make it obsolete
     [AddComponentMenu("BroWar/UI/Views Manager")]
     public class ViewsManager : UiViewsManagerBase
     {

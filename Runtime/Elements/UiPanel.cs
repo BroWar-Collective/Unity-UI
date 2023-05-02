@@ -67,6 +67,9 @@ namespace BroWar.UI.Elements
             base.Hide();
         }
 
+        /// <summary>
+        /// Indicates if <see cref="UiPanel"/> should use animations when hiding or showing.
+        /// </summary>
         public virtual bool UseAnimations { get; private set; } = true;
         public virtual IAnimationContext ShowAnimationContext { get => showAnimationContext; set => showAnimationContext = value; }
         public virtual IAnimationContext HideAnimationContext { get => hideAnimationContext; set => hideAnimationContext = value; }

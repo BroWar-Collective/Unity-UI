@@ -7,15 +7,15 @@ namespace BroWar.UI
     /// </summary>
     public abstract class UiHandlerBehaviour : MonoBehaviour, IUiHandler
     {
-        public virtual void Dispose()
-        { }
-
         public virtual void Prepare()
         { }
 
         public virtual void Tick()
         { }
 
-        public abstract bool IsTickable { get; }
+        public virtual void Dispose()
+        { }
+
+        public virtual bool IsTickable => false;
     }
 }

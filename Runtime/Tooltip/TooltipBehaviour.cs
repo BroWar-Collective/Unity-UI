@@ -46,5 +46,7 @@ namespace BroWar.UI.Tooltip
             RectTransform.pivot = pivot;
             RectTransform.position = screenPosition;
         }
+
+        internal string Id { get; set; }
     }
 }

@@ -5,11 +5,13 @@ namespace BroWar.UI.Management
 {
     using BroWar.Common;
 
+    //TODO: interface
     [DisallowMultipleComponent]
-    public class UiHandlersManager : StandaloneManager
+    [AddComponentMenu("BroWar/UI/UI Manager")]
+    public class UiManager : StandaloneManager
     {
-        [SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName), ReorderableList]
-        private IUiHandler[] handlers;
+        [SerializeField, ReorderableList(HasLabels = false, Foldable = true)]
+        private UiHandlerBehaviour[] handlers;
 
         private void OnEnable()
         {
@@ -51,6 +53,10 @@ namespace BroWar.UI.Management
             }
         }
 
+        /// <summary>
+        /// Collection of all available <see cref="IUiHandler"/>s.
+        /// Each handler is responsible for custom, UI-related feature.
+        /// </summary>
         public IReadOnlyList<IUiHandler> Handlers => handlers;
     }
 }

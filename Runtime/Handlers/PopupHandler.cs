@@ -1,26 +1,14 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BroWar.UI.Handlers
 {
-    [Serializable]
-    public class PopupHandler : IUiHandler
-    {
-        public void Dispose()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Prepare()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Tick()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool IsTickable => false;
-    }
+    /// <summary>
+    /// Dedicated <see cref="IUiHandler"/> respnsible for displaying popup messages.
+    /// 
+    /// TODO: implementation needed
+    /// </summary>
+    [DisallowMultipleComponent]
+    [AddComponentMenu("BroWar/UI/Handlers/Popup Handler")]
+    public class PopupHandler : UiHandlerBehaviour
+    { }
 }
