@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem.UI;
+using Zenject;
 
 namespace BroWar.UI.Handlers
 {
     using BroWar.Common;
+    using BroWar.UI.Input;
     using BroWar.UI.Tooltip;
 
     /// <summary>
@@ -25,26 +27,7 @@ namespace BroWar.UI.Handlers
         [Tooltip("Currently active tooltip instance.")]
         private TooltipBehaviour activeTooltip;
 
-        private TooltipBehaviour ActiveTooltip
-        {
-            get => activeTooltip;
-            set
-            {
-                HideTooltip();
-                activeTooltip = value;
-            }
-        }
-
-        private Vector2 ScreenPosition
-        {
-            get
-            {
-                //TODO: UI-based interface to handle input
-                //TODO: get it from the EventSystem
-                var pointInputReference = inputModule.point;
-                return pointInputReference.action.ReadValue<Vector2>();
-            }
-        }
+        private IUiInputHandler inputHandler;
 
         private void ShowTooltip(TooltipBehaviour tooltip)
         {
@@ -56,6 +39,12 @@ namespace BroWar.UI.Handlers
 
             ActiveTooltip = tooltip;
             ActiveTooltip.Show();
+        }
+
+        [Inject]
+        internal void Inject(IUiInputHandler inputHandler)
+        {
+            this.inputHandler = inputHandler;
         }
 
         public override void Prepare()
@@ -71,7 +60,7 @@ namespace BroWar.UI.Handlers
                 return;
             }
 
-            activeTooltip.UpdatePosition(ScreenPosition);
+            activeTooltip.UpdatePosition(PointPosition);
         }
 
         public override void Dispose()
@@ -88,7 +77,7 @@ namespace BroWar.UI.Handlers
         public T ShowTooltip<T>(in TooltipData data, T tooltipPrefab) where T : TooltipBehaviour
         {
             var instance = factory.Create(tooltipPrefab);
-            instance.UpdatePositionAndData(ScreenPosition, in data);
+            instance.UpdatePositionAndData(PointPosition, in data);
             ShowTooltip(instance);
             return instance;
         }
@@ -104,6 +93,21 @@ namespace BroWar.UI.Handlers
 
             ActiveTooltip.Hide();
             ActiveTooltip = null;
+        }
+
+        private TooltipBehaviour ActiveTooltip
+        {
+            get => activeTooltip;
+            set
+            {
+                HideTooltip();
+                activeTooltip = value;
+            }
+        }
+
+        private Vector2 PointPosition
+        {
+            get => inputHandler.PointPosition;
         }
 
         public override bool IsTickable => IsTooltipActive;

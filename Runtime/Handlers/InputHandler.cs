@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.InputSystem.UI;
 
 namespace BroWar.UI.Handlers
@@ -15,5 +16,30 @@ namespace BroWar.UI.Handlers
     {
         [SerializeField]
         private InputSystemUIInputModule inputModule;
+
+        public Vector2 PointPosition
+        {
+            get
+            {
+                if (inputModule == null)
+                {
+                    return Vector2.zero;
+                }
+
+                var pointAction = inputModule.point;
+                if (pointAction == null)
+                {
+                    return Vector2.zero;
+                }
+
+                return pointAction.action.ReadValue<Vector2>();
+            }
+        }
+
+        public override void Prepare()
+        {
+            base.Prepare();
+            Assert.IsNotNull(inputModule, "[UI][Input] Input module is null.");
+        }
     }
 }
