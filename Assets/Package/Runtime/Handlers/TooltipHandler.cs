@@ -76,7 +76,7 @@ namespace BroWar.UI.Handlers
 
         public T ShowTooltip<T>(in TooltipData data, T tooltipPrefab) where T : TooltipBehaviour
         {
-            var instance = factory.Create(tooltipPrefab);
+            var instance = factory.Create<T>(tooltipPrefab);
             instance.UpdatePositionAndData(PointPosition, in data);
             ShowTooltip(instance);
             return instance;

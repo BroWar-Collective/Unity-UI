@@ -3,7 +3,7 @@
     internal interface ITooltipFactory
     {
         TooltipBehaviour Create();
-        T Create<T>(T prefab) where T : TooltipBehaviour;
+        T Create<T>(TooltipBehaviour prefab) where T : TooltipBehaviour;
         void Dispose(TooltipBehaviour target);
     }
 }
