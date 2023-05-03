@@ -16,7 +16,6 @@ namespace BroWar.UI.Tooltip.Factories
         [SerializeField]
         private Transform parent;
         [SerializeField, NotNull]
-        [Tooltip("TODO")]
         private TooltipBehaviour defaultPrefab;
 
         private void CachePrefab(TooltipBehaviour prefab)
@@ -33,7 +32,7 @@ namespace BroWar.UI.Tooltip.Factories
             }
 
             var id = GenerateId(prefab);
-            if (poolsByIds.TryGetValue(id, out _))
+            if (poolsByIds.ContainsKey(id))
             {
                 LogHandler.Log($"[UI][Tooltip] Prefab with ID: '{id}' is already cached.", LogType.Warning);
                 return;
@@ -54,6 +53,7 @@ namespace BroWar.UI.Tooltip.Factories
         {
             if (defaultPrefab == null)
             {
+                LogHandler.Log("[UI][Tooltip] Default prefab not available.", LogType.Error);
                 return null;
             }
 

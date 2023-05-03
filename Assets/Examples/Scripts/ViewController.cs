@@ -7,8 +7,6 @@ namespace Examples
 {
     public class ViewController : MonoBehaviour
     {
-        private IUiViewsHandler viewsHandler;
-
         [SerializeField]
         private bool showOnStart = true;
 
@@ -16,6 +14,8 @@ namespace Examples
         [EditorButton(nameof(Show))]
         [SerializeField, TypeConstraint(typeof(UiView))]
         private SerializedType viewType;
+
+        private IUiViewsHandler viewsHandler;
 
         private void Start()
         {
