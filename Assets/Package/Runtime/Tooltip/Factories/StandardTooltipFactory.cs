@@ -75,6 +75,7 @@ namespace BroWar.UI.Tooltip.Factories
                 if (instance != null)
                 {
                     instance.Id = id;
+                    instance.name = prefab.name;
                 }
 
                 return instance;

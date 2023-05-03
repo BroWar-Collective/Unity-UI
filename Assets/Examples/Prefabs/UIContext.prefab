@@ -31,7 +31,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1114633844845556573}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -281,11 +281,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1114633845645297973}
   - {fileID: 1114633846721440257}
   - {fileID: 1114633845719669553}
   - {fileID: 1114633844749566033}
   - {fileID: 1114633844921038927}
-  - {fileID: 1114633845645297973}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -318,7 +318,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1114633844845556573}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -671,7 +671,7 @@ GameObject:
   - component: {fileID: 1114633845645297973}
   - component: {fileID: 1114633845645297974}
   m_Layer: 0
-  m_Name: HandlersManager
+  m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -690,7 +690,7 @@ Transform:
   m_Children:
   - {fileID: 1114633846812842676}
   m_Father: {fileID: 1114633844845556573}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1114633845645297974
 MonoBehaviour:
@@ -742,7 +742,7 @@ RectTransform:
   - {fileID: 1114633846218482263}
   - {fileID: 1114633846163970288}
   m_Father: {fileID: 1114633844845556573}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1400,7 +1400,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1114633844845556573}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1114633846721440256
 MonoBehaviour:
@@ -1583,7 +1583,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392cd4cb3b120cb46a3c99ef64774876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  views: []
+  views:
+  - {fileID: 1114633846218482264}
 --- !u!114 &1114633846812842680
 MonoBehaviour:
   m_ObjectHideFlags: 0
