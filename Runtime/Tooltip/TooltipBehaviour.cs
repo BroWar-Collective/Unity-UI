@@ -47,6 +47,10 @@ namespace BroWar.UI.Tooltip
             RectTransform.position = screenPosition;
         }
 
-        internal string Id { get; set; }
+        /// <summary>
+        /// Instance ID of associated pool. 
+        /// Used internally by the tooltip system.
+        /// </summary>
+        internal int InstanceId { get; set; }
     }
 }
