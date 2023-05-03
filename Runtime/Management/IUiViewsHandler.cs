@@ -16,7 +16,6 @@ namespace BroWar.UI.Management
         bool TryGetView(Type type, out UiView view);
         bool TryGetView<T>(out T view) where T : UiView;
         void HideAll();
-        void HideActiveViews();
 
         IReadOnlyCollection<UiView> Views { get; }
         IReadOnlyCollection<UiView> ActiveViews { get; }
