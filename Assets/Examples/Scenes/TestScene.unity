@@ -480,7 +480,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1114633844845556572, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
       propertyPath: m_Name
-      value: UIContext
+      value: UIContext [Example]
       objectReference: {fileID: 0}
     - target: {fileID: 1114633844845556573, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
       propertyPath: m_RootOrder

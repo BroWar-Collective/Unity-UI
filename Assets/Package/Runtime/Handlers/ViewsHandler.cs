@@ -169,15 +169,10 @@ namespace BroWar.UI.Handlers
         {
             foreach (var view in Views)
             {
-                HideInternally(view);
-            }
-        }
-
-        public void HideActiveViews()
-        {
-            foreach (var view in activeViews)
-            {
-                HideInternally(view);
+                if (view.IsActive)
+                {
+                    HideInternally(view);
+                }
             }
         }
 
