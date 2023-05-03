@@ -263,6 +263,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1114633844845556573}
+  - component: {fileID: 739823630}
+  - component: {fileID: 6677187410769690711}
   m_Layer: 0
   m_Name: UIContext
   m_TagString: Untagged
@@ -289,6 +291,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &739823630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114633844845556572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 6677187410769690711}
+  _installerPrefabs: []
+  _findSiblingMonoInstallers: 0
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &6677187410769690711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114633844845556572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1672cbb5fa696c94db968810901ad4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  installers:
+  - id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: UiInstaller, ns: BroWar.UI.Injection, asm: BroWar.UI}
+      data:
+        bindToParent: 1
+        manager: {fileID: 1114633845645297974}
 --- !u!1 &1114633844921038926
 GameObject:
   m_ObjectHideFlags: 0

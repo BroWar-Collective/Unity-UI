@@ -33,12 +33,12 @@ namespace Examples
 
         public void Show()
         {
-            viewsHandler.Show(viewType);
+            viewsHandler?.Show(viewType);
         }
 
         public void Hide()
         {
-            viewsHandler.Hide(viewType);
+            viewsHandler?.Hide(viewType);
         }
     }
 }
