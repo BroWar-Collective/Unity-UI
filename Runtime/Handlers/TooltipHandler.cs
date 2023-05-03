@@ -33,7 +33,7 @@ namespace BroWar.UI.Handlers
         {
             if (tooltip == null)
             {
-                LogHandler.Log("[UI] Cannot show tooltip. Instance is null.", LogType.Error);
+                LogHandler.Log("[UI][Tooltip] Cannot show tooltip. Instance is null.", LogType.Error);
                 return;
             }
 
@@ -69,9 +69,9 @@ namespace BroWar.UI.Handlers
             HideTooltip();
         }
 
-        public T ShowTooltip<T>(in TooltipData data) where T : TooltipBehaviour
+        public TooltipBehaviour ShowTooltip(in TooltipData data)
         {
-            return ShowTooltip<T>(in data, null);
+            return ShowTooltip<TooltipBehaviour>(in data, null);
         }
 
         public T ShowTooltip<T>(in TooltipData data, T tooltipPrefab) where T : TooltipBehaviour
