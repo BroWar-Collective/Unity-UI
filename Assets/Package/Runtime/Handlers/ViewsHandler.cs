@@ -7,6 +7,7 @@ namespace BroWar.UI.Handlers
     using BroWar.Common;
     using BroWar.UI.Elements;
     using BroWar.UI.Management;
+    using BroWar.UI.Management.Views;
 
     [DisallowMultipleComponent]
     [AddComponentMenu("BroWar/UI/Handlers/Views Handler")]
@@ -17,6 +18,8 @@ namespace BroWar.UI.Handlers
 
         [SerializeField, ReorderableList]
         private List<UiView> views;
+        [SerializeField, ReorderableList]
+        private ViewContext[] contexts;
 
         private Camera canvasCamera;
 
@@ -25,9 +28,10 @@ namespace BroWar.UI.Handlers
 
         //TODO:
         // - events
-        // - what about views between scenes?
+        // - what about views between scenes? - no needed
         // - better initialization (better settings?)
         // - handle initial active views (data structure for it?)
+        // - namespaces
 
         private void InitializeViews()
         {
@@ -52,7 +56,7 @@ namespace BroWar.UI.Handlers
 
         private void ShowInternally(UiView view)
         {
-            if (view == null)
+            if (view == null || (view.IsActive && !view.IsDuringAnimation))
             {
                 return;
             }
@@ -64,7 +68,8 @@ namespace BroWar.UI.Handlers
 
         private void HideInternally(UiView view)
         {
-            if (view == null)
+            //TODO: can hide and can show
+            if (view == null || !view.IsActive)
             {
                 return;
             }

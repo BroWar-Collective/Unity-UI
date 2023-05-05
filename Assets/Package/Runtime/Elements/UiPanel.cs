@@ -20,10 +20,14 @@ namespace BroWar.UI.Elements
 
         private void ResetAnimation()
         {
-            if (sequence != null)
-            {
-                sequence.Kill();
-            }
+            sequence?.Kill();
+        }
+
+        private void StartAnimation()
+        {
+            sequence.OnComplete(() => IsDuringAnimation = false);
+            sequence.Play();
+            IsDuringAnimation = true;
         }
 
         protected virtual Sequence GetShowSequence()
@@ -45,7 +49,7 @@ namespace BroWar.UI.Elements
                 sequence = GetShowSequence();
                 if (sequence != null)
                 {
-                    sequence.Play();
+                    StartAnimation();
                 }
             }
         }
@@ -59,13 +63,17 @@ namespace BroWar.UI.Elements
                 if (sequence != null)
                 {
                     sequence.AppendCallback(base.Hide);
-                    sequence.Play();
+                    StartAnimation();
                     return;
                 }
             }
 
             base.Hide();
         }
+
+        //TODO: better name
+        //TODO: separate into is hiding is showing
+        public bool IsDuringAnimation { get; private set; }
 
         /// <summary>
         /// Indicates if <see cref="UiPanel"/> should use animations when hiding or showing.

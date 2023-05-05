@@ -5,10 +5,9 @@ namespace BroWar.UI.Management
 {
     using BroWar.Common;
 
-    //TODO: interface
     [DisallowMultipleComponent]
     [AddComponentMenu("BroWar/UI/UI Manager")]
-    public class UiManager : StandaloneManager
+    public class UiManager : StandaloneManager, IUiManager
     {
         [SerializeField, ReorderableList(HasLabels = false, Foldable = true)]
         private UiHandlerBehaviour[] handlers;

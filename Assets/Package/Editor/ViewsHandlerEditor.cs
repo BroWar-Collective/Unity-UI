@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Toolbox.Editor;
+using Toolbox.Editor.Internal;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,6 +12,39 @@ namespace BroWar.Editor.UI
     [CustomEditor(typeof(ViewsHandler))]
     public class ViewsHandlerEditor : ToolboxEditor
     {
+        private ToolboxEditorList viewsList;
+
+        private void OnEnable()
+        {
+            var viewsProperty = serializedObject.FindProperty("views");
+            viewsList = new ToolboxEditorList(viewsProperty)
+            {
+                drawElementCallback = (rect, index, isActive, isFocused) =>
+                {
+                    var property = viewsProperty.GetArrayElementAtIndex(index);
+                    ToolboxEditorGui.DrawToolboxProperty(property, GUIContent.none);
+
+                    var handler = target as ViewsHandler;
+                    if (!handler.IsInitialized)
+                    {
+                        return;
+                    }
+
+                    var view = property.objectReferenceValue as UiView;
+                    EditorGUILayout.Toggle("Is Active", view.IsActive);
+                    if (GUILayout.Button("Hide"))
+                    {
+                        handler.Hide(view);
+                    }
+
+                    if (GUILayout.Button("Show"))
+                    {
+                        handler.Show(view);
+                    }
+                }
+            };
+        }
+
         private void DrawActiveViews(IReadOnlyList<UiView> views)
         {
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
@@ -48,6 +82,10 @@ namespace BroWar.Editor.UI
         public override void DrawCustomInspector()
         {
             base.DrawCustomInspector();
+            serializedObject.Update();
+            viewsList.DoList();
+            serializedObject.ApplyModifiedProperties();
+
             var handler = target as ViewsHandler;
             if (!handler.IsInitialized)
             {
@@ -56,6 +94,7 @@ namespace BroWar.Editor.UI
 
             var activeViews = new List<UiView>(handler.ActiveViews);
             DrawActiveViews(activeViews);
+
         }
 
         public override bool RequiresConstantRepaint()
