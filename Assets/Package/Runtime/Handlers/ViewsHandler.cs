@@ -27,11 +27,14 @@ namespace BroWar.UI.Handlers
         public event Action<UiView> OnHideView;
 
         //TODO:
+        // - hiding during animations
         // - events
         // - what about views between scenes? - no needed
         // - better initialization (better settings?)
         // - handle initial active views (data structure for it?)
         // - namespaces
+        // - refactor
+        // - can hide and can show
 
         private void InitializeViews()
         {
@@ -51,12 +54,16 @@ namespace BroWar.UI.Handlers
 
                 viewsByTypes.Add(type, view);
                 view.Initialize(canvasCamera);
+                if (view.IsActive)
+                {
+                    activeViews.Add(view);
+                }
             }
         }
 
         private void ShowInternally(UiView view)
         {
-            if (view == null || (view.IsActive && !view.IsDuringAnimation))
+            if (view == null || (view.IsActive && !view.Hides))
             {
                 return;
             }
@@ -68,8 +75,7 @@ namespace BroWar.UI.Handlers
 
         private void HideInternally(UiView view)
         {
-            //TODO: can hide and can show
-            if (view == null || !view.IsActive)
+            if (view == null || (!view.IsActive || view.Hides))
             {
                 return;
             }
