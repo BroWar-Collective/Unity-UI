@@ -8,6 +8,7 @@ namespace BroWar.UI.Elements
     [AddComponentMenu("BroWar/UI/Elements/UI Panel")]
     public class UiPanel : UiObject
     {
+        //TODO: multiple animations?
         [Title("Animations")]
         [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
         [NewLabel("-> Animation Context")]
@@ -32,12 +33,12 @@ namespace BroWar.UI.Elements
 
         protected virtual Sequence GetShowSequence()
         {
-            return showAnimationContext?.GetSequence(RectTransform);
+            return showAnimationContext?.GetSequence();
         }
 
         protected virtual Sequence GetHideSequence()
         {
-            return hideAnimationContext?.GetSequence(RectTransform);
+            return hideAnimationContext?.GetSequence();
         }
 
         public override void Show()

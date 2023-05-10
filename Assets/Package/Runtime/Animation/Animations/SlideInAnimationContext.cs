@@ -8,15 +8,17 @@ namespace BroWar.UI.Animation.Animations
     public class SlideInAnimationContext : IAnimationContext
     {
         [SerializeField]
+        private RectTransform transform;
+        [SerializeField]
         private AnimationDirection direction;
         [SerializeField, SearchableEnum]
         private Ease ease = Ease.OutCubic;
         [SerializeField, Min(0)]
         private float duration = 1.0f;
 
-        public Sequence GetSequence(RectTransform rectTransform)
+        public Sequence GetSequence()
         {
-            return AnimationUtility.SlideIn(rectTransform, direction, ease, duration);
+            return AnimationUtility.SlideIn(transform, direction, ease, duration);
         }
     }
 }

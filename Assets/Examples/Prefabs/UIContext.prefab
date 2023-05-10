@@ -1147,6 +1147,7 @@ GameObject:
   - component: {fileID: 1114633846218482263}
   - component: {fileID: 1114633846218482264}
   - component: {fileID: 1114633846218482265}
+  - component: {fileID: 684838735}
   - component: {fileID: 1114633846218482266}
   m_Layer: 5
   m_Name: SourceBarView
@@ -1197,12 +1198,14 @@ MonoBehaviour:
     00000000:
       type: {class: SlideInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
+        transform: {fileID: 1114633846218482263}
         direction: 3
         ease: 9
         duration: 1
     00000001:
       type: {class: SlideOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
+        transform: {fileID: 1114633846218482263}
         direction: 2
         ease: 9
         duration: 1
@@ -1227,6 +1230,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &684838735
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114633846218482262}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &1114633846218482266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1627,6 +1642,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   views:
   - {fileID: 1114633846218482264}
+  contexts:
+  - showOnInitialize: 1
+    view: {fileID: 1114633846218482264}
 --- !u!114 &1114633846812842680
 MonoBehaviour:
   m_ObjectHideFlags: 0
