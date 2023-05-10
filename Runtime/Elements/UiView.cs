@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace BroWar.UI.Elements
 {
@@ -6,11 +7,13 @@ namespace BroWar.UI.Elements
     [AddComponentMenu("BroWar/UI/Elements/UI View")]
     public class UiView : UiPanel
     {
-        private Canvas canvas;
-
         [Title("General")]
+        [SerializeField]
+        private Canvas canvas;
         [SerializeField, ReorderableList, Tooltip("Nested, optional, UI panels maintained by this view.")]
         private UiPanel[] panels;
+
+        private CanvasGroup group;
 
         public virtual void Initialize(Camera camera)
         {
@@ -19,7 +22,7 @@ namespace BroWar.UI.Elements
                 camera = Camera.main;
             }
 
-            canvas = GetComponent<Canvas>();
+            Assert.IsNotNull(canvas, $"[UI][View] {nameof(Canvas)} reference is not availabe.");
             canvas.worldCamera = camera;
         }
 
@@ -38,6 +41,19 @@ namespace BroWar.UI.Elements
             foreach (var panel in panels)
             {
                 panel.Show();
+            }
+        }
+
+        public CanvasGroup Group
+        {
+            get
+            {
+                if (group == null)
+                {
+                    group = GetComponent<CanvasGroup>();
+                }
+
+                return group;
             }
         }
     }

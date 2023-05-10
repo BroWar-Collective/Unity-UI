@@ -5,10 +5,12 @@ namespace BroWar.UI.Elements
 {
     using BroWar.UI.Animation;
 
+    //TODO: refactor
+
     [AddComponentMenu("BroWar/UI/Elements/UI Panel")]
     public class UiPanel : UiObject
     {
-        //TODO: multiple animations?
+        //NOTE: multiple animations?
         [Title("Animations")]
         [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
         [NewLabel("-> Animation Context")]
@@ -22,13 +24,32 @@ namespace BroWar.UI.Elements
         private void ResetAnimation()
         {
             sequence?.Kill();
+            Shows = false;
+            Hides = false;
         }
 
-        private void StartAnimation()
+        private void StartShowAnimation()
         {
-            sequence.OnComplete(() => IsDuringAnimation = false);
+            if (sequence == null)
+            {
+                return;
+            }
+
+            sequence.OnComplete(() => Shows = false);
             sequence.Play();
-            IsDuringAnimation = true;
+            Shows = true;
+        }
+
+        private void StartHideAnimation()
+        {
+            if (sequence == null)
+            {
+                return;
+            }
+
+            sequence.OnComplete(() => Hides = false);
+            sequence.Play();
+            Hides = true;
         }
 
         protected virtual Sequence GetShowSequence()
@@ -50,7 +71,7 @@ namespace BroWar.UI.Elements
                 sequence = GetShowSequence();
                 if (sequence != null)
                 {
-                    StartAnimation();
+                    StartShowAnimation();
                 }
             }
         }
@@ -64,7 +85,7 @@ namespace BroWar.UI.Elements
                 if (sequence != null)
                 {
                     sequence.AppendCallback(base.Hide);
-                    StartAnimation();
+                    StartHideAnimation();
                     return;
                 }
             }
@@ -75,6 +96,8 @@ namespace BroWar.UI.Elements
         //TODO: better name
         //TODO: separate into is hiding is showing
         public bool IsDuringAnimation { get; private set; }
+        public bool Shows { get; private set; }
+        public bool Hides { get; private set; }
 
         /// <summary>
         /// Indicates if <see cref="UiPanel"/> should use animations when hiding or showing.
