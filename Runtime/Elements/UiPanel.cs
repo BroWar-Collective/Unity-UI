@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 namespace BroWar.UI.Elements
@@ -6,6 +7,7 @@ namespace BroWar.UI.Elements
     using BroWar.UI.Animation;
 
     //TODO: refactor
+    //TODO: callbacks
 
     [AddComponentMenu("BroWar/UI/Elements/UI Panel")]
     public class UiPanel : UiObject
@@ -64,45 +66,71 @@ namespace BroWar.UI.Elements
 
         public override void Show()
         {
-            base.Show();
-            if (UseAnimations)
-            {
-                ResetAnimation();
-                sequence = GetShowSequence();
-                if (sequence != null)
-                {
-                    StartShowAnimation();
-                }
-            }
+            Show(false);
         }
 
         public override void Hide()
         {
-            if (UseAnimations)
-            {
-                ResetAnimation();
-                sequence = GetHideSequence();
-                if (sequence != null)
-                {
-                    sequence.AppendCallback(base.Hide);
-                    StartHideAnimation();
-                    return;
-                }
-            }
-
-            base.Hide();
+            Hide(false);
         }
 
-        //TODO: better name
-        //TODO: separate into is hiding is showing
-        public bool IsDuringAnimation { get; private set; }
+        public virtual void Show(bool immediately, Action onFinish = null)
+        {
+            base.Show();
+            ResetAnimation();
+            sequence = GetShowSequence();
+            if (sequence == null)
+            {
+                onFinish?.Invoke();
+                return;
+            }
+
+            sequence.AppendCallback(() =>
+            {
+                onFinish?.Invoke();
+            });
+
+            if (immediately)
+            {
+                sequence.Complete(true);
+            }
+            else
+            {
+                StartShowAnimation();
+            }
+        }
+
+        public virtual void Hide(bool immediately, Action onFinish = null)
+        {
+            ResetAnimation();
+            sequence = GetHideSequence();
+            if (sequence == null)
+            {
+                base.Hide();
+                onFinish?.Invoke();
+                return;
+            }
+
+            sequence.AppendCallback(() =>
+            {
+                base.Hide();
+                onFinish?.Invoke();
+            });
+
+            if (immediately)
+            {
+                sequence.Complete(true);
+            }
+            else
+            {
+                StartHideAnimation();
+            }
+        }
+
+        //TODO: better names
         public bool Shows { get; private set; }
         public bool Hides { get; private set; }
 
-        /// <summary>
-        /// Indicates if <see cref="UiPanel"/> should use animations when hiding or showing.
-        /// </summary>
-        public virtual bool UseAnimations { get; private set; } = true;
         public virtual IAnimationContext ShowAnimationContext { get => showAnimationContext; set => showAnimationContext = value; }
         public virtual IAnimationContext HideAnimationContext { get => hideAnimationContext; set => hideAnimationContext = value; }
     }
