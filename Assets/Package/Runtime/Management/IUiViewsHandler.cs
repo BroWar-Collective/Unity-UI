@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 namespace BroWar.UI.Management
 {
+    using BroWar.Common;
     using BroWar.UI.Elements;
 
-    public interface IUiViewsHandler
+    public interface IUiViewsHandler : IInitializableWithArgument<ViewsSettings>
     {
         void Show<T>() where T : UiView;
         void Show(Type viewType);

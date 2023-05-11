@@ -71,11 +71,6 @@ namespace BroWar.Editor.UI
                 {
                     EditorGUILayout.ObjectField(view, typeof(UiView), true);
                 }
-
-                if (GUILayout.Button("Hide"))
-                {
-                    Handler.Hide(view);
-                }
             }
         }
 
