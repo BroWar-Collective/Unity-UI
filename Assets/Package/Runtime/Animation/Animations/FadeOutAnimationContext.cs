@@ -15,6 +15,11 @@ namespace BroWar.UI.Animation.Animations
         public Sequence GetSequence()
         {
             var sequence = DOTween.Sequence();
+            return GetSequence(sequence);
+        }
+
+        public Sequence GetSequence(Sequence sequence)
+        {
             sequence.Append(group.DOFade(0.0f, duration));
             return sequence;
         }

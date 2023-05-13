@@ -7,22 +7,22 @@ using UnityEngine;
 namespace BroWar.Editor.UI
 {
     using BroWar.UI.Elements;
-    using BroWar.UI.Handlers;
+    using BroWar.UI.Views;
 
     [CustomEditor(typeof(ViewsHandler))]
     public class ViewsHandlerEditor : ToolboxEditor
     {
-        private ToolboxEditorList viewsList;
+        private ToolboxEditorList contextsList;
 
         private void OnEnable()
         {
-            var viewsProperty = serializedObject.FindProperty("views");
-            viewsList = new ToolboxEditorList(viewsProperty)
+            var viewsProperty = serializedObject.FindProperty("contexts");
+            contextsList = new ToolboxEditorList(viewsProperty)
             {
                 drawElementCallback = (rect, index, isActive, isFocused) =>
                 {
                     var property = viewsProperty.GetArrayElementAtIndex(index);
-                    ToolboxEditorGui.DrawToolboxProperty(property, GUIContent.none);
+                    ToolboxEditorGui.DrawToolboxProperty(property);
 
                     var handler = target as ViewsHandler;
                     if (!handler.IsInitialized)
@@ -30,7 +30,13 @@ namespace BroWar.Editor.UI
                         return;
                     }
 
-                    var view = property.objectReferenceValue as UiView;
+                    var viewProperty = property.FindPropertyRelative("view");
+                    var view = viewProperty.objectReferenceValue as UiView;
+                    if (view == null)
+                    {
+                        return;
+                    }
+
                     EditorGUILayout.Toggle("Is Active", view.IsActive);
                     if (GUILayout.Button("Hide"))
                     {
@@ -78,7 +84,7 @@ namespace BroWar.Editor.UI
         {
             base.DrawCustomInspector();
             serializedObject.Update();
-            viewsList.DoList();
+            contextsList.DoList();
             serializedObject.ApplyModifiedProperties();
 
             var handler = target as ViewsHandler;

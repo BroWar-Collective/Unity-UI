@@ -1,46 +1,66 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace BroWar.UI.Elements
 {
+    using BroWar.Common;
+    using BroWar.UI.Views;
+
     [RequireComponent(typeof(Canvas))]
     [AddComponentMenu("BroWar/UI/Elements/UI View")]
-    public class UiView : UiPanel
+    public class UiView : UiPanel, IInitializableWithArgument<ViewData>
     {
         [Title("General")]
-        [SerializeField]
+        [SerializeField, NotNull]
         private Canvas canvas;
-        [SerializeField, ReorderableList, Tooltip("Nested, optional, UI panels maintained by this view.")]
-        private UiPanel[] panels;
+
+        [Title("Content")]
+        [SerializeField, ReorderableList(elementLabel: "Panel")]
+        [Tooltip("Nested, optional, UI panels maintained by this view.")]
+        private List<UiPanel> panels = new List<UiPanel>();
 
         private CanvasGroup group;
 
-        public virtual void Initialize(Camera camera)
+        public event Action OnInitialized;
+
+        protected void RegisterPanel(UiPanel panel)
         {
-            if (camera == null)
+            if (panels == null)
             {
-                camera = Camera.main;
+                panels = new List<UiPanel>();
             }
 
-            Assert.IsNotNull(canvas, $"[UI][View] {nameof(Canvas)} reference is not availabe.");
+            panels.Add(panel);
+        }
+
+        public virtual void Initialize(ViewData data)
+        {
+            var camera = data?.CanvasCamera;
+            Assert.IsNotNull(camera, $"[UI][View] {nameof(Camera)} is not availabe.");
+            Assert.IsNotNull(canvas, $"[UI][View] {nameof(Canvas)} is not availabe.");
             canvas.worldCamera = camera;
+
+            IsInitialized = true;
+            OnInitialized?.Invoke();
         }
 
-        public override void Show()
+        public override void Show(bool immediately, Action onFinish = null)
         {
-            base.Show();
+            base.Show(immediately, onFinish);
             foreach (var panel in panels)
             {
-                panel.Hide();
+                panel.Show(immediately);
             }
         }
 
-        public override void Hide()
+        public override void Hide(bool immediately, Action onFinish = null)
         {
-            base.Hide();
+            base.Hide(immediately, onFinish);
             foreach (var panel in panels)
             {
-                panel.Show();
+                panel.Hide(immediately);
             }
         }
 
@@ -56,5 +76,9 @@ namespace BroWar.UI.Elements
                 return group;
             }
         }
+
+        public IReadOnlyList<UiPanel> NestedPanels => panels;
+
+        public bool IsInitialized { get; private set; }
     }
 }

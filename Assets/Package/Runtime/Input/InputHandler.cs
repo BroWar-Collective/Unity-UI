@@ -2,10 +2,8 @@
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem.UI;
 
-namespace BroWar.UI.Handlers
+namespace BroWar.UI.Input
 {
-    using BroWar.UI.Input;
-
     /// <summary>
     /// Overlay used to wrap UI-based input features.
     /// Mainly focused on using internally the <see cref="InputSystemUIInputModule"/>.
@@ -14,7 +12,7 @@ namespace BroWar.UI.Handlers
     [AddComponentMenu("BroWar/UI/Handlers/Input Handler")]
     public class InputHandler : UiHandlerBehaviour, IUiInputHandler
     {
-        [SerializeField]
+        [SerializeField, NotNull]
         private InputSystemUIInputModule inputModule;
 
         public Vector2 PointPosition

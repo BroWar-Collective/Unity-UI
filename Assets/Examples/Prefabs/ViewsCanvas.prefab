@@ -28,7 +28,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2392328904417161248}
   m_Father: {fileID: 1325540530634917443}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -111,10 +112,10 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.3, y: 0.9}
+  m_AnchorMax: {x: 0, y: 0.90000004}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 1}
+  m_SizeDelta: {x: 300, y: 0}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &2270930417628958380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +133,8 @@ MonoBehaviour:
   hideAnimationContext:
     id: 1
   canvas: {fileID: 4033983631744151213}
-  panels: []
+  panels:
+  - {fileID: 6890317790088979967}
   references:
     version: 1
     00000000:
@@ -1362,13 +1364,35 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
+      type: {class: MultipleAnimationsContext, ns: BroWar.UI.Animation, asm: BroWar.UI}
+      data:
+        nestedContexts:
+        - id: 2
+        - id: 3
+    00000001:
+      type: {class: MultipleAnimationsContext, ns: BroWar.UI.Animation, asm: BroWar.UI}
+      data:
+        nestedContexts:
+        - id: 4
+        - id: 5
+    00000002:
+      type: {class: FadeInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
+      data:
+        group: {fileID: 6386027112681158046}
+        duration: 1
+    00000003:
       type: {class: SlideInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         transform: {fileID: 6334383523745798278}
         direction: 3
         ease: 9
         duration: 1
-    00000001:
+    00000004:
+      type: {class: FadeOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
+      data:
+        group: {fileID: 6386027112681158046}
+        duration: 1
+    00000005:
       type: {class: SlideOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         transform: {fileID: 6334383523745798278}
@@ -1425,6 +1449,123 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &7833581523588970263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2392328904417161248}
+  - component: {fileID: 8791322419794534577}
+  - component: {fileID: 3088378686658718534}
+  - component: {fileID: 6890317790088979967}
+  - component: {fileID: 9027283703977579669}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2392328904417161248
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7833581523588970263}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5115238103093554245}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8791322419794534577
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7833581523588970263}
+  m_CullTransparentMesh: 1
+--- !u!114 &3088378686658718534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7833581523588970263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6890317790088979967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7833581523588970263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ce93798a6d3944d962161ceef610a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showAnimationContext:
+    id: 0
+  hideAnimationContext:
+    id: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: FadeInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
+      data:
+        group: {fileID: 9027283703977579669}
+        duration: 2
+    00000001:
+      type: {class: FadeOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
+      data:
+        group: {fileID: 9027283703977579669}
+        duration: 2
+--- !u!225 &9027283703977579669
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7833581523588970263}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &2504786725372419802
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -416,9 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392cd4cb3b120cb46a3c99ef64774876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  views:
-  - {fileID: 1114633846218482264}
-  - {fileID: 5124057328700175485}
+  selfInitialize: 1
   contexts:
   - showOnInitialize: 1
     view: {fileID: 1114633846218482264}
@@ -448,7 +446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25f5fcbdf0fd9542a816f64ecadfedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputModule: {fileID: 1114633846721440255}
   factory:
     id: 0
   activeTooltip: {fileID: 0}
@@ -466,22 +463,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1114633844845556573}
     m_Modifications:
-    - target: {fileID: 1325540530634917443, guid: 2a395490c509743489caa0be438244d0, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1325540530634917443, guid: 2a395490c509743489caa0be438244d0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1325540530634917443, guid: 2a395490c509743489caa0be438244d0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.90000004
-      objectReference: {fileID: 0}
-    - target: {fileID: 1325540530634917443, guid: 2a395490c509743489caa0be438244d0, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 300
-      objectReference: {fileID: 0}
     - target: {fileID: 6334383522155979232, guid: 2a395490c509743489caa0be438244d0, type: 3}
       propertyPath: m_Pivot.x
       value: 0

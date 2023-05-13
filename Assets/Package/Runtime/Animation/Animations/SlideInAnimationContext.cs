@@ -18,7 +18,13 @@ namespace BroWar.UI.Animation.Animations
 
         public Sequence GetSequence()
         {
-            return AnimationUtility.SlideIn(transform, direction, ease, duration);
+            var sequence = DOTween.Sequence();
+            return GetSequence(sequence);
+        }
+
+        public Sequence GetSequence(Sequence sequence)
+        {
+            return AnimationUtility.SlideIn(sequence, transform, direction, ease, duration);
         }
     }
 }

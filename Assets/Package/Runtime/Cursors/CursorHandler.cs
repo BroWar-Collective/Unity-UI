@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 
-namespace BroWar.UI.Handlers
+namespace BroWar.UI.Cursors
 {
-    using BroWar.UI.Management;
-
     /// <summary>
     /// Dedicated <see cref="IUiHandler"/> responsible for displaying and customizing game cursor.
     /// 

@@ -1,5 +1,4 @@
-﻿using BroWar.UI.Handlers;
-using BroWar.UI.Management;
+﻿using BroWar.UI.Views;
 using UnityEngine;
 
 namespace Examples.Handlers

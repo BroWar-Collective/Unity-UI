@@ -6,13 +6,9 @@ namespace BroWar.UI.Elements
 {
     using BroWar.UI.Animation;
 
-    //TODO: refactor
-    //TODO: callbacks
-
     [AddComponentMenu("BroWar/UI/Elements/UI Panel")]
     public class UiPanel : UiObject
     {
-        //NOTE: multiple animations?
         [Title("Animations")]
         [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
         [NewLabel("-> Animation Context")]
@@ -127,10 +123,8 @@ namespace BroWar.UI.Elements
             }
         }
 
-        //TODO: better names
         public bool Shows { get; private set; }
         public bool Hides { get; private set; }
-
         public virtual IAnimationContext ShowAnimationContext { get => showAnimationContext; set => showAnimationContext = value; }
         public virtual IAnimationContext HideAnimationContext { get => hideAnimationContext; set => hideAnimationContext = value; }
     }
