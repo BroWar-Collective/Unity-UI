@@ -55,18 +55,18 @@ namespace BroWar.UI.Views
                 view.Initialize(data);
                 if (context.showOnInitialize)
                 {
-                    ShowInternally(view, true);
+                    ShowInternally(view, true, true);
                 }
                 else
                 {
-                    HideInternally(view, true);
+                    HideInternally(view, true, true);
                 }
             }
         }
 
-        protected void ShowInternally(UiView view, bool immediately)
+        protected void ShowInternally(UiView view, bool immediately, bool force = false)
         {
-            if (!CanShow(view))
+            if (!CanShow(view) && !force)
             {
                 return;
             }
@@ -76,9 +76,9 @@ namespace BroWar.UI.Views
             OnShowView?.Invoke(view);
         }
 
-        protected void HideInternally(UiView view, bool immediately)
+        protected void HideInternally(UiView view, bool immediately, bool force = false)
         {
-            if (!CanHide(view))
+            if (!CanHide(view) && !force)
             {
                 return;
             }
