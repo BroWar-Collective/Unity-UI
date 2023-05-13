@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 
-namespace BroWar.UI.Management
+namespace BroWar.UI.Views
 {
-    //TODO: settings for views
     public class ViewsSettings
     {
         public Camera CanvasCamera { get; set; }

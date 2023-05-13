@@ -5,10 +5,9 @@ namespace BroWar.UI.Animation
 {
     public static class AnimationUtility
     {
-        public static Sequence SlideIn(RectTransform rectTransform, AnimationDirection direction,
+        public static Sequence SlideIn(Sequence sequence, RectTransform rectTransform, AnimationDirection direction,
             Ease ease = Ease.OutCubic, float duration = 1.0f, bool fixPosition = false)
         {
-            var sequence = DOTween.Sequence();
             if (fixPosition)
             {
                 Vector2 inPosition;
@@ -40,7 +39,7 @@ namespace BroWar.UI.Animation
             return sequence;
         }
 
-        public static Sequence SlideOut(RectTransform rectTransform, AnimationDirection direction,
+        public static Sequence SlideOut(Sequence sequence, RectTransform rectTransform, AnimationDirection direction,
             Ease ease = Ease.OutCubic, float duration = 1.0f, bool fixPosition = false)
         {
             if (fixPosition)
@@ -48,7 +47,6 @@ namespace BroWar.UI.Animation
                 rectTransform.anchoredPosition = Vector2.zero;
             }
 
-            var sequence = DOTween.Sequence();
             Vector2 outPosition;
             switch (direction)
             {

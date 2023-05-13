@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem.UI;
 using Zenject;
 
-namespace BroWar.UI.Handlers
+namespace BroWar.UI.Tooltip
 {
     using BroWar.Common;
     using BroWar.UI.Input;
-    using BroWar.UI.Tooltip;
 
     /// <summary>
     /// <see cref="IUiHandler"/> responsible for showing and updating tooltips.
@@ -15,14 +13,11 @@ namespace BroWar.UI.Handlers
     [AddComponentMenu("BroWar/UI/Handlers/Tooltip Handler")]
     public class TooltipHandler : UiHandlerBehaviour, ITooltipHandler
     {
-        [SerializeField]
-        private InputSystemUIInputModule inputModule;
-
-        [Line]
         [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
         private ITooltipFactory factory;
 
-        [SpaceArea]
+        [SpaceArea, Line]
+
         [SerializeField, Disable]
         [Tooltip("Currently active tooltip instance.")]
         private TooltipBehaviour activeTooltip;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BroWar.UI.Management.Views
+namespace BroWar.UI.Views
 {
     using BroWar.UI.Elements;
 

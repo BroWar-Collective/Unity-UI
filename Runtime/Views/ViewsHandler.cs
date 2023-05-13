@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BroWar.UI.Handlers
+namespace BroWar.UI.Views
 {
     using BroWar.Common;
     using BroWar.UI.Elements;
-    using BroWar.UI.Management;
-    using BroWar.UI.Management.Views;
 
+    /// <inheritdoc cref="IUiViewsHandler"/>
     [DisallowMultipleComponent]
     [AddComponentMenu("BroWar/UI/Handlers/Views Handler")]
     public class ViewsHandler : UiHandlerBehaviour, IUiViewsHandler
@@ -16,8 +15,9 @@ namespace BroWar.UI.Handlers
         protected readonly Dictionary<Type, UiView> viewsByTypes = new Dictionary<Type, UiView>();
         protected readonly List<UiView> activeViews = new List<UiView>();
 
-        [SerializeField, ReorderableList]
-        protected List<UiView> views;
+        [SerializeField]
+        [Tooltip("Indicates if handle should initialized during the 'Prepare' callback.")]
+        protected bool selfInitialize = true;
         [SerializeField, ReorderableList]
         protected ViewContext[] contexts;
 
@@ -27,17 +27,13 @@ namespace BroWar.UI.Handlers
         public event Action<UiView> OnHideView;
         public event Action OnInitialized;
 
-        //TODO:
-        // - what about views between scenes? - no needed
-        // - better initialization (better settings?)
-        // - handle initial active views (data structure for it?)
-        // - namespaces
-        // - refactor
-        // - can hide and can show
-        // - hide/show immedietly
-
         private void InitializeViews()
         {
+            var data = new ViewData()
+            {
+                CanvasCamera = canvasCamera
+            };
+
             for (var i = 0; i < contexts.Length; i++)
             {
                 var context = contexts[i];
@@ -49,14 +45,14 @@ namespace BroWar.UI.Handlers
                 }
 
                 var type = view.GetType();
-                if (viewsByTypes.ContainsKey(type))
+                if (ContainsView(type))
                 {
                     LogHandler.Log($"[UI] View ({type.Name}) is cached multiple times.", LogType.Warning);
                     continue;
                 }
 
                 viewsByTypes.Add(type, view);
-                view.Initialize(canvasCamera);
+                view.Initialize(data);
                 if (context.showOnInitialize)
                 {
                     ShowInternally(view, true);
@@ -68,9 +64,9 @@ namespace BroWar.UI.Handlers
             }
         }
 
-        private void ShowInternally(UiView view, bool immediately)
+        protected void ShowInternally(UiView view, bool immediately)
         {
-            if (view == null || (view.IsActive && !view.Hides))
+            if (!CanShow(view))
             {
                 return;
             }
@@ -80,9 +76,9 @@ namespace BroWar.UI.Handlers
             OnShowView?.Invoke(view);
         }
 
-        private void HideInternally(UiView view, bool immediately)
+        protected void HideInternally(UiView view, bool immediately)
         {
-            if (view == null || (!view.IsActive || view.Hides))
+            if (!CanHide(view))
             {
                 return;
             }
@@ -92,6 +88,16 @@ namespace BroWar.UI.Handlers
             {
                 OnHideView?.Invoke(view);
             }
+        }
+
+        protected virtual bool CanShow(UiView view)
+        {
+            return view != null && (!view.IsActive || view.Hides);
+        }
+
+        protected virtual bool CanHide(UiView view)
+        {
+            return view != null && (view.IsActive && !view.Hides);
         }
 
         protected virtual ViewsSettings GetDefaultSettings()
@@ -110,8 +116,11 @@ namespace BroWar.UI.Handlers
         public override void Prepare()
         {
             base.Prepare();
-            var settings = GetDefaultSettings();
-            Initialize(settings);
+            if (selfInitialize)
+            {
+                var settings = GetDefaultSettings();
+                Initialize(settings);
+            }
         }
 
         public void Initialize(ViewsSettings settings)
@@ -144,7 +153,12 @@ namespace BroWar.UI.Handlers
 
         public void Show(UiView view)
         {
-            ShowInternally(view, false);
+            Show(view, false);
+        }
+
+        public void Show(UiView view, bool immediately)
+        {
+            ShowInternally(view, immediately);
         }
 
         public void Hide<T>() where T : UiView
@@ -162,7 +176,22 @@ namespace BroWar.UI.Handlers
 
         public void Hide(UiView view)
         {
-            HideInternally(view, false);
+            Hide(view, false);
+        }
+
+        public void Hide(UiView view, bool immediately)
+        {
+            HideInternally(view, immediately);
+        }
+
+        public bool ContainsView<T>() where T : UiView
+        {
+            return ContainsView(typeof(T));
+        }
+
+        public bool ContainsView(Type type)
+        {
+            return viewsByTypes.ContainsKey(type);
         }
 
         public bool TryGetView(Type type, out UiView view)
@@ -190,7 +219,8 @@ namespace BroWar.UI.Handlers
 
         public void HideAll()
         {
-            foreach (var view in Views)
+            var views = GetAllViews();
+            foreach (var view in views)
             {
                 if (view.IsActive)
                 {
@@ -199,10 +229,13 @@ namespace BroWar.UI.Handlers
             }
         }
 
+        public List<UiView> GetAllViews()
+        {
+            return new List<UiView>(viewsByTypes.Values);
+        }
+
         public bool IsInitialized { get; private set; }
 
-        /// <inheritdoc cref="IUiViewsHandler"/>
-        public IReadOnlyCollection<UiView> Views => viewsByTypes.Values;
         /// <inheritdoc cref="IUiViewsHandler"/>
         public IReadOnlyCollection<UiView> ActiveViews => activeViews;
     }
