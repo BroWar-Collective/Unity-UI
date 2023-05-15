@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Toolbox.Editor;
+﻿using Toolbox.Editor;
 using Toolbox.Editor.Internal;
 using UnityEditor;
 using UnityEngine;
@@ -16,66 +15,88 @@ namespace BroWar.Editor.UI
 
         private void OnEnable()
         {
-            var viewsProperty = serializedObject.FindProperty("contexts");
-            contextsList = new ToolboxEditorList(viewsProperty)
+            const string contextsPropertyName = "contexts";
+            IgnoreProperty(contextsPropertyName);
+            var listProperty = serializedObject.FindProperty(contextsPropertyName);
+
+            contextsList = new ToolboxEditorList(listProperty)
             {
                 drawElementCallback = (rect, index, isActive, isFocused) =>
                 {
-                    var property = viewsProperty.GetArrayElementAtIndex(index);
-                    ToolboxEditorGui.DrawToolboxProperty(property);
-
-                    var handler = target as ViewsHandler;
-                    if (!handler.IsInitialized)
+                    using (new EditorGUILayout.VerticalScope(Style.viewContextBackgroundStyle))
                     {
-                        return;
-                    }
+                        var ctxProperty = listProperty.GetArrayElementAtIndex(index);
+                        var viewProperty = ctxProperty.FindPropertyRelative("view");
+                        var viewReference = viewProperty.objectReferenceValue as UiView;
 
-                    var viewProperty = property.FindPropertyRelative("view");
-                    var view = viewProperty.objectReferenceValue as UiView;
-                    if (view == null)
-                    {
-                        return;
-                    }
+                        var label = CreateContextLabel(viewReference);
+                        ToolboxEditorGui.DrawToolboxProperty(ctxProperty, label);
+                        if (!ctxProperty.isExpanded)
+                        {
+                            return;
+                        }
 
-                    EditorGUILayout.Toggle("Is Active", view.IsActive);
-                    if (GUILayout.Button("Hide"))
-                    {
-                        handler.Hide(view);
-                    }
-
-                    if (GUILayout.Button("Show"))
-                    {
-                        handler.Show(view);
+                        EditorGUI.indentLevel++;
+                        var handler = Handler;
+                        DrawContextTools(handler, viewReference);
+                        EditorGUI.indentLevel--;
                     }
                 }
             };
         }
 
-        private void DrawActiveViews(IReadOnlyList<UiView> views)
+        private void DrawContexts()
+        {
+            serializedObject.Update();
+            contextsList.DoList();
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        private GUIContent CreateContextLabel(UiView view)
+        {
+            if (view == null)
+            {
+                return null;
+            }
+
+            var text = $"{(view.IsActive ? "[a] " : string.Empty)}{view.name}";
+            return new GUIContent(text);
+        }
+
+        private void DrawHandlerTools(ViewsHandler handler)
         {
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField("Active Views", EditorStyles.boldLabel);
-                if (views.Count == 0)
+                EditorGUILayout.LabelField("Tools", EditorStyles.boldLabel);
+                if (GUILayout.Button("Hide All"))
                 {
-                    EditorGUILayout.LabelField("<none>");
-                    return;
-                }
-
-                foreach (var view in views)
-                {
-                    DrawActiveView(view);
+                    handler.HideAll();
                 }
             }
         }
 
-        private void DrawActiveView(UiView view)
+        private void DrawContextTools(ViewsHandler handler, UiView view)
         {
+            if (!handler.IsInitialized || view == null)
+            {
+                return;
+            }
+
+            using (new EditorGUI.DisabledScope(true))
+            {
+                EditorGUILayout.Toggle("Is Active", view.IsActive);
+            }
+
             using (new EditorGUILayout.HorizontalScope())
             {
-                using (new EditorGUI.DisabledScope(true))
+                if (GUILayout.Button("Show"))
                 {
-                    EditorGUILayout.ObjectField(view, typeof(UiView), true);
+                    handler.Show(view);
+                }
+
+                if (GUILayout.Button("Hide"))
+                {
+                    handler.Hide(view);
                 }
             }
         }
@@ -83,19 +104,15 @@ namespace BroWar.Editor.UI
         public override void DrawCustomInspector()
         {
             base.DrawCustomInspector();
-            serializedObject.Update();
-            contextsList.DoList();
-            serializedObject.ApplyModifiedProperties();
+            DrawContexts();
 
-            var handler = target as ViewsHandler;
+            var handler = Handler;
             if (!handler.IsInitialized)
             {
                 return;
             }
 
-            var activeViews = new List<UiView>(handler.ActiveViews);
-            DrawActiveViews(activeViews);
-
+            DrawHandlerTools(handler);
         }
 
         public override bool RequiresConstantRepaint()
@@ -104,5 +121,13 @@ namespace BroWar.Editor.UI
         }
 
         private ViewsHandler Handler => target as ViewsHandler;
+
+        private static class Style
+        {
+            internal static readonly GUIStyle viewContextBackgroundStyle = new GUIStyle(EditorStyles.helpBox)
+            {
+                padding = new RectOffset(16, 0, 0, 0)
+            };
+        }
     }
 }
