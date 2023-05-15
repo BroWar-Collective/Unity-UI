@@ -681,8 +681,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    positionOffset: {x: 0, y: 0}
-    positionPivot: {x: 0, y: 0}
+    positionOffset: {x: 10, y: -10}
+    positionPivot: {x: 0, y: 1}
     childAlignment: 0
   offsetTime: 0.3
   customPrefab: {fileID: 8332164750516034109, guid: 5904c075d402f554595809c8228b176c, type: 3}
