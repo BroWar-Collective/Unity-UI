@@ -22,6 +22,7 @@ namespace BroWar.UI.Views
         bool TryGetView<T>(out T view) where T : UiView;
         List<UiView> GetAllViews();
         void HideAll();
+        void ShowAll();
 
         IReadOnlyCollection<UiView> ActiveViews { get; }
     }
