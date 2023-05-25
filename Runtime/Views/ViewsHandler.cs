@@ -229,6 +229,15 @@ namespace BroWar.UI.Views
             }
         }
 
+        public void ShowAll()
+        {
+            var views = GetAllViews();
+            foreach (var view in views)
+            {
+                ShowInternally(view, false);
+            }
+        }
+
         public List<UiView> GetAllViews()
         {
             return new List<UiView>(viewsByTypes.Values);

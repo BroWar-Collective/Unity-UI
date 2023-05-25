@@ -59,8 +59,20 @@ namespace BroWar.Editor.UI
                 return null;
             }
 
-            var text = $"{(view.IsActive ? "[a] " : string.Empty)}{view.name}";
-            return new GUIContent(text);
+            var text = view.name;
+            Texture icon;
+            if (view.IsActive)
+            {
+                icon = view.Hides || view.Shows 
+                    ? Style.movingViewIcon 
+                    : Style.enabledViewIcon;
+            }
+            else
+            {
+                icon = Style.disabledViewIcon;
+            }
+
+            return new GUIContent(text, icon);
         }
 
         private void DrawHandlerTools(ViewsHandler handler)
@@ -71,6 +83,11 @@ namespace BroWar.Editor.UI
                 if (GUILayout.Button("Hide All"))
                 {
                     handler.HideAll();
+                }
+
+                if (GUILayout.Button("Show All"))
+                {
+                    handler.ShowAll();
                 }
             }
         }
@@ -128,6 +145,10 @@ namespace BroWar.Editor.UI
             {
                 padding = new RectOffset(16, 0, 0, 0)
             };
+
+            internal static readonly Texture movingViewIcon = EditorGUIUtility.IconContent("scenevis_scene_hover").image;
+            internal static readonly Texture enabledViewIcon = EditorGUIUtility.IconContent("scenevis_visible_hover").image;
+            internal static readonly Texture disabledViewIcon = EditorGUIUtility.IconContent("scenevis_hidden_hover").image;
         }
     }
 }
