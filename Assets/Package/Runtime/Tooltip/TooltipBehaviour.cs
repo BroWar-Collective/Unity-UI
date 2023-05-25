@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 namespace BroWar.UI.Tooltip
 {
+    /// <summary>
+    /// In-game tooltip representation.
+    /// </summary>
     [AddComponentMenu("BroWar/UI/Tooltip/Tooltip Behaviour")]
     public class TooltipBehaviour : UiObject
     {
@@ -29,9 +32,9 @@ namespace BroWar.UI.Tooltip
             UpdatePosition(position);
         }
 
-        public virtual void UpdateContent(string text)
+        public virtual void UpdateContent(string content)
         {
-            contentText.SetText(text);
+            contentText.SetText(content);
         }
 
         public virtual void UpdatePosition(Vector2 screenPosition)

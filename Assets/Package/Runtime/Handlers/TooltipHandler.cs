@@ -60,7 +60,8 @@ namespace BroWar.UI.Handlers
                 return;
             }
 
-            activeTooltip.UpdatePosition(PointPosition);
+            var position = PointPosition;
+            activeTooltip.UpdatePosition(position);
         }
 
         public override void Dispose()
