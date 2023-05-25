@@ -101,7 +101,5 @@ namespace BroWar.UI.Tooltip.Factories
             target.InstanceId = -1;
             pool.Release(target);
         }
-
-        public bool IsInitialized { get; private set; }
     }
 }
