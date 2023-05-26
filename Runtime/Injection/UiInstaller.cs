@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Zenject;
 
 namespace BroWar.UI.Injection
@@ -15,6 +16,7 @@ namespace BroWar.UI.Injection
 
         protected override void OnInstall(DiContainer container)
         {
+            Assert.IsNotNull(manager, $"[UI][Injection] {nameof(UiManager)} not available.");
             var handlers = manager.Handlers;
             foreach (var handler in handlers)
             {
