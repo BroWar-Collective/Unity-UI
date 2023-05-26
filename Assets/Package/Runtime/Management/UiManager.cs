@@ -52,10 +52,6 @@ namespace BroWar.UI.Management
             }
         }
 
-        /// <summary>
-        /// Collection of all available <see cref="IUiHandler"/>s.
-        /// Each handler is responsible for custom, UI-related feature.
-        /// </summary>
         public IReadOnlyList<IUiHandler> Handlers => handlers;
     }
 }
