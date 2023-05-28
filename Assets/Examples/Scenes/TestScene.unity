@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 659488587}
   - component: {fileID: 659488588}
   m_Layer: 0
-  m_Name: ViewController [LeftPanel]
+  m_Name: ViewController [LeftView]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showOnStart: 0
   viewType:
-    typeReference: BroWar.UI.Elements.UiView, BroWar.UI
+    typeReference: BroWar.UI.Views.ScreenSpaceView, BroWar.UI
 --- !u!1 &694553497
 GameObject:
   m_ObjectHideFlags: 0

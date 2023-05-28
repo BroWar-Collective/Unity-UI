@@ -5,7 +5,6 @@ using UnityEngine;
 namespace BroWar.UI.Views
 {
     using BroWar.Common;
-    using BroWar.UI.Elements;
 
     /// <inheritdoc cref="IUiViewsHandler"/>
     [DisallowMultipleComponent]
@@ -16,7 +15,7 @@ namespace BroWar.UI.Views
         protected readonly List<UiView> activeViews = new List<UiView>();
 
         [SerializeField]
-        [Tooltip("Indicates if handle should initialized during the 'Prepare' callback.")]
+        [Tooltip("Indicates if handler should be initialized during the 'Prepare' callback.")]
         protected bool selfInitialize = true;
         [SerializeField, ReorderableList]
         protected ViewContext[] contexts;
@@ -92,12 +91,12 @@ namespace BroWar.UI.Views
 
         protected virtual bool CanShow(UiView view)
         {
-            return view != null && (!view.IsActive || view.Hides);
+            return view != null && view.CanShow();
         }
 
         protected virtual bool CanHide(UiView view)
         {
-            return view != null && (view.IsActive && !view.Hides);
+            return view != null && view.CanHide();
         }
 
         protected virtual ViewsSettings GetDefaultSettings()

@@ -9,6 +9,7 @@ namespace BroWar.UI.Elements
     [AddComponentMenu("BroWar/UI/Elements/UI Panel")]
     public class UiPanel : UiObject
     {
+        //TODO: move it to a separate type
         [Title("Animations")]
         [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
         [NewLabel("-> Animation Context")]

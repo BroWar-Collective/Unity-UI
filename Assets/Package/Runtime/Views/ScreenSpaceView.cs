@@ -3,27 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace BroWar.UI.Elements
+namespace BroWar.UI.Views
 {
-    using BroWar.Common;
-    using BroWar.UI.Views;
+    using BroWar.UI.Elements;
 
     [RequireComponent(typeof(Canvas))]
-    [AddComponentMenu("BroWar/UI/Elements/UI View")]
-    public class UiView : UiPanel, IInitializableWithArgument<ViewData>
+    [AddComponentMenu("BroWar/UI/Elements/UI View (Screen Space)")]
+    public class ScreenSpaceView : UiView
     {
+        //TODO: show/hide handler
+
         [Title("General")]
         [SerializeField, NotNull]
         private Canvas canvas;
 
         [Title("Content")]
+        [SerializeField]
+        private UiPanel mainPanel;
         [SerializeField, ReorderableList(elementLabel: "Panel")]
         [Tooltip("Nested, optional, UI panels maintained by this view.")]
         private List<UiPanel> panels = new List<UiPanel>();
 
         private CanvasGroup group;
 
-        public event Action OnInitialized;
+        protected override void OnInitialize(ViewData data)
+        {
+            Assert.IsNotNull(mainPanel);
+
+            base.OnInitialize(data);
+            var camera = data?.CanvasCamera;
+            Assert.IsNotNull(camera, $"[UI][View] {nameof(Camera)} is not availabe.");
+            Assert.IsNotNull(canvas, $"[UI][View] {nameof(Canvas)} is not availabe.");
+            canvas.worldCamera = camera;
+        }
 
         protected void RegisterPanel(UiPanel panel)
         {
@@ -35,20 +47,10 @@ namespace BroWar.UI.Elements
             panels.Add(panel);
         }
 
-        public virtual void Initialize(ViewData data)
-        {
-            var camera = data?.CanvasCamera;
-            Assert.IsNotNull(camera, $"[UI][View] {nameof(Camera)} is not availabe.");
-            Assert.IsNotNull(canvas, $"[UI][View] {nameof(Canvas)} is not availabe.");
-            canvas.worldCamera = camera;
-
-            IsInitialized = true;
-            OnInitialized?.Invoke();
-        }
-
         public override void Show(bool immediately, Action onFinish = null)
         {
-            base.Show(immediately, onFinish);
+            base.Show(immediately, null);
+            mainPanel.Show(immediately, onFinish);
             foreach (var panel in panels)
             {
                 panel.Show(immediately);
@@ -57,11 +59,22 @@ namespace BroWar.UI.Elements
 
         public override void Hide(bool immediately, Action onFinish = null)
         {
-            base.Hide(immediately, onFinish);
+            base.Hide(immediately, null);
+            mainPanel.Hide(immediately, onFinish);
             foreach (var panel in panels)
             {
                 panel.Hide(immediately);
             }
+        }
+
+        public override bool CanShow()
+        {
+            return base.CanShow() || mainPanel.Hides;
+        }
+
+        public override bool CanHide()
+        {
+            return base.CanHide() && !mainPanel.Hides;
         }
 
         public CanvasGroup Group
@@ -78,7 +91,5 @@ namespace BroWar.UI.Elements
         }
 
         public IReadOnlyList<UiPanel> NestedPanels => panels;
-
-        public bool IsInitialized { get; private set; }
     }
 }
