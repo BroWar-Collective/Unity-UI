@@ -63,9 +63,10 @@ namespace BroWar.Editor.UI
             Texture icon;
             if (view.IsActive)
             {
-                icon = view.Hides || view.Shows 
-                    ? Style.movingViewIcon 
-                    : Style.enabledViewIcon;
+                //icon = view.Hides || view.Shows 
+                //    ? Style.movingViewIcon 
+                //    : Style.enabledViewIcon;
+                icon = Style.enabledViewIcon;
             }
             else
             {

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 namespace BroWar.UI.Views
 {
     using BroWar.Common;
-    using BroWar.UI.Elements;
 
     public interface IUiViewsHandler : IInitializableWithArgument<ViewsSettings>
     {
