@@ -40,7 +40,7 @@ namespace BroWar.UI
             SetActive(false);
         }
 
-        protected RectTransform RectTransform
+        public RectTransform RectTransform
         {
             get
             {

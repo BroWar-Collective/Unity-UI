@@ -9,5 +9,6 @@ namespace BroWar.UI.Tooltip
         public Vector2 positionOffset;
         public Vector2 positionPivot;
         public TextAnchor childAlignment;
+        public TooltipPositioningType positioningType;
     }
 }
