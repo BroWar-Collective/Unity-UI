@@ -17,7 +17,7 @@ namespace BroWar.UI.Handlers
         [SerializeField]
         private InputSystemUIInputModule inputModule;
 
-        public Vector2 PointPosition
+        public Vector2 PointerPosition
         {
             get
             {
