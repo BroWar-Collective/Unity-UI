@@ -28,7 +28,8 @@ namespace BroWar.UI.Tooltip
         public void UpdatePositionAndData(Vector2 position, in TooltipData data)
         {
             currentData = data;
-            contentGroup.childAlignment = currentData.childAlignment;
+            PositioningType = data.positioningType;
+            contentGroup.childAlignment = data.childAlignment;
             UpdatePosition(position);
         }
 
@@ -55,5 +56,7 @@ namespace BroWar.UI.Tooltip
         /// Used internally by the tooltip system.
         /// </summary>
         internal int InstanceId { get; set; }
+
+        internal TooltipPositioningType PositioningType { get; private set; }
     }
 }

@@ -6,9 +6,7 @@ namespace BroWar.UI.Tooltip
     using BroWar.Common;
     using BroWar.UI.Input;
 
-    /// <summary>
-    /// <see cref="IUiHandler"/> responsible for showing and updating tooltips.
-    /// </summary>
+    /// <inheritdoc cref="ITooltipHandler"/>
     [DisallowMultipleComponent]
     [AddComponentMenu("BroWar/UI/Handlers/Tooltip Handler")]
     public class TooltipHandler : UiHandlerBehaviour, ITooltipHandler
@@ -36,6 +34,20 @@ namespace BroWar.UI.Tooltip
             ActiveTooltip.Show();
         }
 
+        //TODO: better support for defining custom positioning behaviour
+        private Vector2 GetTooltipPosition(TooltipPositioningType positioningType)
+        {
+            switch (positioningType)
+            {
+                case TooltipPositioningType.Pointer:
+                    return PointerPosition;
+                case TooltipPositioningType.Static:
+                    break;
+            }
+
+            return Vector2.zero;
+        }
+
         [Inject]
         internal void Inject(IUiInputHandler inputHandler)
         {
@@ -55,7 +67,8 @@ namespace BroWar.UI.Tooltip
                 return;
             }
 
-            var position = PointPosition;
+            var positioningType = activeTooltip.PositioningType;
+            var position = GetTooltipPosition(positioningType);
             activeTooltip.UpdatePosition(position);
         }
 
@@ -65,16 +78,32 @@ namespace BroWar.UI.Tooltip
             HideTooltip();
         }
 
-        public TooltipBehaviour ShowTooltip(in TooltipData data)
+        public T GetInstance<T>(T tooltipPrefab) where T : TooltipBehaviour
+        {
+            return factory.Create<T>(tooltipPrefab);
+        }
+
+        public void ShowInstance(TooltipBehaviour instance, in TooltipData data)
+        {
+            var position = GetTooltipPosition(data.positioningType);
+            instance.UpdatePositionAndData(position, in data);
+            ShowInstance(instance);
+        }
+
+        public void ShowInstance(TooltipBehaviour instance)
+        {
+            ShowTooltip(instance);
+        }
+
+        public TooltipBehaviour ShowDefault(in TooltipData data)
         {
             return ShowTooltip<TooltipBehaviour>(in data, null);
         }
 
         public T ShowTooltip<T>(in TooltipData data, T tooltipPrefab) where T : TooltipBehaviour
         {
-            var instance = factory.Create<T>(tooltipPrefab);
-            instance.UpdatePositionAndData(PointPosition, in data);
-            ShowTooltip(instance);
+            var instance = GetInstance(tooltipPrefab);
+            ShowInstance(instance, in data);
             return instance;
         }
 
@@ -85,9 +114,8 @@ namespace BroWar.UI.Tooltip
                 return;
             }
 
-            factory.Dispose(ActiveTooltip);
-
             ActiveTooltip.Hide();
+            factory.Dispose(ActiveTooltip);
             ActiveTooltip = null;
         }
 
@@ -101,9 +129,9 @@ namespace BroWar.UI.Tooltip
             }
         }
 
-        private Vector2 PointPosition
+        private Vector2 PointerPosition
         {
-            get => inputHandler.PointPosition;
+            get => inputHandler.PointerPosition;
         }
 
         public override bool IsTickable => IsTooltipActive;
