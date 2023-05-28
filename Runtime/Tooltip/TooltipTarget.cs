@@ -6,11 +6,12 @@ using Zenject;
 
 namespace BroWar.UI.Tooltip
 {
+    using BroWar.Common;
+
     /// <summary>
     /// Component responsible for showing/hiding tooltips on an associated UI object.
     /// </summary>
     [DisallowMultipleComponent]
-    [AddComponentMenu("BroWar/UI/Tooltip/Tooltip Target")]
     public abstract class TooltipTarget<T> : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler where T : TooltipBehaviour
     {
         [SerializeField, FormerlySerializedAs("settings")]
@@ -27,11 +28,15 @@ namespace BroWar.UI.Tooltip
 
         protected virtual void ShowTooltip()
         {
-            var tooltip = tooltipHandler.ShowTooltip(in data, customPrefab);
-            if (tooltip != null)
+            var tooltip = tooltipHandler.GetInstance(customPrefab);
+            if (tooltip == null)
             {
-                UpdateContent(tooltip);
+                LogHandler.Log("[UI][Tooltip] Cannot create tooltip instance.", LogType.Warning);
+                return;
             }
+
+            UpdateContent(tooltip);
+            tooltipHandler.ShowInstance(tooltip, in data);
         }
 
         protected virtual void HideTooltip()
@@ -49,22 +54,34 @@ namespace BroWar.UI.Tooltip
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
+            ApplyTooltip();
+        }
+
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        {
+            ClearTooltip();
+        }
+
+        public bool ApplyTooltip()
+        {
             if (!ShouldShowContent)
             {
-                return;
+                return false;
             }
 
             sequence = DOTween.Sequence();
             sequence.AppendInterval(offsetTime);
             sequence.AppendCallback(ShowTooltip);
+            return false;
         }
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        public void ClearTooltip()
         {
             sequence?.Kill();
+            sequence = null;
             HideTooltip();
         }
 
-        protected virtual bool ShouldShowContent => true;
+        protected virtual bool ShouldShowContent => sequence == null || sequence.IsComplete();
     }
 }
