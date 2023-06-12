@@ -54,8 +54,5 @@ namespace BroWar.UI
         }
 
         public bool IsActive => gameObject.activeSelf;
-
-        public virtual bool Shows => false;
-        public virtual bool Hides => false;
     }
 }

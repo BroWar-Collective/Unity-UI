@@ -40,6 +40,9 @@ namespace BroWar.UI.Views
             return IsActive && !Hides;
         }
 
+        public virtual bool Shows => false;
+        public virtual bool Hides => false;
+
         public bool IsInitialized { get; private set; }
     }
 }

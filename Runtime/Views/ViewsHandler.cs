@@ -36,31 +36,44 @@ namespace BroWar.UI.Views
             for (var i = 0; i < contexts.Length; i++)
             {
                 var context = contexts[i];
-                var view = context.view;
-                if (view == null)
-                {
-                    LogHandler.Log($"[UI] {nameof(ViewContext)} at index {i} is invalid.", LogType.Warning);
-                    continue;
-                }
+                InitializeView(context, data, i);
+            }
+        }
 
-                var type = view.GetType();
-                if (ContainsView(type))
-                {
-                    LogHandler.Log($"[UI] View ({type.Name}) is cached multiple times.", LogType.Warning);
-                    continue;
-                }
+        private void InitializeView(ViewContext context, ViewData data, int index)
+        {
+            var view = context.view;
+            if (view == null)
+            {
+                LogHandler.Log($"[UI] {nameof(ViewContext)} at index {index} is invalid.", LogType.Warning);
+                return;
+            }
 
-                viewsByTypes.Add(type, view);
-                view.Initialize(data);
-                if (context.showOnInitialize)
+            var type = view.GetType();
+            if (ContainsView(type))
+            {
+                LogHandler.Log($"[UI] View ({type.Name}) is cached multiple times.", LogType.Warning);
+                return;
+            }
+
+            viewsByTypes.Add(type, view);
+            view.Initialize(data);
+            if (context.showOnInitialize)
+            {
+                if (!context.immediateAction)
                 {
-                    ShowInternally(view, true, true);
+                    HideInternally(view, true, true);
+                    ShowInternally(view, false, true);
                 }
                 else
                 {
-                    HideInternally(view, true, true);
+                    ShowInternally(view, true, true);
                 }
+
+                return;
             }
+
+            HideInternally(view, context.immediateAction, true);
         }
 
         protected void ShowInternally(UiView view, bool immediately, bool force = false)
@@ -130,8 +143,7 @@ namespace BroWar.UI.Views
                 return;
             }
 
-            canvasCamera = settings.CanvasCamera != null
-                ? settings.CanvasCamera : Camera.main;
+            canvasCamera = settings.CanvasCamera;
             OnInitialize();
             IsInitialized = true;
             OnInitialized?.Invoke();

@@ -6,6 +6,7 @@ namespace BroWar.UI.Views
     public class ViewContext
     {
         public bool showOnInitialize;
+        public bool immediateAction;
         public UiView view;
     }
 }

@@ -7,41 +7,35 @@ namespace BroWar.UI.Views
 {
     using BroWar.UI.Common;
 
+    /// <summary>
+    /// Canvas-based View implementation. 
+    /// Typical and ready-to-use solution to provide Screen Space elements.
+    /// </summary>
     [RequireComponent(typeof(Canvas))]
-    [AddComponentMenu("BroWar/UI/Views/UI View (Screen Space)")]
-    public class ScreenSpaceView : UiView
+    public abstract class ScreenSpaceView : UiView
     {
+        private readonly List<UiPanel> panels = new List<UiPanel>();
+
         [Title("General")]
         [SerializeField, NotNull]
         private Canvas canvas;
         [SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
         private IShowHideHandler showHideHandler;
 
-        [Title("Content")]
-        [SerializeField]
-        private UiPanel mainPanel;
-        [SerializeField, ReorderableList(elementLabel: "Panel")]
-        [Tooltip("Nested, optional, UI panels maintained by this view.")]
-        private List<UiPanel> panels = new List<UiPanel>();
-
         private CanvasGroup group;
 
         protected override void OnInitialize(ViewData data)
         {
             base.OnInitialize(data);
-            var camera = data?.CanvasCamera;
-            Assert.IsNotNull(camera, $"[UI][View] {nameof(Camera)} is not availabe.");
             Assert.IsNotNull(canvas, $"[UI][View] {nameof(Canvas)} is not availabe.");
+
+            panels.Clear();
+            var camera = data?.CanvasCamera;
             canvas.worldCamera = camera;
         }
 
         protected void RegisterPanel(UiPanel panel)
         {
-            if (panels == null)
-            {
-                panels = new List<UiPanel>();
-            }
-
             panels.Add(panel);
         }
 
@@ -54,7 +48,7 @@ namespace BroWar.UI.Views
             }
 
             showHideHandler.Show(this, immediately, onFinish);
-            foreach (var panel in NestedPanels)
+            foreach (var panel in panels)
             {
                 panel.Show(immediately);
             }
@@ -69,7 +63,7 @@ namespace BroWar.UI.Views
             }
 
             showHideHandler.Hide(this, immediately, onFinish);
-            foreach (var panel in NestedPanels)
+            foreach (var panel in panels)
             {
                 panel.Hide(immediately);
             }
@@ -87,8 +81,6 @@ namespace BroWar.UI.Views
                 return group;
             }
         }
-
-        public IReadOnlyList<UiPanel> NestedPanels => panels;
 
         public override bool Shows => showHideHandler?.Shows ?? false;
         public override bool Hides => showHideHandler?.Hides ?? false;

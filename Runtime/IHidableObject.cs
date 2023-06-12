@@ -12,7 +12,5 @@ namespace BroWar.UI
         void Hide();
 
         bool IsActive { get; }
-        bool Shows { get; }
-        bool Hides { get; }
     }
 }
