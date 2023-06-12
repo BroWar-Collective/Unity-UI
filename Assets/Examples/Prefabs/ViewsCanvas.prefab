@@ -247,35 +247,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showHideHandler:
     id: 0
-  showAnimationContext:
-    id: 1
-  hideAnimationContext:
-    id: 2
   references:
     version: 1
     00000000:
       type: {class: AnimationShowHideHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
       data:
         showAnimationContext:
-          id: 3
+          id: 1
         hideAnimationContext:
-          id: 4
+          id: 2
     00000001:
       type: {class: FadeInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         group: {fileID: 804848496138390356}
         duration: 2
     00000002:
-      type: {class: FadeOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        group: {fileID: 804848496138390356}
-        duration: 2
-    00000003:
-      type: {class: FadeInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        group: {fileID: 804848496138390356}
-        duration: 2
-    00000004:
       type: {class: FadeOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         group: {fileID: 804848496138390356}
@@ -301,7 +287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2187782931675356647}
-  - component: {fileID: 7017107331654948307}
+  - component: {fileID: 1679518467528098475}
   - component: {fileID: 7256615792312014793}
   - component: {fileID: 4872413191211284438}
   - component: {fileID: 3786089865794125035}
@@ -332,7 +318,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 0}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &7017107331654948307
+--- !u!114 &1679518467528098475
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -341,14 +327,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4147253732032481224}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 057388478cf5c7a44a6e5127657b0329, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ecab60534ec4844f958dc9f9385581a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 7256615792312014793}
   showHideHandler:
     id: 0
-  mainPanel: {fileID: 0}
-  panels:
+  nestedPanels:
   - {fileID: 8104924854886270078}
   - {fileID: 358488533299437210}
   references:
@@ -1503,8 +1488,6 @@ MonoBehaviour:
   canvas: {fileID: 6334383523745798280}
   showHideHandler:
     id: 0
-  mainPanel: {fileID: 0}
-  panels: []
   references:
     version: 1
     00000000:
@@ -1653,19 +1636,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showHideHandler:
     id: 0
-  showAnimationContext:
-    id: 1
-  hideAnimationContext:
-    id: 2
   references:
     version: 1
     00000000:
       type: {class: AnimationShowHideHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
       data:
         showAnimationContext:
-          id: 3
+          id: 1
         hideAnimationContext:
-          id: 4
+          id: 2
     00000001:
       type: {class: SlideInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
@@ -1674,20 +1653,6 @@ MonoBehaviour:
         ease: 9
         duration: 2
     00000002:
-      type: {class: SlideOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        transform: {fileID: 7290104650223497521}
-        direction: 0
-        ease: 9
-        duration: 2
-    00000003:
-      type: {class: SlideInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        transform: {fileID: 7290104650223497521}
-        direction: 1
-        ease: 9
-        duration: 2
-    00000004:
       type: {class: SlideOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         transform: {fileID: 7290104650223497521}

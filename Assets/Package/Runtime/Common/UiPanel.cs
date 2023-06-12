@@ -32,8 +32,5 @@ namespace BroWar.UI.Common
 
             showHideHandler.Hide(this, immediately, onFinish);
         }
-
-        public override bool Shows => showHideHandler?.Shows ?? false;
-        public override bool Hides => showHideHandler?.Hides ?? false;
     }
 }
