@@ -8,7 +8,7 @@ namespace BroWar.UI.Views
 
     /// <inheritdoc cref="IUiViewsHandler"/>
     [DisallowMultipleComponent]
-    [AddComponentMenu("BroWar/UI/Handlers/Views Handler")]
+    [AddComponentMenu("BroWar/UI/Views/Views Handler")]
     public class ViewsHandler : UiHandlerBehaviour, IUiViewsHandler
     {
         protected readonly Dictionary<Type, UiView> viewsByTypes = new Dictionary<Type, UiView>();

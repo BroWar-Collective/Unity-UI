@@ -2,14 +2,13 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace BroWar.UI.Elements
+namespace BroWar.UI.Common
 {
     using BroWar.UI.Animation;
 
-    [AddComponentMenu("BroWar/UI/Elements/UI Panel")]
-    public class UiPanel : UiObject
+    [Serializable]
+    public class AnimationShowHideHandler : IShowHideHandler
     {
-        //TODO: move it to a separate type
         [Title("Animations")]
         [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
         [NewLabel("-> Animation Context")]
@@ -51,29 +50,29 @@ namespace BroWar.UI.Elements
             Hides = true;
         }
 
-        protected virtual Sequence GetShowSequence()
+        private Sequence GetShowSequence()
         {
             return showAnimationContext?.GetSequence();
         }
 
-        protected virtual Sequence GetHideSequence()
+        private Sequence GetHideSequence()
         {
             return hideAnimationContext?.GetSequence();
         }
 
-        public override void Show()
+        public void Show(IHidableObject target)
         {
-            Show(false);
+            Show(target, false);
         }
 
-        public override void Hide()
+        public void Hide(IHidableObject target)
         {
-            Hide(false);
+            Hide(target, false);
         }
 
-        public virtual void Show(bool immediately, Action onFinish = null)
+        public virtual void Show(IHidableObject target, bool immediately, Action onFinish = null)
         {
-            base.Show();
+            target.Show();
             ResetAnimation();
             sequence = GetShowSequence();
             if (sequence == null)
@@ -97,20 +96,20 @@ namespace BroWar.UI.Elements
             }
         }
 
-        public virtual void Hide(bool immediately, Action onFinish = null)
+        public virtual void Hide(IHidableObject target, bool immediately, Action onFinish = null)
         {
             ResetAnimation();
             sequence = GetHideSequence();
             if (sequence == null)
             {
-                base.Hide();
+                target.Hide();
                 onFinish?.Invoke();
                 return;
             }
 
             sequence.AppendCallback(() =>
             {
-                base.Hide();
+                target.Hide();
                 onFinish?.Invoke();
             });
 
@@ -126,7 +125,7 @@ namespace BroWar.UI.Elements
 
         public bool Shows { get; private set; }
         public bool Hides { get; private set; }
-        public virtual IAnimationContext ShowAnimationContext { get => showAnimationContext; set => showAnimationContext = value; }
-        public virtual IAnimationContext HideAnimationContext { get => hideAnimationContext; set => hideAnimationContext = value; }
+        public IAnimationContext ShowAnimationContext => showAnimationContext;
+        public IAnimationContext HideAnimationContext => hideAnimationContext;
     }
 }
