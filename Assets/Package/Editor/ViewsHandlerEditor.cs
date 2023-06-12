@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace BroWar.Editor.UI
 {
-    using BroWar.UI.Elements;
     using BroWar.UI.Views;
 
     [CustomEditor(typeof(ViewsHandler))]
@@ -63,10 +62,9 @@ namespace BroWar.Editor.UI
             Texture icon;
             if (view.IsActive)
             {
-                //icon = view.Hides || view.Shows 
-                //    ? Style.movingViewIcon 
-                //    : Style.enabledViewIcon;
-                icon = Style.enabledViewIcon;
+                icon = view.Hides || view.Shows
+                    ? Style.movingViewIcon
+                    : Style.enabledViewIcon;
             }
             else
             {

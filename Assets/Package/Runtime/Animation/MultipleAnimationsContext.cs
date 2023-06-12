@@ -8,8 +8,10 @@ namespace BroWar.UI.Animation
     public class MultipleAnimationsContext : IAnimationContext
     {
         [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
-        [ReorderableList]
+        [ReorderableList(Foldable = true)]
         private IAnimationContext[] nestedContexts;
+        [SerializeField]
+        private bool parallel = true;
 
         public Sequence GetSequence()
         {
@@ -26,7 +28,15 @@ namespace BroWar.UI.Animation
                     continue;
                 }
 
-                context.GetSequence(sequence);
+                if (parallel)
+                {
+                    var nestedSequence = context.GetSequence();
+                    sequence.Join(nestedSequence);
+                }
+                else
+                {
+                    context.GetSequence(sequence);
+                }
             }
 
             return sequence;

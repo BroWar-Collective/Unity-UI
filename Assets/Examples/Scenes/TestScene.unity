@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7106684cf34f21a488e0018932689cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showOnStart: 1
+  showOnStart: 0
   viewType:
     typeReference: Examples.SourceBarView, Assembly-CSharp
 --- !u!1001 &1114633845298320384

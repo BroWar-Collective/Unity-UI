@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace BroWar.UI.Animation.Animations
 {
+    using BroWar.Common;
+
     [Serializable]
     public class SlideInAnimationContext : IAnimationContext
     {
@@ -24,6 +26,12 @@ namespace BroWar.UI.Animation.Animations
 
         public Sequence GetSequence(Sequence sequence)
         {
+            if (transform == null)
+            {
+                LogHandler.Log($"[UI] {nameof(RectTransform)} not available.", LogType.Warning);
+                return sequence;
+            }
+
             return AnimationUtility.SlideIn(sequence, transform, direction, ease, duration);
         }
     }

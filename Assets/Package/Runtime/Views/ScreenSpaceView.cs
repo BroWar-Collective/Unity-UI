@@ -5,17 +5,17 @@ using UnityEngine.Assertions;
 
 namespace BroWar.UI.Views
 {
-    using BroWar.UI.Elements;
+    using BroWar.UI.Common;
 
     [RequireComponent(typeof(Canvas))]
-    [AddComponentMenu("BroWar/UI/Elements/UI View (Screen Space)")]
+    [AddComponentMenu("BroWar/UI/Views/UI View (Screen Space)")]
     public class ScreenSpaceView : UiView
     {
-        //TODO: show/hide handler
-
         [Title("General")]
         [SerializeField, NotNull]
         private Canvas canvas;
+        [SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
+        private IShowHideHandler showHideHandler;
 
         [Title("Content")]
         [SerializeField]
@@ -28,8 +28,6 @@ namespace BroWar.UI.Views
 
         protected override void OnInitialize(ViewData data)
         {
-            Assert.IsNotNull(mainPanel);
-
             base.OnInitialize(data);
             var camera = data?.CanvasCamera;
             Assert.IsNotNull(camera, $"[UI][View] {nameof(Camera)} is not availabe.");
@@ -49,9 +47,14 @@ namespace BroWar.UI.Views
 
         public override void Show(bool immediately, Action onFinish = null)
         {
-            base.Show(immediately, null);
-            mainPanel.Show(immediately, onFinish);
-            foreach (var panel in panels)
+            if (showHideHandler == null)
+            {
+                base.Show(immediately, onFinish);
+                return;
+            }
+
+            showHideHandler.Show(this, immediately, onFinish);
+            foreach (var panel in NestedPanels)
             {
                 panel.Show(immediately);
             }
@@ -59,22 +62,17 @@ namespace BroWar.UI.Views
 
         public override void Hide(bool immediately, Action onFinish = null)
         {
-            base.Hide(immediately, null);
-            mainPanel.Hide(immediately, onFinish);
-            foreach (var panel in panels)
+            if (showHideHandler == null)
+            {
+                base.Hide(immediately, onFinish);
+                return;
+            }
+
+            showHideHandler.Hide(this, immediately, onFinish);
+            foreach (var panel in NestedPanels)
             {
                 panel.Hide(immediately);
             }
-        }
-
-        public override bool CanShow()
-        {
-            return base.CanShow() || mainPanel.Hides;
-        }
-
-        public override bool CanHide()
-        {
-            return base.CanHide() && !mainPanel.Hides;
         }
 
         public CanvasGroup Group
@@ -91,5 +89,8 @@ namespace BroWar.UI.Views
         }
 
         public IReadOnlyList<UiPanel> NestedPanels => panels;
+
+        public override bool Shows => showHideHandler?.Shows ?? false;
+        public override bool Hides => showHideHandler?.Hides ?? false;
     }
 }

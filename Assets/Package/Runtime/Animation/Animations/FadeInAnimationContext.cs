@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace BroWar.UI.Animation.Animations
 {
+    using BroWar.Common;
+
     [Serializable]
     public class FadeInAnimationContext : IAnimationContext
     {
@@ -20,6 +22,12 @@ namespace BroWar.UI.Animation.Animations
 
         public Sequence GetSequence(Sequence sequence)
         {
+            if (group == null)
+            {
+                LogHandler.Log($"[UI] {nameof(CanvasGroup)} not available.", LogType.Warning);
+                return sequence;
+            }
+
             sequence.Append(group.DOFade(1.0f, duration));
             return sequence;
         }

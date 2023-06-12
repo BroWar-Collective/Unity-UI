@@ -151,6 +151,7 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0}
     positionPivot: {x: 0, y: 0}
     childAlignment: 0
+    positioningType: 0
   offsetTime: 0.3
   customPrefab: {fileID: 0}
   tooltipContent: Lorem Ipsum Lorem Ipsum Lorem IpsumLorem IpsumLorem Ipsum Lorem
@@ -244,18 +245,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ce93798a6d3944d962161ceef610a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showAnimationContext:
+  showHideHandler:
     id: 0
-  hideAnimationContext:
+  showAnimationContext:
     id: 1
+  hideAnimationContext:
+    id: 2
   references:
     version: 1
     00000000:
+      type: {class: AnimationShowHideHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
+      data:
+        showAnimationContext:
+          id: 3
+        hideAnimationContext:
+          id: 4
+    00000001:
       type: {class: FadeInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         group: {fileID: 804848496138390356}
         duration: 2
-    00000001:
+    00000002:
+      type: {class: FadeOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
+      data:
+        group: {fileID: 804848496138390356}
+        duration: 2
+    00000003:
+      type: {class: FadeInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
+      data:
+        group: {fileID: 804848496138390356}
+        duration: 2
+    00000004:
       type: {class: FadeOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         group: {fileID: 804848496138390356}
@@ -324,27 +344,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 057388478cf5c7a44a6e5127657b0329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showAnimationContext:
-    id: 0
-  hideAnimationContext:
-    id: 1
   canvas: {fileID: 7256615792312014793}
+  showHideHandler:
+    id: 0
+  mainPanel: {fileID: 0}
   panels:
-  - {fileID: 8104924854886270078}
-  - {fileID: 358488533299437210}
-  nestedPanels:
   - {fileID: 8104924854886270078}
   - {fileID: 358488533299437210}
   references:
     version: 1
     00000000:
+      type: {class: AnimationShowHideHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
+      data:
+        showAnimationContext:
+          id: 1
+        hideAnimationContext:
+          id: 2
+    00000001:
       type: {class: SlideInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         transform: {fileID: 2187782931675356647}
         direction: 1
         ease: 9
         duration: 1
-    00000001:
+    00000002:
       type: {class: SlideOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         transform: {fileID: 2187782931675356647}
@@ -614,7 +637,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7620c3bac8b8210489ebe780450f32be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 6334383521685663067}
   labelIcon: {fileID: 6334383523482723051}
   labelText: {fileID: 6334383523607036154}
 --- !u!114 &6334383521685663071
@@ -633,6 +655,7 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0}
     positionPivot: {x: 0, y: 0}
     childAlignment: 0
+    positioningType: 0
   offsetTime: 0
   customPrefab: {fileID: 0}
   tooltipContent: 'Lorem Ipsum Lorem Ipsum
@@ -890,6 +913,7 @@ MonoBehaviour:
     positionOffset: {x: 10, y: -10}
     positionPivot: {x: 0, y: 1}
     childAlignment: 0
+    positioningType: 0
   offsetTime: 0.3
   customPrefab: {fileID: 8332164750516034109, guid: 5904c075d402f554595809c8228b176c, type: 3}
   tooltipContent: Lorem Ipsum Lorem Ipsum Lorem IpsumLorem IpsumLorem Ipsum Lorem
@@ -1029,7 +1053,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7620c3bac8b8210489ebe780450f32be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 6334383522781897203}
   labelIcon: {fileID: 6334383523598463133}
   labelText: {fileID: 0}
 --- !u!114 &6334383522781897201
@@ -1048,6 +1071,7 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0}
     positionPivot: {x: 1, y: 1}
     childAlignment: 2
+    positioningType: 0
   offsetTime: 0
   customPrefab: {fileID: 0}
   tooltipContent: 'Lorem Ipsum
@@ -1476,32 +1500,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e967c8689c9b65d45ae30632fdbe54b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showAnimationContext:
-    id: 0
-  hideAnimationContext:
-    id: 1
   canvas: {fileID: 6334383523745798280}
+  showHideHandler:
+    id: 0
+  mainPanel: {fileID: 0}
   panels: []
-  nestedPanels: []
   references:
     version: 1
     00000000:
-      type: {class: MultipleAnimationsContext, ns: BroWar.UI.Animation, asm: BroWar.UI}
+      type: {class: AnimationShowHideHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
       data:
-        nestedContexts:
-        - id: 2
-        - id: 3
+        showAnimationContext:
+          id: 1
+        hideAnimationContext:
+          id: 2
     00000001:
       type: {class: MultipleAnimationsContext, ns: BroWar.UI.Animation, asm: BroWar.UI}
       data:
         nestedContexts:
+        - id: 3
         - id: 4
-        - id: 5
+        parallel: 1
     00000002:
-      type: {class: FadeInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
+      type: {class: MultipleAnimationsContext, ns: BroWar.UI.Animation, asm: BroWar.UI}
       data:
-        group: {fileID: 6386027112681158046}
-        duration: 1
+        nestedContexts:
+        - id: 5
+        - id: 6
+        parallel: 1
     00000003:
       type: {class: SlideInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
@@ -1510,7 +1536,7 @@ MonoBehaviour:
         ease: 9
         duration: 1
     00000004:
-      type: {class: FadeOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
+      type: {class: FadeInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         group: {fileID: 6386027112681158046}
         duration: 1
@@ -1520,6 +1546,11 @@ MonoBehaviour:
         transform: {fileID: 6334383523745798278}
         direction: 2
         ease: 9
+        duration: 1
+    00000006:
+      type: {class: FadeOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
+      data:
+        group: {fileID: 6386027112681158046}
         duration: 1
 --- !u!223 &6334383523745798280
 Canvas:
@@ -1620,20 +1651,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ce93798a6d3944d962161ceef610a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showAnimationContext:
+  showHideHandler:
     id: 0
-  hideAnimationContext:
+  showAnimationContext:
     id: 1
+  hideAnimationContext:
+    id: 2
   references:
     version: 1
     00000000:
+      type: {class: AnimationShowHideHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
+      data:
+        showAnimationContext:
+          id: 3
+        hideAnimationContext:
+          id: 4
+    00000001:
       type: {class: SlideInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         transform: {fileID: 7290104650223497521}
         direction: 1
         ease: 9
         duration: 2
-    00000001:
+    00000002:
+      type: {class: SlideOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
+      data:
+        transform: {fileID: 7290104650223497521}
+        direction: 0
+        ease: 9
+        duration: 2
+    00000003:
+      type: {class: SlideInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
+      data:
+        transform: {fileID: 7290104650223497521}
+        direction: 1
+        ease: 9
+        duration: 2
+    00000004:
       type: {class: SlideOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         transform: {fileID: 7290104650223497521}

@@ -4,7 +4,6 @@ namespace BroWar.UI.Views
 {
     using BroWar.Common;
 
-    //TODO: interface for hidable objects (in time and immediate)
     public abstract class UiView : UiObject, IInitializableWithArgument<ViewData>
     {
         public event Action OnInitialized;
@@ -33,12 +32,12 @@ namespace BroWar.UI.Views
 
         public virtual bool CanShow()
         {
-            return !IsActive;
+            return !IsActive || Hides;
         }
 
         public virtual bool CanHide()
         {
-            return IsActive;
+            return IsActive && !Hides;
         }
 
         public bool IsInitialized { get; private set; }

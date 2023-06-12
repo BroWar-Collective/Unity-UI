@@ -2,8 +2,6 @@
 
 namespace BroWar.UI.Views
 {
-    using BroWar.UI.Elements;
-
     [Serializable]
     public class ViewContext
     {

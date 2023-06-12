@@ -7,7 +7,7 @@ namespace BroWar.UI
     /// Base class for all UI-related objects.
     /// </summary>
     [DisallowMultipleComponent, RequireComponent(typeof(RectTransform))]
-    public abstract class UiObject : MonoBehaviour
+    public abstract class UiObject : MonoBehaviour, IHidableObject
     {
         private RectTransform rectTransform;
 
@@ -54,5 +54,8 @@ namespace BroWar.UI
         }
 
         public bool IsActive => gameObject.activeSelf;
+
+        public virtual bool Shows => false;
+        public virtual bool Hides => false;
     }
 }
