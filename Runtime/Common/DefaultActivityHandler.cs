@@ -3,7 +3,7 @@
 namespace BroWar.UI.Common
 {
     [Serializable]
-    public class DefaultShowHideHandler : IShowHideHandler
+    public class DefaultActivityHandler : IActivityHandler
     {
         public void Show(IHidableObject target)
         {

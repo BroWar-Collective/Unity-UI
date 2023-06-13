@@ -4,6 +4,6 @@ namespace BroWar.UI.Views
 {
     public class ViewsSettings
     {
-        public Camera CanvasCamera { get; set; }
+        public Camera UiCamera { get; set; }
     }
 }

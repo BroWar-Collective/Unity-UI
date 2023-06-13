@@ -30,7 +30,7 @@ namespace BroWar.UI.Views
         {
             var data = new ViewData()
             {
-                CanvasCamera = canvasCamera
+                UiCamera = canvasCamera
             };
 
             for (var i = 0; i < contexts.Length; i++)
@@ -58,9 +58,11 @@ namespace BroWar.UI.Views
 
             viewsByTypes.Add(type, view);
             view.Initialize(data);
+
+            var setImmediately = context.showImmediately;
             if (context.showOnInitialize)
             {
-                if (!context.immediateAction)
+                if (!setImmediately)
                 {
                     HideInternally(view, true, true);
                     ShowInternally(view, false, true);
@@ -73,7 +75,7 @@ namespace BroWar.UI.Views
                 return;
             }
 
-            HideInternally(view, context.immediateAction, true);
+            HideInternally(view, setImmediately, true);
         }
 
         protected void ShowInternally(UiView view, bool immediately, bool force = false)
@@ -116,7 +118,7 @@ namespace BroWar.UI.Views
         {
             return new ViewsSettings()
             {
-                CanvasCamera = Camera.main
+                UiCamera = Camera.main
             };
         }
 
@@ -143,7 +145,7 @@ namespace BroWar.UI.Views
                 return;
             }
 
-            canvasCamera = settings.CanvasCamera;
+            canvasCamera = settings.UiCamera;
             OnInitialize();
             IsInitialized = true;
             OnInitialized?.Invoke();
@@ -249,6 +251,7 @@ namespace BroWar.UI.Views
             }
         }
 
+        /// <inheritdoc cref="IUiViewsHandler"/>
         public List<UiView> GetAllViews()
         {
             return new List<UiView>(viewsByTypes.Values);

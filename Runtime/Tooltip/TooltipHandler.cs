@@ -8,7 +8,7 @@ namespace BroWar.UI.Tooltip
 
     /// <inheritdoc cref="ITooltipHandler"/>
     [DisallowMultipleComponent]
-    [AddComponentMenu("BroWar/UI/Handlers/Tooltip Handler")]
+    [AddComponentMenu("BroWar/UI/Tooltip/Tooltip Handler")]
     public class TooltipHandler : UiHandlerBehaviour, ITooltipHandler
     {
         [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]

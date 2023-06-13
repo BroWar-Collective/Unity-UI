@@ -4,6 +4,9 @@ namespace BroWar.UI.Views
 {
     using BroWar.Common;
 
+    /// <summary>
+    /// Base class for all views.
+    /// </summary>
     public abstract class UiView : UiObject, IInitializableWithArgument<ViewData>
     {
         public event Action OnInitialized;
@@ -18,6 +21,7 @@ namespace BroWar.UI.Views
             OnInitialized?.Invoke();
         }
 
+        //TODO: move it to UiObject?
         public virtual void Show(bool immediately, Action onFinish = null)
         {
             base.Show();
