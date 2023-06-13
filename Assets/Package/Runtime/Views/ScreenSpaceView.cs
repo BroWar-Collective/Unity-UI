@@ -14,13 +14,14 @@ namespace BroWar.UI.Views
     [RequireComponent(typeof(Canvas))]
     public abstract class ScreenSpaceView : UiView
     {
+        //NOTE: consider using contexts to have "metadata" about panels
         private readonly List<UiPanel> panels = new List<UiPanel>();
 
         [Title("General")]
         [SerializeField, NotNull]
         private Canvas canvas;
         [SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
-        private IShowHideHandler showHideHandler;
+        private IActivityHandler showHideHandler;
 
         private CanvasGroup group;
 
@@ -30,7 +31,7 @@ namespace BroWar.UI.Views
             Assert.IsNotNull(canvas, $"[UI][View] {nameof(Canvas)} is not availabe.");
 
             panels.Clear();
-            var camera = data?.CanvasCamera;
+            var camera = data?.UiCamera;
             canvas.worldCamera = camera;
         }
 
@@ -82,6 +83,7 @@ namespace BroWar.UI.Views
             }
         }
 
+        public IReadOnlyList<UiPanel> Panels => panels;
         public override bool Shows => showHideHandler?.Shows ?? false;
         public override bool Hides => showHideHandler?.Hides ?? false;
     }

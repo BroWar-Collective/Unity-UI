@@ -443,10 +443,10 @@ MonoBehaviour:
   selfInitialize: 1
   contexts:
   - showOnInitialize: 1
-    immediateAction: 0
+    showImmediately: 0
     view: {fileID: 1114633846218482264}
   - showOnInitialize: 0
-    immediateAction: 1
+    showImmediately: 1
     view: {fileID: 5751484812887521402}
 --- !u!114 &1114633846812842680
 MonoBehaviour:

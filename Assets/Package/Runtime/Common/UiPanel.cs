@@ -6,8 +6,9 @@ namespace BroWar.UI.Common
     [AddComponentMenu("BroWar/UI/Common/UI Panel")]
     public class UiPanel : UiObject
     {
+        //TODO: rename to ActivityHandler
         [SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
-        private IShowHideHandler showHideHandler;
+        private IActivityHandler showHideHandler;
 
         public virtual void Show(bool immediately, Action onFinish = null)
         {

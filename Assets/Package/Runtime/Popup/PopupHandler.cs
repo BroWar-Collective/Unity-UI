@@ -8,7 +8,7 @@ namespace BroWar.UI.Popup
     /// TODO: implementation needed
     /// </summary>
     [DisallowMultipleComponent]
-    [AddComponentMenu("BroWar/UI/Handlers/Popup Handler")]
+    [AddComponentMenu("BroWar/UI/Popup/Popup Handler")]
     public class PopupHandler : UiHandlerBehaviour, IUiPopupHandler
     { }
 }

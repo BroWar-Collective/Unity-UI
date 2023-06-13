@@ -12,7 +12,7 @@ namespace Examples.Handlers
         {
             return new ViewsSettings()
             {
-                CanvasCamera = targetCamera
+                UiCamera = targetCamera
             };
         }
     }

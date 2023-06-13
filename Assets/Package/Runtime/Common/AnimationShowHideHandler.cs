@@ -6,8 +6,9 @@ namespace BroWar.UI.Common
 {
     using BroWar.UI.Animation;
 
+    //TODO: rename
     [Serializable]
-    public class AnimationShowHideHandler : IShowHideHandler
+    public class AnimationShowHideHandler : IActivityHandler
     {
         [Title("Animations")]
         [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
@@ -70,7 +71,7 @@ namespace BroWar.UI.Common
             Hide(target, false);
         }
 
-        public virtual void Show(IHidableObject target, bool immediately, Action onFinish = null)
+        public void Show(IHidableObject target, bool immediately, Action onFinish = null)
         {
             target.Show();
             ResetAnimation();
@@ -96,7 +97,7 @@ namespace BroWar.UI.Common
             }
         }
 
-        public virtual void Hide(IHidableObject target, bool immediately, Action onFinish = null)
+        public void Hide(IHidableObject target, bool immediately, Action onFinish = null)
         {
             ResetAnimation();
             sequence = GetHideSequence();

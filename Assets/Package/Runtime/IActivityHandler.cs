@@ -2,8 +2,7 @@
 
 namespace BroWar.UI
 {
-    //TODO: activity handler
-    public interface IShowHideHandler
+    public interface IActivityHandler
     {
         void Show(IHidableObject target);
         void Hide(IHidableObject target);

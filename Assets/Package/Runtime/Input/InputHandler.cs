@@ -9,7 +9,7 @@ namespace BroWar.UI.Input
     /// Mainly focused on using internally the <see cref="InputSystemUIInputModule"/>.
     /// </summary>
     [DisallowMultipleComponent]
-    [AddComponentMenu("BroWar/UI/Handlers/Input Handler")]
+    [AddComponentMenu("BroWar/UI/Input/Input Handler")]
     public class InputHandler : UiHandlerBehaviour, IUiInputHandler
     {
         [SerializeField, NotNull]

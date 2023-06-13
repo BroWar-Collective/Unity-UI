@@ -11,7 +11,7 @@ namespace BroWar.UI.Injection
     [Serializable]
     public class UiInstaller : ExposableSubInstaller
     {
-        [SerializeField]
+        [SerializeField, NotNull]
         private UiManager manager;
 
         protected override void OnInstall(DiContainer container)

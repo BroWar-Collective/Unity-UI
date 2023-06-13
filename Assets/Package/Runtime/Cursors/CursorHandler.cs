@@ -8,7 +8,7 @@ namespace BroWar.UI.Cursors
     /// TODO: implementation needed
     /// </summary>
     [DisallowMultipleComponent]
-    [AddComponentMenu("BroWar/UI/Handlers/Cursor Handler")]
+    [AddComponentMenu("BroWar/UI/Cursors/Cursor Handler")]
     public class CursorHandler : UiHandlerBehaviour, IUiCursorHandler
     { }
 }
