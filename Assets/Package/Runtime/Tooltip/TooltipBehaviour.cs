@@ -4,61 +4,59 @@ using UnityEngine.UI;
 
 namespace BroWar.UI.Tooltip
 {
+    /// <summary>
+    /// In-game tooltip representation.
+    /// </summary>
     [AddComponentMenu("BroWar/UI/Tooltip/Tooltip Behaviour")]
     public class TooltipBehaviour : UiObject
     {
+        [SerializeField, NotNull]
+        private LayoutGroup contentGroup;
         [SerializeField, NotNull]
         private RectTransform contentRect;
         [SerializeField, NotNull]
         private TextMeshProUGUI contentText;
         [SerializeField]
-        private float maxWidth = 250.0f;
-        [SerializeField]
-        private TooltipSettings defaultSettings;
-        private TooltipSettings currentSettings;
+        private TooltipData defaultData;
+        private TooltipData currentData;
 
-        //TODO: temporary solution
-        public void FixRectSize()
+        public void UpdatePositionAndData(Vector2 position)
         {
-            var parentSize = RectTransform.sizeDelta;
-            parentSize.x = maxWidth;
-            RectTransform.sizeDelta = parentSize;
-            LayoutRebuilder.ForceRebuildLayoutImmediate(RectTransform);
-            if (contentRect.sizeDelta.x < maxWidth)
-            {
-                parentSize.x = contentRect.sizeDelta.x;
-            }
-            else
-            {
-                parentSize.x = maxWidth;
-            }
-
-            RectTransform.sizeDelta = parentSize;
+            UpdatePositionAndData(position, in defaultData);
         }
 
-        public void UpdateContent(string text)
+        public void UpdatePositionAndData(Vector2 position, in TooltipData data)
         {
-            UpdateContent(text, in defaultSettings);
+            currentData = data;
+            PositioningType = data.positioningType;
+            contentGroup.childAlignment = data.childAlignment;
+            UpdatePosition(position);
         }
 
-        public void UpdateContent(string text, in TooltipSettings settings)
+        public virtual void UpdateContent(string content)
         {
-            contentText.SetText(text);
-            currentSettings = settings;
+            contentText.SetText(content);
         }
 
-        public void UpdatePosition(Vector2 position)
+        public virtual void UpdatePosition(Vector2 screenPosition)
         {
-            //TODO: test different cases and pivots
-            var rect = contentRect.rect;
+            var rect = RectTransform.rect;
             var w = Screen.width;
             var h = Screen.height;
-            var pivot = currentSettings.positionPivot;
-            position += currentSettings.positionOffset;
-            position.x = Mathf.Clamp(position.x, rect.width * pivot.x, w - rect.width * (1.0f - pivot.x));
-            position.y = Mathf.Clamp(position.y, rect.height * pivot.y, h - rect.height * (1.0f - pivot.y));
-            RectTransform.pivot = currentSettings.positionPivot;
-            RectTransform.position = position;
+            var pivot = currentData.positionPivot;
+            screenPosition += currentData.positionOffset;
+            screenPosition.x = Mathf.Clamp(screenPosition.x, rect.width * pivot.x, w - rect.width * (1.0f - pivot.x));
+            screenPosition.y = Mathf.Clamp(screenPosition.y, rect.height * pivot.y, h - rect.height * (1.0f - pivot.y));
+            RectTransform.pivot = pivot;
+            RectTransform.position = screenPosition;
         }
+
+        /// <summary>
+        /// Instance ID of associated pool. 
+        /// Used internally by the tooltip system.
+        /// </summary>
+        internal int InstanceId { get; set; }
+
+        internal TooltipPositioningType PositioningType { get; private set; }
     }
 }

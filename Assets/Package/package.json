@@ -10,8 +10,8 @@
   "category": "ui",
   "dependencies": {
     "com.browar.common": "1.0.0",
-    "com.browar.injection": "1.0.0",
-    "com.browar.editor-toolbox": "0.11.9"
+    "com.browar.injection": "1.2.5",
+    "com.browar.editor-toolbox": "0.12.0"
   },
   "author": {
     "name": "BroWar Collective",

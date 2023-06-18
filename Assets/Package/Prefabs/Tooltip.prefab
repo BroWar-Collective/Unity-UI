@@ -328,8 +328,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a37fad72ceeda499241e5ebf74139a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contentGroup: {fileID: 3359148382322358973}
   contentRect: {fileID: 3359148380560781348}
   contentText: {fileID: 3359148381745167703}
-  defaultSettings:
+  defaultData:
     positionOffset: {x: 0, y: 0}
     positionPivot: {x: 0, y: 0}
+    childAlignment: 0

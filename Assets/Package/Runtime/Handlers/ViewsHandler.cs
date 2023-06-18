@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-namespace BroWar.UI.Management
+namespace BroWar.UI.Handlers
 {
     using BroWar.Common;
     using BroWar.UI.Elements;
+    using BroWar.UI.Management;
 
-    /// <inheritdoc cref="IViewsManager"/>
     [DisallowMultipleComponent]
-    public abstract class UiViewsManagerBase : StandaloneManager, IViewsManager, IInitializableWithArgument<Camera>
+    [AddComponentMenu("BroWar/UI/Handlers/Views Handler")]
+    public class ViewsHandler : UiHandlerBehaviour, IUiViewsHandler
     {
         private readonly Dictionary<Type, UiView> viewsByTypes = new Dictionary<Type, UiView>();
         private readonly List<UiView> activeViews = new List<UiView>();
@@ -78,6 +79,13 @@ namespace BroWar.UI.Management
         protected virtual void OnInitialize()
         {
             InitializeViews();
+        }
+
+        //TODO: temporary solution
+        public override void Prepare()
+        {
+            base.Prepare();
+            Initialize();
         }
 
         public void Initialize()

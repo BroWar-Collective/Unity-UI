@@ -2,14 +2,13 @@
 
 namespace BroWar.UI.Handlers
 {
-    using BroWar.UI.Management;
-
-    [AddComponentMenu("BroWar/UI/Handler/Popup Handler")]
+    /// <summary>
+    /// Dedicated <see cref="IUiHandler"/> respnsible for displaying popup messages.
+    /// 
+    /// TODO: implementation needed
+    /// </summary>
+    [DisallowMultipleComponent]
+    [AddComponentMenu("BroWar/UI/Handlers/Popup Handler")]
     public class PopupHandler : UiHandlerBehaviour
-    {
-        [SerializeField]
-        private UiViewsManagerBase viewsManager;
-
-        public override bool IsTickable => false;
-    }
+    { }
 }

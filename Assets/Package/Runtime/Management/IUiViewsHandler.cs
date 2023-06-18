@@ -5,10 +5,7 @@ namespace BroWar.UI.Management
 {
     using BroWar.UI.Elements;
 
-    /// <summary>
-    /// TODO
-    /// </summary>
-    public interface IViewsManager
+    public interface IUiViewsHandler
     {
         void Show<T>() where T : UiView;
         void Show(Type viewType);
