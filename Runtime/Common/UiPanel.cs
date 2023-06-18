@@ -1,37 +1,36 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BroWar.UI.Common
 {
     [AddComponentMenu("BroWar/UI/Common/UI Panel")]
     public class UiPanel : UiObject
     {
-        //TODO: rename to ActivityHandler
         [SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
-        private IActivityHandler showHideHandler;
+        [FormerlySerializedAs("showHideHandler")]
+        private IActivityHandler activityHandler;
 
-        public virtual void Show(bool immediately, Action onFinish = null)
+        public override void Show(bool immediately, Action onFinish = null)
         {
-            if (showHideHandler == null)
+            if (activityHandler == null)
             {
-                base.Show();
-                onFinish?.Invoke();
+                base.Show(immediately, onFinish);
                 return;
             }
 
-            showHideHandler.Show(this, immediately, onFinish);
+            activityHandler.Show(this, immediately, onFinish);
         }
 
-        public virtual void Hide(bool immediately, Action onFinish = null)
+        public override void Hide(bool immediately, Action onFinish = null)
         {
-            if (showHideHandler == null)
+            if (activityHandler == null)
             {
-                base.Hide();
-                onFinish?.Invoke();
+                base.Hide(immediately, onFinish);
                 return;
             }
 
-            showHideHandler.Hide(this, immediately, onFinish);
+            activityHandler.Hide(this, immediately, onFinish);
         }
     }
 }

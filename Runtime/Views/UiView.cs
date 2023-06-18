@@ -21,32 +21,6 @@ namespace BroWar.UI.Views
             OnInitialized?.Invoke();
         }
 
-        //TODO: move it to UiObject?
-        public virtual void Show(bool immediately, Action onFinish = null)
-        {
-            base.Show();
-            onFinish?.Invoke();
-        }
-
-        public virtual void Hide(bool immediately, Action onFinish = null)
-        {
-            base.Hide();
-            onFinish?.Invoke();
-        }
-
-        public virtual bool CanShow()
-        {
-            return !IsActive || Hides;
-        }
-
-        public virtual bool CanHide()
-        {
-            return IsActive && !Hides;
-        }
-
-        public virtual bool Shows => false;
-        public virtual bool Hides => false;
-
         public bool IsInitialized { get; private set; }
     }
 }
