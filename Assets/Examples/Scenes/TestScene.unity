@@ -200,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showOnStart: 0
   viewType:
-    typeReference: BroWar.UI.Views.ScreenSpaceView, BroWar.UI
+    typeReference: Examples.LeftView, Assembly-CSharp
 --- !u!1 &694553497
 GameObject:
   m_ObjectHideFlags: 0

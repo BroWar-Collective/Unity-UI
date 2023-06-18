@@ -2,6 +2,9 @@
 
 namespace BroWar.UI.Management
 {
+    /// <summary>
+    /// Manager responsible for maintaining UI-related features.
+    /// </summary>
     public interface IUiManager
     {
         /// <summary>

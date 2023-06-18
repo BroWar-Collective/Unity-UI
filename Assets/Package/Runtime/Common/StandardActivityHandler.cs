@@ -3,7 +3,7 @@
 namespace BroWar.UI.Common
 {
     [Serializable]
-    public class DefaultActivityHandler : IActivityHandler
+    public class StandardActivityHandler : IActivityHandler
     {
         public void Show(IHidableObject target)
         {

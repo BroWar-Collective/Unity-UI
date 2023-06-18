@@ -1,14 +1,18 @@
 ﻿using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 namespace BroWar.UI.Common
 {
     using BroWar.UI.Animation;
 
-    //TODO: rename
+    /// <summary>
+    /// Animation-based activity handler.
+    /// </summary>
     [Serializable]
-    public class AnimationShowHideHandler : IActivityHandler
+    [MovedFrom(false, null, null, "AnimationShowHideHandler")]
+    public class AnimationActivityHandler : IActivityHandler
     {
         [Title("Animations")]
         [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
