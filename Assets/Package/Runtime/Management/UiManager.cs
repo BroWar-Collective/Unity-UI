@@ -14,7 +14,7 @@ namespace BroWar.UI.Management
         //this can be easily transferred into pure interface-based approach
 
         /// <inheritdoc cref="IUiManager.Handlers" />
-        [SerializeField, ReorderableList(HasLabels = false, Foldable = true)]
+        [SerializeField, ReorderableList(HasLabels = false, Foldable = true), InLineEditor]
         private UiHandlerBehaviour[] handlers;
 
         private void OnEnable()
