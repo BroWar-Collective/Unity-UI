@@ -26,6 +26,11 @@ namespace BroWar.UI.Tooltip
         private ITooltipHandler tooltipHandler;
         private Sequence sequence;
 
+        private void OnDisable()
+        {
+            ClearTooltip();
+        }
+
         protected virtual void ShowTooltip()
         {
             var tooltip = tooltipHandler.GetInstance(customPrefab);
@@ -72,7 +77,7 @@ namespace BroWar.UI.Tooltip
             sequence = DOTween.Sequence();
             sequence.AppendInterval(offsetTime);
             sequence.AppendCallback(ShowTooltip);
-            return false;
+            return true;
         }
 
         public void ClearTooltip()

@@ -15,19 +15,19 @@ namespace BroWar.UI.Input
         [SerializeField, NotNull]
         private InputSystemUIInputModule inputModule;
 
-        public Vector2 PointerPosition
+        public Vector2? PointerPosition
         {
             get
             {
                 if (inputModule == null)
                 {
-                    return Vector2.zero;
+                    return null;
                 }
 
                 var pointAction = inputModule.point;
                 if (pointAction == null)
                 {
-                    return Vector2.zero;
+                    return null;
                 }
 
                 return pointAction.action.ReadValue<Vector2>();

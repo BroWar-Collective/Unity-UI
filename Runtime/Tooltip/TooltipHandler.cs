@@ -34,20 +34,6 @@ namespace BroWar.UI.Tooltip
             ActiveTooltip.Show();
         }
 
-        //TODO: better support for defining custom positioning behaviour
-        private Vector2 GetTooltipPosition(TooltipPositioningType positioningType)
-        {
-            switch (positioningType)
-            {
-                case TooltipPositioningType.Pointer:
-                    return PointerPosition;
-                case TooltipPositioningType.Static:
-                    break;
-            }
-
-            return Vector2.zero;
-        }
-
         [Inject]
         internal void Inject(IUiInputHandler inputHandler)
         {
@@ -67,8 +53,7 @@ namespace BroWar.UI.Tooltip
                 return;
             }
 
-            var positioningType = activeTooltip.PositioningType;
-            var position = GetTooltipPosition(positioningType);
+            var position = PointerPosition;
             activeTooltip.UpdatePosition(position);
         }
 
@@ -85,7 +70,7 @@ namespace BroWar.UI.Tooltip
 
         public void ShowInstance(TooltipBehaviour instance, in TooltipData data)
         {
-            var position = GetTooltipPosition(data.positioningType);
+            var position = PointerPosition;
             instance.UpdatePositionAndData(position, in data);
             ShowInstance(instance);
         }
@@ -129,7 +114,7 @@ namespace BroWar.UI.Tooltip
             }
         }
 
-        private Vector2 PointerPosition
+        private Vector2? PointerPosition
         {
             get => inputHandler.PointerPosition;
         }
