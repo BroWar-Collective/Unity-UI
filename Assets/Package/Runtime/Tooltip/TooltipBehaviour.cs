@@ -20,15 +20,27 @@ namespace BroWar.UI.Tooltip
         private TooltipData defaultData;
         private TooltipData currentData;
 
-        public void UpdatePositionAndData(Vector2 position)
+        private Vector2 GetScreenPosition(Vector2? pointerPosition)
+        {
+            var positioner = currentData.positioner;
+            if (positioner != null)
+            {
+                return positioner.GetScreenPosition(pointerPosition);
+            }
+            else
+            {
+                return pointerPosition ?? Vector2.zero;
+            }
+        }
+
+        public void UpdatePositionAndData(Vector2? position)
         {
             UpdatePositionAndData(position, in defaultData);
         }
 
-        public void UpdatePositionAndData(Vector2 position, in TooltipData data)
+        public void UpdatePositionAndData(Vector2? position, in TooltipData data)
         {
             currentData = data;
-            PositioningType = data.positioningType;
             contentGroup.childAlignment = data.childAlignment;
             UpdatePosition(position);
         }
@@ -38,8 +50,10 @@ namespace BroWar.UI.Tooltip
             contentText.SetText(content);
         }
 
-        public virtual void UpdatePosition(Vector2 screenPosition)
+        public virtual void UpdatePosition(Vector2? pointerPosition)
         {
+            var screenPosition = GetScreenPosition(pointerPosition);
+
             var rect = RectTransform.rect;
             var w = Screen.width;
             var h = Screen.height;
@@ -56,7 +70,5 @@ namespace BroWar.UI.Tooltip
         /// Used internally by the tooltip system.
         /// </summary>
         internal int InstanceId { get; set; }
-
-        internal TooltipPositioningType PositioningType { get; private set; }
     }
 }

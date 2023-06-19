@@ -3,12 +3,14 @@ using UnityEngine;
 
 namespace BroWar.UI.Tooltip
 {
+    //TODO: replace it with SO-based settings
     [Serializable]
-    public struct TooltipData
+    public class TooltipData
     {
         public Vector2 positionOffset;
         public Vector2 positionPivot;
         public TextAnchor childAlignment;
-        public TooltipPositioningType positioningType;
+        [SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
+        public ITooltipPositioner positioner;
     }
 }

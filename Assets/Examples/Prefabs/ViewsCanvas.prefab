@@ -151,11 +151,18 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0}
     positionPivot: {x: 0, y: 0}
     childAlignment: 0
-    positioningType: 0
+    positioner:
+      id: 0
   offsetTime: 0.3
   customPrefab: {fileID: 0}
   tooltipContent: Lorem Ipsum Lorem Ipsum Lorem IpsumLorem IpsumLorem Ipsum Lorem
     Ipsum Lorem Ipsum
+  references:
+    version: 1
+    00000000:
+      type: {class: PointerTooltipPositioner, ns: BroWar.UI.Tooltip.Positioners, asm: BroWar.UI}
+      data:
+        target: {fileID: 6313451103944410157}
 --- !u!1 &993745985610675012
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +173,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3018366966499669632}
   - component: {fileID: 5268522292234815016}
-  - component: {fileID: 6131003740434040639}
   - component: {fileID: 358488533299437210}
   - component: {fileID: 804848496138390356}
   m_Layer: 5
@@ -186,7 +192,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5290454972796849275}
   m_Father: {fileID: 6823635389694212386}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -203,36 +210,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993745985610675012}
   m_CullTransparentMesh: 1
---- !u!114 &6131003740434040639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 993745985610675012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &358488533299437210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,12 +222,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ce93798a6d3944d962161ceef610a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showHideHandler:
+  activityHandler:
     id: 0
   references:
     version: 1
     00000000:
-      type: {class: AnimationShowHideHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
+      type: {class: AnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
       data:
         showAnimationContext:
           id: 1
@@ -339,7 +316,7 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: AnimationShowHideHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
+      type: {class: AnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
       data:
         showAnimationContext:
           id: 1
@@ -640,12 +617,17 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0}
     positionPivot: {x: 0, y: 0}
     childAlignment: 0
-    positioningType: 0
+    positioner:
+      id: 0
   offsetTime: 0
   customPrefab: {fileID: 0}
   tooltipContent: 'Lorem Ipsum Lorem Ipsum
 
     Lorem Ipsum Lorem Ipsum'
+  references:
+    version: 1
+    00000000:
+      type: {class: , ns: , asm: }
 --- !u!1 &6334383522155979260
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,11 +880,16 @@ MonoBehaviour:
     positionOffset: {x: 10, y: -10}
     positionPivot: {x: 0, y: 1}
     childAlignment: 0
-    positioningType: 0
+    positioner:
+      id: 0
   offsetTime: 0.3
   customPrefab: {fileID: 8332164750516034109, guid: 5904c075d402f554595809c8228b176c, type: 3}
   tooltipContent: Lorem Ipsum Lorem Ipsum Lorem IpsumLorem IpsumLorem Ipsum Lorem
     Ipsum Lorem Ipsum
+  references:
+    version: 1
+    00000000:
+      type: {class: , ns: , asm: }
 --- !u!1 &6334383522781897167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1043,8 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0}
     positionPivot: {x: 1, y: 1}
     childAlignment: 2
-    positioningType: 0
+    positioner:
+      id: 0
   offsetTime: 0
   customPrefab: {fileID: 0}
   tooltipContent: 'Lorem Ipsum
@@ -1071,6 +1059,10 @@ MonoBehaviour:
     Ipsum
 
     Lorem Ipsum'
+  references:
+    version: 1
+    00000000:
+      type: {class: , ns: , asm: }
 --- !u!1 &6334383523194568941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,7 +1483,7 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: AnimationShowHideHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
+      type: {class: AnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
       data:
         showAnimationContext:
           id: 1
@@ -1634,12 +1626,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ce93798a6d3944d962161ceef610a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showHideHandler:
+  activityHandler:
     id: 0
   references:
     version: 1
     00000000:
-      type: {class: AnimationShowHideHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
+      type: {class: AnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
       data:
         showAnimationContext:
           id: 1
@@ -1659,3 +1651,106 @@ MonoBehaviour:
         direction: 0
         ease: 9
         duration: 2
+--- !u!1 &9142699178866086100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5290454972796849275}
+  - component: {fileID: 8968439141928891275}
+  - component: {fileID: 7952962886966420159}
+  - component: {fileID: 240311555637736970}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5290454972796849275
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9142699178866086100}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3018366966499669632}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8968439141928891275
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9142699178866086100}
+  m_CullTransparentMesh: 1
+--- !u!114 &7952962886966420159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9142699178866086100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &240311555637736970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9142699178866086100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dec881e59aea57459fb9c4b127f70ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    positionOffset: {x: 0, y: 0}
+    positionPivot: {x: 0, y: 0}
+    childAlignment: 0
+    positioner:
+      id: 0
+  offsetTime: 0
+  customPrefab: {fileID: 0}
+  tooltipContent: Lorem Ipsum Lorem Ipsum Lorem Ipsum
+  references:
+    version: 1
+    00000000:
+      type: {class: StaticTooltipPositioner, ns: BroWar.UI.Tooltip.Positioners, asm: BroWar.UI}
+      data:
+        target: {fileID: 5290454972796849275}

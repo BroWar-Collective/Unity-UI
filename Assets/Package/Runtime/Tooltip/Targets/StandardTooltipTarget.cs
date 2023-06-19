@@ -6,6 +6,7 @@ namespace BroWar.UI.Tooltip.Targets
     [AddComponentMenu("BroWar/UI/Tooltip/Tooltip Target")]
     public class StandardTooltipTarget : TooltipTarget<TooltipBehaviour>
     {
+        [Title("Content")]
         [SerializeField, TextArea(4, 8)]
         private string tooltipContent;
 
