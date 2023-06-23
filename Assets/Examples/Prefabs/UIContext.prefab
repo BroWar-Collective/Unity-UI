@@ -445,7 +445,7 @@ MonoBehaviour:
   - showOnInitialize: 1
     showImmediately: 0
     view: {fileID: 1114633846218482264}
-  - showOnInitialize: 0
+  - showOnInitialize: 1
     showImmediately: 1
     view: {fileID: 5751484812887521402}
 --- !u!114 &1114633846812842680
@@ -481,7 +481,7 @@ MonoBehaviour:
       type: {class: StandardTooltipFactory, ns: BroWar.UI.Tooltip.Factories, asm: BroWar.UI}
       data:
         parent: {fileID: 1114633844921038927}
-        defaultPrefab: {fileID: 2888309395328228474, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
+        defaultPrefab: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
 --- !u!1001 &6386027113086876369
 PrefabInstance:
   m_ObjectHideFlags: 0

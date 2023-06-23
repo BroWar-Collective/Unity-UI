@@ -22,18 +22,6 @@ namespace BroWar.UI.Tooltip
 
         private IUiInputHandler inputHandler;
 
-        private void ShowTooltip(TooltipBehaviour tooltip)
-        {
-            if (tooltip == null)
-            {
-                LogHandler.Log("[UI][Tooltip] Cannot show tooltip. Instance is null.", LogType.Error);
-                return;
-            }
-
-            ActiveTooltip = tooltip;
-            ActiveTooltip.Show();
-        }
-
         [Inject]
         internal void Inject(IUiInputHandler inputHandler)
         {
@@ -68,28 +56,38 @@ namespace BroWar.UI.Tooltip
             return factory.Create<T>(tooltipPrefab);
         }
 
-        public void ShowInstance(TooltipBehaviour instance, in TooltipData data)
+        public TooltipBehaviour ShowDefault(TooltipData data)
         {
-            var position = PointerPosition;
-            instance.UpdatePositionAndData(position, in data);
-            ShowInstance(instance);
+            return ShowTooltip<TooltipBehaviour>(data, null);
         }
 
-        public void ShowInstance(TooltipBehaviour instance)
+        public T ShowTooltip<T>(TooltipData data, T tooltipPrefab) where T : TooltipBehaviour
         {
+            var instance = GetInstance(tooltipPrefab);
+            ShowTooltip(instance, data);
+            return instance;
+        }
+
+        public void ShowTooltip(TooltipBehaviour instance, TooltipData data)
+        {
+            //TODO: move it to the main method
+            instance.Prepare(data);
             ShowTooltip(instance);
         }
 
-        public TooltipBehaviour ShowDefault(in TooltipData data)
+        public void ShowTooltip(TooltipBehaviour instance)
         {
-            return ShowTooltip<TooltipBehaviour>(in data, null);
-        }
+            if (instance == null)
+            {
+                LogHandler.Log("[UI][Tooltip] Cannot show tooltip. Instance is null.", LogType.Error);
+                return;
+            }
 
-        public T ShowTooltip<T>(in TooltipData data, T tooltipPrefab) where T : TooltipBehaviour
-        {
-            var instance = GetInstance(tooltipPrefab);
-            ShowInstance(instance, in data);
-            return instance;
+            HideTooltip();
+            ActiveTooltip = instance; 
+            var position = PointerPosition;
+            ActiveTooltip.UpdatePosition(position);
+            ActiveTooltip.Show();
         }
 
         public void HideTooltip()

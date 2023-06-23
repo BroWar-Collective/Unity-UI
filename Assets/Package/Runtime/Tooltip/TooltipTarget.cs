@@ -41,7 +41,7 @@ namespace BroWar.UI.Tooltip
             }
 
             UpdateContent(tooltip);
-            tooltipHandler.ShowInstance(tooltip, in data);
+            tooltipHandler.ShowTooltip(tooltip, data);
         }
 
         protected virtual void HideTooltip()
