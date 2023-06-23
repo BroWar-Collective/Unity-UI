@@ -9,10 +9,10 @@
         /// Returns runtime <see cref="TooltipBehaviour"/> instance based on the given prefab.
         /// </summary>
         T GetInstance<T>(T tooltipPrefab) where T : TooltipBehaviour;
-        void ShowInstance(TooltipBehaviour instance, in TooltipData data);
-        void ShowInstance(TooltipBehaviour instance);
-        TooltipBehaviour ShowDefault(in TooltipData data);
-        T ShowTooltip<T>(in TooltipData data, T tooltipPrefab) where T : TooltipBehaviour;
+        TooltipBehaviour ShowDefault(TooltipData data);
+        T ShowTooltip<T>(TooltipData data, T tooltipPrefab) where T : TooltipBehaviour;
+        void ShowTooltip(TooltipBehaviour instance, TooltipData data);
+        void ShowTooltip(TooltipBehaviour instance);
         /// <summary>
         /// Hides currently active <see cref="TooltipBehaviour"/>.
         /// </summary>

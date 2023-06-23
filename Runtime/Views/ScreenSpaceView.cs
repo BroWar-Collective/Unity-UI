@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 
 namespace BroWar.UI.Views
 {
@@ -21,7 +22,8 @@ namespace BroWar.UI.Views
         [SerializeField, NotNull]
         private Canvas canvas;
         [SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
-        private IActivityHandler showHideHandler;
+        [FormerlySerializedAs("showHideHandler")]
+        private IActivityHandler activityHandler;
 
         private CanvasGroup group;
 
@@ -42,13 +44,13 @@ namespace BroWar.UI.Views
 
         public override void Show(bool immediately, Action onFinish = null)
         {
-            if (showHideHandler == null)
+            if (activityHandler == null)
             {
                 base.Show(immediately, onFinish);
                 return;
             }
 
-            showHideHandler.Show(this, immediately, onFinish);
+            activityHandler.Show(this, immediately, onFinish);
             foreach (var panel in panels)
             {
                 panel.Show(immediately);
@@ -57,13 +59,13 @@ namespace BroWar.UI.Views
 
         public override void Hide(bool immediately, Action onFinish = null)
         {
-            if (showHideHandler == null)
+            if (activityHandler == null)
             {
                 base.Hide(immediately, onFinish);
                 return;
             }
 
-            showHideHandler.Hide(this, immediately, onFinish);
+            activityHandler.Hide(this, immediately, onFinish);
             foreach (var panel in panels)
             {
                 panel.Hide(immediately);
@@ -84,7 +86,7 @@ namespace BroWar.UI.Views
         }
 
         public IReadOnlyList<UiPanel> Panels => panels;
-        public override bool Shows => showHideHandler?.Shows ?? false;
-        public override bool Hides => showHideHandler?.Hides ?? false;
+        public override bool Shows => activityHandler?.Shows ?? false;
+        public override bool Hides => activityHandler?.Hides ?? false;
     }
 }

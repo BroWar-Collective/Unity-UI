@@ -34,10 +34,10 @@ RectTransform:
   m_Father: {fileID: 3359148382322358972}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 45.945, y: -12.825}
-  m_SizeDelta: {x: 91.89, y: 25.65}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3359148380560781351
 CanvasRenderer:
@@ -135,10 +135,10 @@ RectTransform:
   m_Father: {fileID: 3359148380560781348}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 45.945, y: -12.825}
-  m_SizeDelta: {x: 81.89, y: 15.65}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3359148381745167696
 CanvasRenderer:
@@ -248,14 +248,14 @@ GameObject:
   - component: {fileID: 3359148382322358972}
   - component: {fileID: 3359148382322358974}
   - component: {fileID: 3359148382322358973}
-  - component: {fileID: 2888309395328228474}
+  - component: {fileID: 7452575055888138041}
   m_Layer: 5
   m_Name: Tooltip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3359148382322358972
 RectTransform:
   m_ObjectHideFlags: 0
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &2888309395328228474
+--- !u!114 &7452575055888138041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -325,13 +325,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3359148382322358947}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11a37fad72ceeda499241e5ebf74139a, type: 3}
+  m_Script: {fileID: 11500000, guid: f849bab183e086841801d2f79a7618c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contentGroup: {fileID: 3359148382322358973}
-  contentRect: {fileID: 3359148380560781348}
-  contentText: {fileID: 3359148381745167703}
   defaultData:
     positionOffset: {x: 0, y: 0}
     positionPivot: {x: 0, y: 0}
     childAlignment: 0
+    positioner:
+      id: 0
+  contentRect: {fileID: 3359148382322358972}
+  contentText: {fileID: 3359148381745167703}
+  contentGroup: {fileID: 3359148382322358973}
+  references:
+    version: 1
+    00000000:
+      type: {class: , ns: , asm: }

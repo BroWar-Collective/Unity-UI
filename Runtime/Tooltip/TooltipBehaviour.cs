@@ -1,24 +1,22 @@
-﻿using TMPro;
+﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace BroWar.UI.Tooltip
 {
     /// <summary>
-    /// In-game tooltip representation.
+    /// Basic in-game tooltip representation.
     /// </summary>
-    [AddComponentMenu("BroWar/UI/Tooltip/Tooltip Behaviour")]
-    public class TooltipBehaviour : UiObject
+    [AddComponentMenu("BroWar/UI/Tooltip/Behaviours/Tooltip Behaviour (Basic)")]
+    public class TooltipBehaviour : UiObject, IDisposable
     {
-        [SerializeField, NotNull]
-        private LayoutGroup contentGroup;
-        [SerializeField, NotNull]
-        private RectTransform contentRect;
-        [SerializeField, NotNull]
-        private TextMeshProUGUI contentText;
+        [Title("Data")]
         [SerializeField]
         private TooltipData defaultData;
         private TooltipData currentData;
+
+        [Title("Content")]
+        [SerializeField, NotNull]
+        private RectTransform contentRect;
 
         private Vector2 GetScreenPosition(Vector2? pointerPosition)
         {
@@ -33,21 +31,23 @@ namespace BroWar.UI.Tooltip
             }
         }
 
-        public void UpdatePositionAndData(Vector2? position)
+        protected virtual void OnDataUpdate(TooltipData data)
+        { }
+
+        public void Prepare()
         {
-            UpdatePositionAndData(position, in defaultData);
+            Prepare(defaultData);
         }
 
-        public void UpdatePositionAndData(Vector2? position, in TooltipData data)
+        public virtual void Prepare(TooltipData data)
         {
             currentData = data;
-            contentGroup.childAlignment = data.childAlignment;
-            UpdatePosition(position);
+            OnDataUpdate(data);
         }
 
-        public virtual void UpdateContent(string content)
+        public virtual void Dispose()
         {
-            contentText.SetText(content);
+            currentData = null;
         }
 
         public virtual void UpdatePosition(Vector2? pointerPosition)
