@@ -31,17 +31,28 @@ namespace BroWar.UI.Tooltip
             }
         }
 
+        private void ValiateScreenPosition(ref Vector2 screenPosition, out Vector2 pivot)
+        {
+            var rect = RectTransform.rect;
+            var w = Screen.width;
+            var h = Screen.height;
+            pivot = currentData.positionPivot;
+            screenPosition += currentData.positionOffset;
+            screenPosition.x = Mathf.Clamp(screenPosition.x, rect.width * pivot.x, w - rect.width * (1.0f - pivot.x));
+            screenPosition.y = Mathf.Clamp(screenPosition.y, rect.height * pivot.y, h - rect.height * (1.0f - pivot.y));
+        }
+
         protected virtual void OnDataUpdate(TooltipData data)
         { }
 
         public void Prepare()
         {
-            Prepare(defaultData);
+            Prepare(null);
         }
 
         public virtual void Prepare(TooltipData data)
         {
-            currentData = data;
+            currentData = data ?? defaultData;
             OnDataUpdate(data);
         }
 
@@ -53,14 +64,7 @@ namespace BroWar.UI.Tooltip
         public virtual void UpdatePosition(Vector2? pointerPosition)
         {
             var screenPosition = GetScreenPosition(pointerPosition);
-
-            var rect = RectTransform.rect;
-            var w = Screen.width;
-            var h = Screen.height;
-            var pivot = currentData.positionPivot;
-            screenPosition += currentData.positionOffset;
-            screenPosition.x = Mathf.Clamp(screenPosition.x, rect.width * pivot.x, w - rect.width * (1.0f - pivot.x));
-            screenPosition.y = Mathf.Clamp(screenPosition.y, rect.height * pivot.y, h - rect.height * (1.0f - pivot.y));
+            ValiateScreenPosition(ref screenPosition, out var pivot);
             RectTransform.pivot = pivot;
             RectTransform.position = screenPosition;
         }

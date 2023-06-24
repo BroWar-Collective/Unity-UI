@@ -9,7 +9,13 @@ namespace BroWar.UI.Tooltip.Positioners
 
         public Vector2 GetScreenPosition(Vector2? pointerPosition)
         {
-            return pointerPosition ?? Vector2.zero;
+            if (pointerPosition.HasValue)
+            {
+                return pointerPosition.Value;
+            }
+
+            var worldPosition = target.position;
+            return new Vector2(worldPosition.x, worldPosition.y);
         }
     }
 }

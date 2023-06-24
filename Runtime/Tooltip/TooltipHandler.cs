@@ -68,14 +68,12 @@ namespace BroWar.UI.Tooltip
             return instance;
         }
 
-        public void ShowTooltip(TooltipBehaviour instance, TooltipData data)
+        public void ShowTooltip(TooltipBehaviour instance)
         {
-            //TODO: move it to the main method
-            instance.Prepare(data);
-            ShowTooltip(instance);
+            ShowTooltip(instance, null);
         }
 
-        public void ShowTooltip(TooltipBehaviour instance)
+        public void ShowTooltip(TooltipBehaviour instance, TooltipData data)
         {
             if (instance == null)
             {
@@ -84,8 +82,10 @@ namespace BroWar.UI.Tooltip
             }
 
             HideTooltip();
-            ActiveTooltip = instance; 
+
             var position = PointerPosition;
+            ActiveTooltip = instance;
+            ActiveTooltip.Prepare(data);
             ActiveTooltip.UpdatePosition(position);
             ActiveTooltip.Show();
         }
