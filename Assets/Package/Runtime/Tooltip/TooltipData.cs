@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace BroWar.UI.Tooltip
 {
-    //TODO: replace it with SO-based settings (?)
     [Serializable]
     public class TooltipData
     {

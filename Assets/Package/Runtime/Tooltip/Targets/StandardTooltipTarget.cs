@@ -12,7 +12,7 @@ namespace BroWar.UI.Tooltip.Targets
         [SerializeField, TextArea(4, 8)]
         private string tooltipContent;
 
-        protected override void UpdateContent(StandardTooltipBehaviour tooltip)
+        protected override void OnTooltipCreated(StandardTooltipBehaviour tooltip)
         {
             tooltip.UpdateContent(tooltipContent);
             var transform = tooltip.RectTransform;

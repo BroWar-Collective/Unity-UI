@@ -40,7 +40,7 @@ namespace BroWar.UI.Tooltip
                 return;
             }
 
-            UpdateContent(tooltip);
+            OnTooltipCreated(tooltip);
             tooltipHandler.ShowTooltip(tooltip, data);
         }
 
@@ -49,7 +49,7 @@ namespace BroWar.UI.Tooltip
             tooltipHandler.HideTooltip();
         }
 
-        protected abstract void UpdateContent(T tooltip);
+        protected abstract void OnTooltipCreated(T tooltip);
 
         [Inject]
         internal void Inject(ITooltipHandler tooltipHandler)
