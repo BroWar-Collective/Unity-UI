@@ -11,7 +11,7 @@ namespace BroWar.UI.Views
     [AddComponentMenu("BroWar/UI/Views/Views Handler")]
     public class ViewsHandler : UiHandlerBehaviour, IUiViewsHandler
     {
-        protected readonly Dictionary<Type, UiView> viewsByTypes = new Dictionary<Type, UiView>();
+        protected readonly IDictionary<Type, UiView> viewsByTypes = new Dictionary<Type, UiView>();
         protected readonly List<UiView> activeViews = new List<UiView>();
 
         [SerializeField]

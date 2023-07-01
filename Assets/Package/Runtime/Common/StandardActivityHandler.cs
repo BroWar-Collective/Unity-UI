@@ -5,23 +5,23 @@ namespace BroWar.UI.Common
     [Serializable]
     public class StandardActivityHandler : IActivityHandler
     {
-        public void Show(IHidableObject target)
+        public void Show(IActivityTarget target)
         {
             Show(target, false);
         }
 
-        public void Hide(IHidableObject target)
+        public void Hide(IActivityTarget target)
         {
             Hide(target, false);
         }
 
-        public void Show(IHidableObject target, bool immediately, Action onFinish = null)
+        public void Show(IActivityTarget target, bool immediately, Action onFinish = null)
         {
             target.Show();
             onFinish?.Invoke();
         }
 
-        public void Hide(IHidableObject target, bool immediately, Action onFinish = null)
+        public void Hide(IActivityTarget target, bool immediately, Action onFinish = null)
         {
             target.Hide();
             onFinish?.Invoke();

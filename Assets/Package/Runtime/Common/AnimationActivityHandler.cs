@@ -57,25 +57,27 @@ namespace BroWar.UI.Common
 
         private Sequence GetShowSequence()
         {
+            UnityEngine.Debug.LogError(showAnimationContext);
             return showAnimationContext?.GetSequence();
         }
 
         private Sequence GetHideSequence()
         {
+            UnityEngine.Debug.LogError(hideAnimationContext);
             return hideAnimationContext?.GetSequence();
         }
 
-        public void Show(IHidableObject target)
+        public void Show(IActivityTarget target)
         {
             Show(target, false);
         }
 
-        public void Hide(IHidableObject target)
+        public void Hide(IActivityTarget target)
         {
             Hide(target, false);
         }
 
-        public void Show(IHidableObject target, bool immediately, Action onFinish = null)
+        public void Show(IActivityTarget target, bool immediately, Action onFinish = null)
         {
             target.Show();
             ResetAnimation();
@@ -101,7 +103,7 @@ namespace BroWar.UI.Common
             }
         }
 
-        public void Hide(IHidableObject target, bool immediately, Action onFinish = null)
+        public void Hide(IActivityTarget target, bool immediately, Action onFinish = null)
         {
             ResetAnimation();
             sequence = GetHideSequence();
