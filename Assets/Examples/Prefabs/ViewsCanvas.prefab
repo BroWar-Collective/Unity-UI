@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 7256615792312014793}
-  showHideHandler:
+  activityHandler:
     id: 0
   nestedPanels:
   - {fileID: 8104924854886270078}
@@ -883,7 +883,7 @@ MonoBehaviour:
     positioner:
       id: 0
   offsetTime: 0.3
-  customPrefab: {fileID: 8332164750516034109, guid: 5904c075d402f554595809c8228b176c, type: 3}
+  customPrefab: {fileID: 4384324749155268990, guid: 5904c075d402f554595809c8228b176c, type: 3}
   tooltipContent: Lorem Ipsum Lorem Ipsum Lorem IpsumLorem IpsumLorem Ipsum Lorem
     Ipsum Lorem Ipsum
   references:
@@ -1478,7 +1478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 6334383523745798280}
-  showHideHandler:
+  activityHandler:
     id: 0
   references:
     version: 1
@@ -1490,14 +1490,14 @@ MonoBehaviour:
         hideAnimationContext:
           id: 2
     00000001:
-      type: {class: MultipleAnimationsContext, ns: BroWar.UI.Animation, asm: BroWar.UI}
+      type: {class: GroupAnimationsContext, ns: BroWar.UI.Animation, asm: BroWar.UI}
       data:
         nestedContexts:
         - id: 3
         - id: 4
         parallel: 1
     00000002:
-      type: {class: MultipleAnimationsContext, ns: BroWar.UI.Animation, asm: BroWar.UI}
+      type: {class: GroupAnimationsContext, ns: BroWar.UI.Animation, asm: BroWar.UI}
       data:
         nestedContexts:
         - id: 5
