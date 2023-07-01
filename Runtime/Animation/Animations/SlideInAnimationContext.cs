@@ -34,13 +34,13 @@ namespace BroWar.UI.Animation.Animations
                 return sequence;
             }
 
-            //sequence = AnimationUtility.SlideIn(sequence, transform, direction, ease, duration);
-            //if (invert)
-            //{
-            //    sequence.SetInverted();
-            //}
+            sequence = AnimationUtility.SlideIn(sequence, transform, direction, ease, duration);
+            if (invert)
+            {
+                sequence.SetInverted();
+            }
 
-            return AnimationUtility.SlideIn(sequence, transform, direction, ease, duration);
+            return sequence;
         }
     }
 }

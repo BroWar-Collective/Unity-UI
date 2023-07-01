@@ -57,13 +57,11 @@ namespace BroWar.UI.Common
 
         private Sequence GetShowSequence()
         {
-            UnityEngine.Debug.LogError(showAnimationContext);
             return showAnimationContext?.GetSequence();
         }
 
         private Sequence GetHideSequence()
         {
-            UnityEngine.Debug.LogError(hideAnimationContext);
             return hideAnimationContext?.GetSequence();
         }
 
