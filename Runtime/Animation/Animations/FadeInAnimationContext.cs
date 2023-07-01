@@ -28,7 +28,6 @@ namespace BroWar.UI.Animation.Animations
                 return sequence;
             }
 
-            //TODO: From
             sequence.Append(group.DOFade(1.0f, duration));
             return sequence;
         }

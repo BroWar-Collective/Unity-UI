@@ -97,8 +97,12 @@ namespace BroWar.UI.Tooltip
                 return;
             }
 
-            ActiveTooltip.Hide();
-            factory.Dispose(ActiveTooltip);
+            var tooltip = ActiveTooltip;
+            tooltip.Hide(false, () =>
+            {
+                factory.Dispose(tooltip);
+            });
+
             ActiveTooltip = null;
         }
 
