@@ -2,7 +2,7 @@
 
 namespace BroWar.UI
 {
-    public interface IHidableObject
+    public interface IActivityTarget
     {
         event Action OnShow;
         event Action OnHide;

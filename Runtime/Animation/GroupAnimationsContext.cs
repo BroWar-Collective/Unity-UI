@@ -1,11 +1,12 @@
 ﻿using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 namespace BroWar.UI.Animation
 {
-    [Serializable]
-    public class MultipleAnimationsContext : IAnimationContext
+    [Serializable, MovedFrom(false, null, null, "MultipleAnimationsContext")]
+    public class GroupAnimationsContext : IAnimationContext
     {
         [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
         [ReorderableList(Foldable = true)]

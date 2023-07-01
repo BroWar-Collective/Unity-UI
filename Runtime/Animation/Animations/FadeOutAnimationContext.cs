@@ -24,7 +24,7 @@ namespace BroWar.UI.Animation.Animations
         {
             if (group == null)
             {
-                LogHandler.Log($"[UI] {nameof(CanvasGroup)} not available.", LogType.Warning);
+                LogHandler.Log($"[UI][Animation] {nameof(CanvasGroup)} not available.", LogType.Warning);
                 return sequence;
             }
 

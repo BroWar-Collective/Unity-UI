@@ -8,7 +8,7 @@ namespace BroWar.UI
     /// Contains basic API for hiding/showing.
     /// </summary>
     [DisallowMultipleComponent, RequireComponent(typeof(RectTransform))]
-    public abstract class UiObject : MonoBehaviour, IHidableObject
+    public abstract class UiObject : MonoBehaviour, IActivityTarget
     {
         private RectTransform rectTransform;
 

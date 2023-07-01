@@ -31,6 +31,9 @@ namespace BroWar.UI.Views
         {
             base.OnInitialize(data);
             Assert.IsNotNull(canvas, $"[UI][View] {nameof(Canvas)} is not availabe.");
+            var renderMode = canvas.renderMode;
+            var isScreenSpace = renderMode == RenderMode.ScreenSpaceOverlay || renderMode == RenderMode.ScreenSpaceCamera;
+            Assert.IsTrue(isScreenSpace, $"[UI][View] Invalid Render Mode - {renderMode}.");
 
             panels.Clear();
             var camera = data?.UiCamera;

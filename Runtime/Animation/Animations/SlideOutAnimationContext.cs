@@ -17,6 +17,8 @@ namespace BroWar.UI.Animation.Animations
         private Ease ease = Ease.OutCubic;
         [SerializeField, Min(0)]
         private float duration = 1.0f;
+        [SerializeField]
+        private bool invert;
 
         public Sequence GetSequence()
         {
@@ -28,11 +30,17 @@ namespace BroWar.UI.Animation.Animations
         {
             if (transform == null)
             {
-                LogHandler.Log($"[UI] {nameof(RectTransform)} not available.", LogType.Warning);
+                LogHandler.Log($"[UI][Animation] {nameof(RectTransform)} not available.", LogType.Warning);
                 return sequence;
             }
 
-            return AnimationUtility.SlideOut(sequence, transform, direction, ease, duration);
+            //sequence = AnimationUtility.SlideIn(sequence, transform, direction, ease, duration);
+            //if (invert)
+            //{
+            //    sequence.SetInverted();
+            //}
+
+            return AnimationUtility.SlideIn(sequence, transform, direction, ease, duration);
         }
     }
 }
