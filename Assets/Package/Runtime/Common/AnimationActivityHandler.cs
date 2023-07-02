@@ -7,6 +7,8 @@ namespace BroWar.UI.Common
 {
     using BroWar.UI.Animation;
 
+    //TODO: possibility to define custom hide animation
+
     /// <summary>
     /// Animation-based activity handler.
     /// </summary>
@@ -23,6 +25,26 @@ namespace BroWar.UI.Common
         private IAnimationContext hideAnimationContext;
 
         private Sequence sequence;
+        private Tween animationTween;
+
+        private void BeginShowAnimation()
+        {
+            Shows = true;
+            Debug.LogError("BEGIN SHOW");
+        }
+
+        private void BeginHideAnimation()
+        {
+            Hides = true;
+            Debug.LogError("BEGIN HIDE");
+        }
+
+        private void CloseAnimation()
+        {
+            Shows = false;
+            Hides = false;
+            Debug.LogError("CLOSE");
+        }
 
         private void ResetAnimation()
         {
@@ -33,26 +55,32 @@ namespace BroWar.UI.Common
 
         private void StartShowAnimation()
         {
-            if (sequence == null)
+            if (animationTween == null)
             {
                 return;
             }
 
-            sequence.OnComplete(() => Shows = false);
-            sequence.Play();
+            //sequence.OnComplete(() => Shows = false);
+            //animationTween.Restart();
+            animationTween.PlayForward();
+            Debug.LogError("PLAY FORWARD");
             Shows = true;
+            Hides = false;
         }
 
         private void StartHideAnimation()
         {
-            if (sequence == null)
+            if (animationTween == null)
             {
                 return;
             }
 
-            sequence.OnComplete(() => Hides = false);
-            sequence.Play();
+            //sequence.OnComplete(() => Hides = false);
+            //animationTween.SmoothRewind();
+            animationTween.PlayBackwards();
+            Debug.LogError("REWIND");
             Hides = true;
+            Shows = false;
         }
 
         private Sequence GetShowSequence()
@@ -78,53 +106,71 @@ namespace BroWar.UI.Common
         public void Show(IActivityTarget target, bool immediately, Action onFinish = null)
         {
             target.Show();
-            ResetAnimation();
-            sequence = GetShowSequence();
-            if (sequence == null)
+
+            var tween = AnimationSequence;
+            if (tween == null || tween.IsComplete())
             {
                 onFinish?.Invoke();
                 return;
             }
 
-            sequence.AppendCallback(() =>
+            tween.OnComplete(() =>
             {
+                Debug.LogError("LOCAL ON COMPLETE");
+                CloseAnimation();
                 onFinish?.Invoke();
             });
 
+            StartShowAnimation();
             if (immediately)
             {
-                sequence.Complete(true);
-            }
-            else
-            {
-                StartShowAnimation();
+                tween.Complete(true);
+                Debug.LogError("COMPLETE IMMEDIETLY");
             }
         }
 
         public void Hide(IActivityTarget target, bool immediately, Action onFinish = null)
         {
-            ResetAnimation();
-            sequence = GetHideSequence();
-            if (sequence == null)
+            var tween = AnimationSequence;
+            if (tween == null)
             {
                 target.Hide();
                 onFinish?.Invoke();
                 return;
             }
 
-            sequence.AppendCallback(() =>
+            tween.OnRewind(() =>
             {
+                Debug.LogError("LOCAL ON COMPLETE");
+                CloseAnimation();
                 target.Hide();
                 onFinish?.Invoke();
             });
 
+            StartHideAnimation();
             if (immediately)
             {
-                sequence.Complete(true);
+                tween.GotoWithCallbacks(0);
+                Debug.LogError("COMPLETE IMMEDIETLY");
             }
-            else
+        }
+
+        private Tween AnimationSequence
+        {
+            get
             {
-                StartHideAnimation();
+                if (animationTween == null)
+                {
+                    animationTween = showAnimationContext?.CreateAnimationTween();
+                    animationTween.Pause();
+                    animationTween.SetAutoKill(false);
+                    //animationTween.OnPlay(BeginShowAnimation);
+                    //animationTween.OnRewind(CloseAnimation);
+                    //animationTween.OnComplete(CloseAnimation);
+                    animationTween.Complete();
+                }
+
+                return animationTween;
             }
         }
 

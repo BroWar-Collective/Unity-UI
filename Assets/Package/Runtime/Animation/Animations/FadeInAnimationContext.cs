@@ -28,8 +28,31 @@ namespace BroWar.UI.Animation.Animations
                 return sequence;
             }
 
-            sequence.Append(group.DOFade(1.0f, duration));
+            //DOTween.To(
+            //    () => group.alpha, 
+            //    (value) => 
+            //    {
+            //        group.alpha = value;
+            //        Debug.LogError("SET VALUE - " + value);
+            //    }, 1.0f, duration)
+            //    //.Pause()
+            //    .SetEase(Ease.InCubic)
+            //    .SetAutoKill(false);
+            //sequence.Append(group.DOFade(1.0f, duration).OnUpdate(() => Debug.LogError("ASDADS")));
             return sequence;
+        }
+
+        public Tween CreateAnimationTween()
+        {
+            return DOTween.To(
+                () => group.alpha,
+                (value) =>
+                {
+                    group.alpha = value;
+                    Debug.LogError("SET VALUE - " + value);
+                }, 1.0f, duration)
+                .From(0)
+                .SetEase(Ease.InCubic);
         }
     }
 }

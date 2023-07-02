@@ -264,6 +264,11 @@ MonoBehaviour:
   _parentNewObjectsUnderSceneContext: 0
   _contractNames: []
   _parentContractNames: []
+--- !u!225 &778132782 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 684838735, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
+  m_PrefabInstance: {fileID: 1114633845298320384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1145190369
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,6 +577,46 @@ PrefabInstance:
     - target: {fileID: 1114633844845556573, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114633846218482264, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
+      propertyPath: activityHandler.hideAnimationContext.nestedContexts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114633846218482264, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
+      propertyPath: activityHandler.showAnimationContext.nestedContexts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114633846218482264, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
+      propertyPath: activityHandler.hideAnimationContext.nestedContexts.Array.data[0]
+      value: BroWar.UI BroWar.UI.Animation.Animations.FadeOutAnimationContext
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114633846218482264, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
+      propertyPath: activityHandler.showAnimationContext.nestedContexts.Array.data[0]
+      value: BroWar.UI BroWar.UI.Animation.Animations.FadeInAnimationContext
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114633846218482264, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
+      propertyPath: activityHandler.hideAnimationContext.nestedContexts.Array.data[0].group
+      value: 
+      objectReference: {fileID: 778132782}
+    - target: {fileID: 1114633846218482264, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
+      propertyPath: activityHandler.showAnimationContext.nestedContexts.Array.data[0].group
+      value: 
+      objectReference: {fileID: 778132782}
+    - target: {fileID: 1114633846218482264, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
+      propertyPath: activityHandler.hideAnimationContext.nestedContexts.Array.data[0].duration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114633846218482264, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
+      propertyPath: activityHandler.showAnimationContext.nestedContexts.Array.data[0].duration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114633846812842677, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
+      propertyPath: contexts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114633846812842677, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
+      propertyPath: contexts.Array.data[0].showImmediately
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 747927d469bfdfd44b42c8f0e3872a78, type: 3}
