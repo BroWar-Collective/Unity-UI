@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
@@ -7,10 +8,12 @@ namespace BroWar.UI.Animation.Animations
     using BroWar.Common;
 
     [Serializable]
-    public class FadeOutAnimationContext : IAnimationContext
+    public class FadeAnimationContext : IAnimationContext
     {
         [SerializeField]
         private CanvasGroup group;
+        [SerializeField]
+        private AnimationCurve curve;
         [SerializeField, Min(0)]
         private float duration = 1.0f;
 
@@ -34,10 +37,10 @@ namespace BroWar.UI.Animation.Animations
 
         public Tween CreateAnimationTween(bool fromSequence)
         {
-            var tween = group.DOFade(0, duration);
+            var tween = group.DOFade(1, duration).SetEase(curve);
             if (fromSequence)
             {
-                tween.From(1);
+                tween.From(0);
             }
 
             return tween;

@@ -18,18 +18,13 @@ namespace BroWar.UI.Animation.Animations
         [SerializeField, Min(0)]
         private float duration = 1.0f;
 
-        public Tween CreateAnimationTween()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Sequence GetSequence()
+        public Sequence GetSequence(bool fromSequence)
         {
             var sequence = DOTween.Sequence();
-            return GetSequence(sequence);
+            return GetSequence(fromSequence, sequence);
         }
 
-        public Sequence GetSequence(Sequence sequence)
+        public Sequence GetSequence(bool fromSequence, Sequence sequence)
         {
             if (transform == null)
             {
@@ -37,7 +32,13 @@ namespace BroWar.UI.Animation.Animations
                 return sequence;
             }
 
-            return AnimationUtility.SlideOut(sequence, transform, direction, ease, duration);
+            sequence.Append(CreateAnimationTween(fromSequence));
+            return sequence;
+        }
+
+        public Tween CreateAnimationTween(bool fromSequence)
+        {
+            return AnimationUtility.CreateSlideOutTween(transform, direction, ease, duration, fromSequence);
         }
     }
 }

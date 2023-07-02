@@ -23,6 +23,21 @@ namespace BroWar.UI
         protected virtual void Awake()
         { }
 
+        protected virtual void OnDestroy()
+        {
+            ResetActivity();
+        }
+
+        protected virtual void OnValidate()
+        {
+            ResetActivity();
+        }
+
+        protected void ResetActivity()
+        {
+            activityHandler?.Dispose();
+        }
+
         public virtual void SetActive(bool value)
         {
             gameObject.SetActive(value);
@@ -96,6 +111,11 @@ namespace BroWar.UI
         /// Valid only for time-based operations, otherwise always <see langword="false"/>.
         /// </summary>
         public virtual bool Hides => activityHandler?.Hides ?? false;
+
+        /// <summary>
+        /// Indicates if <see cref="UiObject"/> is going to be activated or deactivated but in time.
+        /// </summary>
+        public bool IsActivityChanging => Shows || Hides;
 
         public bool IsActive => gameObject.activeSelf;
 

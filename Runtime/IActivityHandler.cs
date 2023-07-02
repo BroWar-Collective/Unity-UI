@@ -2,7 +2,7 @@
 
 namespace BroWar.UI
 {
-    public interface IActivityHandler
+    public interface IActivityHandler : IDisposable
     {
         void Show(IActivityTarget target);
         void Hide(IActivityTarget target);

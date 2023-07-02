@@ -4,8 +4,7 @@ namespace BroWar.UI.Animation
 {
     public interface IAnimationContext
     {
-        Sequence GetSequence();
-        Sequence GetSequence(Sequence sequence); 
-        Tween CreateAnimationTween();
+        Sequence GetSequence(bool fromSequence);
+        Sequence GetSequence(bool fromSequence, Sequence sequence);
     }
 }

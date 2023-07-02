@@ -8,19 +8,19 @@ namespace BroWar.UI.Animation
     [Serializable, MovedFrom(false, null, null, "MultipleAnimationsContext")]
     public class GroupAnimationsContext : IAnimationContext
     {
+        [SerializeField]
+        private bool parallel = true;
         [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
         [ReorderableList(Foldable = true)]
         private IAnimationContext[] nestedContexts;
-        [SerializeField]
-        private bool parallel = true;
 
-        public Sequence GetSequence()
+        public Sequence GetSequence(bool fromSequence)
         {
             var sequence = DOTween.Sequence();
-            return GetSequence(sequence);
+            return GetSequence(fromSequence, sequence);
         }
 
-        public Sequence GetSequence(Sequence sequence)
+        public Sequence GetSequence(bool fromSequence, Sequence sequence)
         {
             foreach (var context in nestedContexts)
             {
@@ -31,21 +31,16 @@ namespace BroWar.UI.Animation
 
                 if (parallel)
                 {
-                    var nestedSequence = context.GetSequence();
+                    var nestedSequence = context.GetSequence(fromSequence);
                     sequence.Join(nestedSequence);
                 }
                 else
                 {
-                    context.GetSequence(sequence);
+                    context.GetSequence(fromSequence, sequence);
                 }
             }
 
             return sequence;
-        }
-
-        public Tween CreateAnimationTween()
-        {
-            return nestedContexts[0].CreateAnimationTween();
         }
     }
 }
