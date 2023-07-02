@@ -227,22 +227,15 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: AnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
+      type: {class: SimpleAnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
       data:
-        showAnimationContext:
+        animationContext:
           id: 1
-        hideAnimationContext:
-          id: 2
     00000001:
       type: {class: FadeInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         group: {fileID: 804848496138390356}
-        duration: 2
-    00000002:
-      type: {class: FadeOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        group: {fileID: 804848496138390356}
-        duration: 2
+        duration: 0.75
 --- !u!225 &804848496138390356
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -307,16 +300,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ecab60534ec4844f958dc9f9385581a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 7256615792312014793}
   activityHandler:
     id: 0
+  canvas: {fileID: 7256615792312014793}
   nestedPanels:
   - {fileID: 8104924854886270078}
   - {fileID: 358488533299437210}
   references:
     version: 1
     00000000:
-      type: {class: AnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
+      type: {class: ComplexAnimationAcitivtyHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
       data:
         showAnimationContext:
           id: 1
@@ -334,7 +327,7 @@ MonoBehaviour:
       data:
         transform: {fileID: 2187782931675356647}
         direction: 0
-        ease: 9
+        ease: 8
         duration: 1
 --- !u!223 &7256615792312014793
 Canvas:
@@ -599,8 +592,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7620c3bac8b8210489ebe780450f32be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activityHandler:
+    id: 0
   labelIcon: {fileID: 6334383523482723051}
   labelText: {fileID: 6334383523607036154}
+  references:
+    version: 1
+    00000000:
+      type: {class: , ns: , asm: }
 --- !u!114 &6334383521685663071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1025,8 +1024,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7620c3bac8b8210489ebe780450f32be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activityHandler:
+    id: 0
   labelIcon: {fileID: 6334383523598463133}
   labelText: {fileID: 0}
+  references:
+    version: 1
+    00000000:
+      type: {class: , ns: , asm: }
 --- !u!114 &6334383522781897201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1477,55 +1482,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e967c8689c9b65d45ae30632fdbe54b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 6334383523745798280}
   activityHandler:
     id: 0
+  canvas: {fileID: 6334383523745798280}
   references:
     version: 1
     00000000:
-      type: {class: AnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
+      type: {class: SimpleAnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
       data:
-        showAnimationContext:
+        animationContext:
           id: 1
-        hideAnimationContext:
-          id: 2
     00000001:
       type: {class: GroupAnimationsContext, ns: BroWar.UI.Animation, asm: BroWar.UI}
       data:
+        parallel: 1
         nestedContexts:
+        - id: 2
         - id: 3
-        - id: 4
-        parallel: 1
     00000002:
-      type: {class: GroupAnimationsContext, ns: BroWar.UI.Animation, asm: BroWar.UI}
-      data:
-        nestedContexts:
-        - id: 5
-        - id: 6
-        parallel: 1
-    00000003:
       type: {class: SlideInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         transform: {fileID: 6334383523745798278}
         direction: 3
         ease: 9
         duration: 1
-    00000004:
-      type: {class: FadeInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
+    00000003:
+      type: {class: FadeAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         group: {fileID: 6386027112681158046}
-        duration: 1
-    00000005:
-      type: {class: SlideOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        transform: {fileID: 6334383523745798278}
-        direction: 2
-        ease: 9
-        duration: 1
-    00000006:
-      type: {class: FadeOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        group: {fileID: 6386027112681158046}
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 2
+            outSlope: 2
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
         duration: 1
 --- !u!223 &6334383523745798280
 Canvas:
@@ -1631,24 +1639,15 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: AnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
+      type: {class: SimpleAnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
       data:
-        showAnimationContext:
+        animationContext:
           id: 1
-        hideAnimationContext:
-          id: 2
     00000001:
       type: {class: SlideInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         transform: {fileID: 7290104650223497521}
         direction: 1
-        ease: 9
-        duration: 2
-    00000002:
-      type: {class: SlideOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        transform: {fileID: 7290104650223497521}
-        direction: 0
         ease: 9
         duration: 2
 --- !u!1 &9142699178866086100

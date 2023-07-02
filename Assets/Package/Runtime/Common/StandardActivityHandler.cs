@@ -27,6 +27,9 @@ namespace BroWar.UI.Common
             onFinish?.Invoke();
         }
 
+        public void Dispose()
+        { }
+
         public bool Shows => false;
         public bool Hides => false;
     }

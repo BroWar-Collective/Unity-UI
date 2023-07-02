@@ -14,13 +14,13 @@ namespace BroWar.UI.Animation.Animations
         [SerializeField, Min(0)]
         private float duration = 1.0f;
 
-        public Sequence GetSequence()
+        public Sequence GetSequence(bool fromSequence)
         {
             var sequence = DOTween.Sequence();
-            return GetSequence(sequence);
+            return GetSequence(fromSequence, sequence);
         }
 
-        public Sequence GetSequence(Sequence sequence)
+        public Sequence GetSequence(bool fromSequence, Sequence sequence)
         {
             if (group == null)
             {
@@ -28,31 +28,19 @@ namespace BroWar.UI.Animation.Animations
                 return sequence;
             }
 
-            //DOTween.To(
-            //    () => group.alpha, 
-            //    (value) => 
-            //    {
-            //        group.alpha = value;
-            //        Debug.LogError("SET VALUE - " + value);
-            //    }, 1.0f, duration)
-            //    //.Pause()
-            //    .SetEase(Ease.InCubic)
-            //    .SetAutoKill(false);
-            //sequence.Append(group.DOFade(1.0f, duration).OnUpdate(() => Debug.LogError("ASDADS")));
+            sequence.Append(CreateAnimationTween(fromSequence));
             return sequence;
         }
 
-        public Tween CreateAnimationTween()
+        public Tween CreateAnimationTween(bool fromSequence)
         {
-            return DOTween.To(
-                () => group.alpha,
-                (value) =>
-                {
-                    group.alpha = value;
-                    Debug.LogError("SET VALUE - " + value);
-                }, 1.0f, duration)
-                .From(0)
-                .SetEase(Ease.InCubic);
+            var tween = group.DOFade(1, duration);
+            if (fromSequence)
+            {
+                tween.From(0);
+            }
+
+            return tween;
         }
     }
 }
