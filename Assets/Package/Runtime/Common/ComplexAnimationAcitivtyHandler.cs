@@ -5,6 +5,11 @@ using UnityEngine;
 
 namespace BroWar.UI.Common
 {
+    /// <summary>
+    /// Animation-based activity handler.
+    /// Creates new sequences every time new operation is requested.
+    /// Uses separate animations for hiding and showing <see cref="IActivityTarget"/>s.
+    /// </summary>
     [Serializable]
     public class ComplexAnimationAcitivtyHandler : IActivityHandler
     {
@@ -21,6 +26,7 @@ namespace BroWar.UI.Common
         private void ResetAnimation()
         {
             sequence?.Kill();
+            sequence = null;
             Shows = false;
             Hides = false;
         }
@@ -99,19 +105,19 @@ namespace BroWar.UI.Common
         {
             ResetAnimation();
             sequence = GetHideSequence();
-            if (sequence == null)
-            {
-                target.Hide();
-                onFinish?.Invoke();
-                return;
-            }
-
-            sequence.AppendCallback(() =>
+            var callback = new TweenCallback(() =>
             {
                 target.Hide();
                 onFinish?.Invoke();
             });
 
+            if (sequence == null)
+            {
+                callback();
+                return;
+            }
+
+            sequence.AppendCallback(callback);
             if (immediately)
             {
                 sequence.Complete(true);
@@ -123,7 +129,9 @@ namespace BroWar.UI.Common
         }
 
         public void Dispose()
-        { }
+        {
+            ResetAnimation();
+        }
 
         public bool Shows { get; private set; }
         public bool Hides { get; private set; }

@@ -10,10 +10,12 @@ namespace BroWar.UI.Common
 
     /// <summary>
     /// Animation-based activity handler.
+    /// Cached animation is created only once and then re-used. 
+    /// Only one, shared sequence is used to hide and show <see cref="IActivityTarget"/>.
     /// </summary>
     [Serializable]
-    [MovedFrom(false, null, null, "AnimationActivityHandler")]
-    public class SimpleAnimationActivityHandler : IActivityHandler
+    [MovedFrom(false, null, null, "SimpleAnimationActivityHandler")]
+    public class StandardAnimationActivityHandler : IActivityHandler
     {
         [Title("Animations")]
         [SerializeField, SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]

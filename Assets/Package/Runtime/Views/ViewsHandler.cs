@@ -257,6 +257,7 @@ namespace BroWar.UI.Views
             return new List<UiView>(viewsByTypes.Values);
         }
 
+        /// <inheritdoc cref="IInitializable"/>
         public bool IsInitialized { get; private set; }
 
         /// <inheritdoc cref="IUiViewsHandler"/>

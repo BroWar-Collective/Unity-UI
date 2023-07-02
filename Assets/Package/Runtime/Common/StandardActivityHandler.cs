@@ -2,6 +2,9 @@
 
 namespace BroWar.UI.Common
 {
+    /// <summary>
+    /// Basic <see cref="IActivityHandler"/> that shows and hides targets without any time-based operations.
+    /// </summary>
     [Serializable]
     public class StandardActivityHandler : IActivityHandler
     {

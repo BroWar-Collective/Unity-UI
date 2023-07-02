@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace BroWar.UI.Animation
 {
+    /// <summary>
+    /// Utility class used to store commonly used <see cref="Tween"/>s.
+    /// </summary>
     public static class AnimationUtility
     {
         public static Tween CreateSlideInTween(RectTransform rectTransform, AnimationDirection direction, Ease ease = Ease.OutCubic, float duration = 1.0f, bool fromSequence = true)

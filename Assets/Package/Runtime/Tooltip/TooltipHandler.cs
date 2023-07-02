@@ -87,7 +87,7 @@ namespace BroWar.UI.Tooltip
             ActiveTooltip = instance;
             ActiveTooltip.Prepare(data);
             ActiveTooltip.UpdatePosition(position);
-            ActiveTooltip.Show();
+            ActiveTooltip.Show(false);
         }
 
         public void HideTooltip()
@@ -109,11 +109,7 @@ namespace BroWar.UI.Tooltip
         private TooltipBehaviour ActiveTooltip
         {
             get => activeTooltip;
-            set
-            {
-                HideTooltip();
-                activeTooltip = value;
-            }
+            set => activeTooltip = value;
         }
 
         private Vector2? PointerPosition
