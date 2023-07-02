@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Serialization;
 
 namespace BroWar.UI.Views
 {
@@ -21,9 +20,6 @@ namespace BroWar.UI.Views
         [Title("General")]
         [SerializeField, NotNull]
         private Canvas canvas;
-        [SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
-        [FormerlySerializedAs("showHideHandler")]
-        private IActivityHandler activityHandler;
 
         private CanvasGroup group;
 
@@ -47,13 +43,7 @@ namespace BroWar.UI.Views
 
         public override void Show(bool immediately, Action onFinish = null)
         {
-            if (activityHandler == null)
-            {
-                base.Show(immediately, onFinish);
-                return;
-            }
-
-            activityHandler.Show(this, immediately, onFinish);
+            base.Show(immediately, onFinish);
             foreach (var panel in panels)
             {
                 panel.Show(immediately);
@@ -62,13 +52,7 @@ namespace BroWar.UI.Views
 
         public override void Hide(bool immediately, Action onFinish = null)
         {
-            if (activityHandler == null)
-            {
-                base.Hide(immediately, onFinish);
-                return;
-            }
-
-            activityHandler.Hide(this, immediately, onFinish);
+            base.Hide(immediately, onFinish);
             foreach (var panel in panels)
             {
                 panel.Hide(immediately);
@@ -89,7 +73,5 @@ namespace BroWar.UI.Views
         }
 
         public IReadOnlyList<UiPanel> Panels => panels;
-        public override bool Shows => activityHandler?.Shows ?? false;
-        public override bool Hides => activityHandler?.Hides ?? false;
     }
 }

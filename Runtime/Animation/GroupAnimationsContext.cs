@@ -42,5 +42,10 @@ namespace BroWar.UI.Animation
 
             return sequence;
         }
+
+        public Tween CreateAnimationTween()
+        {
+            return nestedContexts[0].CreateAnimationTween();
+        }
     }
 }

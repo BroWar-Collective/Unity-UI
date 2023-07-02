@@ -18,6 +18,11 @@ namespace BroWar.UI.Animation.Animations
         [SerializeField, Min(0)]
         private float duration = 1.0f;
 
+        public Tween CreateAnimationTween()
+        {
+            throw new NotImplementedException();
+        }
+
         public Sequence GetSequence()
         {
             var sequence = DOTween.Sequence();

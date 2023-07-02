@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BroWar.UI
 {
@@ -10,6 +11,10 @@ namespace BroWar.UI
     [DisallowMultipleComponent, RequireComponent(typeof(RectTransform))]
     public abstract class UiObject : MonoBehaviour, IActivityTarget
     {
+        [SerializeReference, ReferencePicker(TypeGrouping = TypeGrouping.ByFlatName)]
+        [FormerlySerializedAs("showHideHandler")]
+        private IActivityHandler activityHandler;
+
         private RectTransform rectTransform;
 
         public event Action OnShow;
@@ -38,8 +43,14 @@ namespace BroWar.UI
 
         public virtual void Show(bool immediately, Action onFinish = null)
         {
-            Show();
-            onFinish?.Invoke();
+            if (activityHandler == null)
+            {
+                Show();
+                onFinish?.Invoke();
+                return;
+            }
+
+            activityHandler.Show(this, immediately, onFinish);
         }
 
         public virtual void Hide()
@@ -49,8 +60,14 @@ namespace BroWar.UI
 
         public virtual void Hide(bool immediately, Action onFinish = null)
         {
-            Hide();
-            onFinish?.Invoke();
+            if (activityHandler == null)
+            {
+                Hide();
+                onFinish?.Invoke();
+                return;
+            }
+
+            activityHandler.Hide(this, immediately, onFinish);
         }
 
         /// <summary>
@@ -73,12 +90,12 @@ namespace BroWar.UI
         /// Indicates if <see cref="UiObject"/> is during the showing operation.
         /// alid only for time-based operations, otherwise always <see langword="false"/>.
         /// </summary>
-        public virtual bool Shows => false;
+        public virtual bool Shows => activityHandler?.Shows ?? false;
         /// <summary>
         /// Indicates if <see cref="UiObject"/> is during the hiding operation.
         /// Valid only for time-based operations, otherwise always <see langword="false"/>.
         /// </summary>
-        public virtual bool Hides => false;
+        public virtual bool Hides => activityHandler?.Hides ?? false;
 
         public bool IsActive => gameObject.activeSelf;
 
