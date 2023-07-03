@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.browar.common": "1.0.1",
     "com.browar.injection": "1.2.5",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",

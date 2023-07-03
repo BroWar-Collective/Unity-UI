@@ -26,6 +26,11 @@ namespace BroWar.UI.Tooltip
         private ITooltipHandler tooltipHandler;
         private Sequence sequence;
 
+        private void OnDisable()
+        {
+            ClearTooltip();
+        }
+
         protected virtual void ShowTooltip()
         {
             var tooltip = tooltipHandler.GetInstance(customPrefab);
@@ -35,8 +40,8 @@ namespace BroWar.UI.Tooltip
                 return;
             }
 
-            UpdateContent(tooltip);
-            tooltipHandler.ShowInstance(tooltip, in data);
+            OnTooltipCreated(tooltip);
+            tooltipHandler.ShowTooltip(tooltip, data);
         }
 
         protected virtual void HideTooltip()
@@ -44,7 +49,7 @@ namespace BroWar.UI.Tooltip
             tooltipHandler.HideTooltip();
         }
 
-        protected abstract void UpdateContent(T tooltip);
+        protected abstract void OnTooltipCreated(T tooltip);
 
         [Inject]
         internal void Inject(ITooltipHandler tooltipHandler)
@@ -72,7 +77,7 @@ namespace BroWar.UI.Tooltip
             sequence = DOTween.Sequence();
             sequence.AppendInterval(offsetTime);
             sequence.AppendCallback(ShowTooltip);
-            return false;
+            return true;
         }
 
         public void ClearTooltip()

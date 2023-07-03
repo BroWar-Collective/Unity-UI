@@ -10,7 +10,7 @@ namespace BroWar.UI.Tooltip.Factories
     [Serializable]
     public class StandardTooltipFactory : ITooltipFactory
     {
-        private readonly Dictionary<int, NativeObjectPool<TooltipBehaviour>> poolsByIds
+        private readonly IDictionary<int, NativeObjectPool<TooltipBehaviour>> poolsByIds
             = new Dictionary<int, NativeObjectPool<TooltipBehaviour>>();
 
         [SerializeField]

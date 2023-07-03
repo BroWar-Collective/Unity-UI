@@ -1,10 +1,18 @@
 ﻿using DG.Tweening;
-using UnityEngine;
 
 namespace BroWar.UI.Animation
 {
     public interface IAnimationContext
     {
-        Sequence GetSequence(RectTransform rectTransform);
+        /// <summary>
+        /// Creates animation <see cref="Sequence"/>.
+        /// </summary>
+        /// <param name="fromSequence">Indicates if <see cref="Sequence"/> should define 'From' value.</param>
+        Sequence GetSequence(bool fromSequence);
+        /// <summary>
+        /// Appends animation <see cref="Sequence"/>.
+        /// </summary>
+        /// <param name="fromSequence">Indicates if <see cref="Sequence"/> should define 'From' value.</param>
+        Sequence GetSequence(bool fromSequence, Sequence sequence);
     }
 }

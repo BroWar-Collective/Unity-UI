@@ -1,5 +1,4 @@
-﻿using BroWar.UI.Elements;
-using BroWar.UI.Management;
+﻿using BroWar.UI.Views;
 using UnityEngine;
 using Zenject;
 

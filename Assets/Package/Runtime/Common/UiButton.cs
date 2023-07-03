@@ -3,40 +3,47 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BroWar.UI.Elements
+namespace BroWar.UI.Common
 {
     /// <summary>
     /// Custom overlay on <see cref="Button"/>.
     /// </summary>
     [RequireComponent(typeof(Button))]
-    [AddComponentMenu("BroWar/UI/Elements/UI Button")]
+    [AddComponentMenu("BroWar/UI/Common/UI Button")]
     public class UiButton : UiObject
     {
-        [SerializeField, NotNull]
-        private Button button;
-
         [Title("Content")]
         [SerializeField]
         private Image labelIcon;
         [SerializeField]
         private TextMeshProUGUI labelText;
 
+        private Button button;
+
         public event Action OnClicked;
 
         protected override void Awake()
         {
             base.Awake();
-            if (button == null)
-            {
-                button = GetComponent<Button>();
-            }
-
-            button.onClick.AddListener(OnClick);
+            Button.onClick.AddListener(OnClick);
         }
 
         protected virtual void OnClick()
         {
             OnClicked?.Invoke();
+        }
+
+        private Button Button
+        {
+            get
+            {
+                if (button == null)
+                {
+                    button = GetComponent<Button>();
+                }
+
+                return button;
+            }
         }
 
         /// <summary>
@@ -49,8 +56,8 @@ namespace BroWar.UI.Elements
         /// </summary>
         public bool IsInteractable
         {
-            get => button.interactable;
-            set => button.interactable = true;
+            get => Button.interactable;
+            set => Button.interactable = true;
         }
 
         public string Text

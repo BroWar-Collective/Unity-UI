@@ -3,68 +3,75 @@ using UnityEngine;
 
 namespace BroWar.UI.Animation
 {
+    /// <summary>
+    /// Utility class used to store commonly used <see cref="Tween"/>s.
+    /// </summary>
     public static class AnimationUtility
     {
-        public static Sequence SlideIn(RectTransform rectTransform, AnimationDirection direction,
-            Ease ease = Ease.OutCubic, float duration = 1.0f)
+        public static Tween CreateSlideInTween(RectTransform rectTransform, AnimationDirection direction, Ease ease = Ease.OutCubic, float duration = 1.0f, bool fromSequence = true)
         {
-            var sequence = DOTween.Sequence();
-            Vector2 inPosition;
+            Vector2 startPosition;
             switch (direction)
             {
                 case AnimationDirection.Left:
-                    inPosition = new Vector2(rectTransform.rect.width, 0);
+                    startPosition = new Vector2(rectTransform.rect.width, 0);
                     break;
                 case AnimationDirection.Right:
-                    inPosition = new Vector2(-rectTransform.rect.width, 0);
+                    startPosition = new Vector2(-rectTransform.rect.width, 0);
                     break;
                 case AnimationDirection.Up:
-                    inPosition = new Vector2(0, -rectTransform.rect.height);
+                    startPosition = new Vector2(0, -rectTransform.rect.height);
                     break;
                 case AnimationDirection.Down:
-                    inPosition = new Vector2(0, rectTransform.rect.height);
+                    startPosition = new Vector2(0, rectTransform.rect.height);
                     break;
                 default:
-                    inPosition = Vector2.zero;
+                    startPosition = Vector2.zero;
                     break;
             }
 
-            rectTransform.anchoredPosition = inPosition;
-            Tween anchorMoveTween =
-                rectTransform.DOAnchorPos(Vector2.zero, duration).SetEase(ease);
-            sequence.Insert(0, anchorMoveTween);
-            return sequence;
+            var anchorMoveTween =
+                rectTransform.DOAnchorPos(Vector2.zero, duration)
+                .SetEase(ease);
+            if (fromSequence)
+            {
+                anchorMoveTween.From(startPosition);
+            }
+
+            return anchorMoveTween;
         }
 
-        public static Sequence SlideOut(RectTransform rectTransform, AnimationDirection direction,
-            Ease ease = Ease.OutCubic, float duration = 1.0f)
+        public static Tween CreateSlideOutTween(RectTransform rectTransform, AnimationDirection direction, Ease ease = Ease.OutCubic, float duration = 1.0f, bool fromSequence = true)
         {
-            var sequence = DOTween.Sequence();
-            rectTransform.anchoredPosition = Vector2.zero;
-            Vector2 outPosition;
+            Vector2 targetPosition;
             switch (direction)
             {
                 case AnimationDirection.Left:
-                    outPosition = new Vector2(-rectTransform.rect.width, 0);
+                    targetPosition = new Vector2(-rectTransform.rect.width, 0);
                     break;
                 case AnimationDirection.Right:
-                    outPosition = new Vector2(rectTransform.rect.width, 0);
+                    targetPosition = new Vector2(rectTransform.rect.width, 0);
                     break;
                 case AnimationDirection.Up:
-                    outPosition = new Vector2(0, rectTransform.rect.height);
+                    targetPosition = new Vector2(0, rectTransform.rect.height);
                     break;
                 case AnimationDirection.Down:
-                    outPosition = new Vector2(0, -rectTransform.rect.height);
+                    targetPosition = new Vector2(0, -rectTransform.rect.height);
                     break;
                 default:
-                    outPosition = Vector2.zero;
+                    targetPosition = Vector2.zero;
                     break;
             }
 
-            Tween anchorMoveTween =
-                rectTransform.DOAnchorPos(outPosition, duration).SetEase(ease);
-            sequence.Insert(0, anchorMoveTween);
-            return sequence;
+            var anchorMoveTween =
+                rectTransform.DOAnchorPos(targetPosition, duration)
+                .SetEase(ease);
+            if (fromSequence)
+            {
+                anchorMoveTween.From(Vector2.zero);
+            }
+
+            return anchorMoveTween;
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using BroWar.UI.Elements;
+﻿using BroWar.UI.Views;
 
 namespace Examples
 {
-    public class SourceBarView : UiView
+    public class SourceBarView : ScreenSpaceView
     { }
 }

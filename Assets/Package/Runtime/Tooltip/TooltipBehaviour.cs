@@ -1,52 +1,70 @@
-﻿using TMPro;
+﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace BroWar.UI.Tooltip
 {
     /// <summary>
-    /// In-game tooltip representation.
+    /// Basic in-game tooltip representation.
     /// </summary>
-    [AddComponentMenu("BroWar/UI/Tooltip/Tooltip Behaviour")]
-    public class TooltipBehaviour : UiObject
+    [AddComponentMenu("BroWar/UI/Tooltip/Behaviours/Tooltip Behaviour (Basic)")]
+    public class TooltipBehaviour : UiObject, IDisposable
     {
-        [SerializeField, NotNull]
-        private LayoutGroup contentGroup;
-        [SerializeField, NotNull]
-        private RectTransform contentRect;
-        [SerializeField, NotNull]
-        private TextMeshProUGUI contentText;
+        [Title("Data")]
         [SerializeField]
         private TooltipData defaultData;
         private TooltipData currentData;
 
-        public void UpdatePositionAndData(Vector2 position)
+        [Title("Content")]
+        [SerializeField, NotNull]
+        private RectTransform contentRect;
+
+        private Vector2 GetScreenPosition(Vector2? pointerPosition)
         {
-            UpdatePositionAndData(position, in defaultData);
+            var positioner = currentData.positioner;
+            if (positioner != null)
+            {
+                return positioner.GetScreenPosition(pointerPosition);
+            }
+            else
+            {
+                return pointerPosition ?? Vector2.zero;
+            }
         }
 
-        public void UpdatePositionAndData(Vector2 position, in TooltipData data)
-        {
-            currentData = data;
-            PositioningType = data.positioningType;
-            contentGroup.childAlignment = data.childAlignment;
-            UpdatePosition(position);
-        }
-
-        public virtual void UpdateContent(string content)
-        {
-            contentText.SetText(content);
-        }
-
-        public virtual void UpdatePosition(Vector2 screenPosition)
+        private void ValiateScreenPosition(ref Vector2 screenPosition, out Vector2 pivot)
         {
             var rect = RectTransform.rect;
             var w = Screen.width;
             var h = Screen.height;
-            var pivot = currentData.positionPivot;
+            pivot = currentData.positionPivot;
             screenPosition += currentData.positionOffset;
             screenPosition.x = Mathf.Clamp(screenPosition.x, rect.width * pivot.x, w - rect.width * (1.0f - pivot.x));
             screenPosition.y = Mathf.Clamp(screenPosition.y, rect.height * pivot.y, h - rect.height * (1.0f - pivot.y));
+        }
+
+        protected virtual void OnDataUpdate(TooltipData data)
+        { }
+
+        public void Prepare()
+        {
+            Prepare(null);
+        }
+
+        public virtual void Prepare(TooltipData data)
+        {
+            currentData = data ?? defaultData;
+            OnDataUpdate(data);
+        }
+
+        public virtual void Dispose()
+        {
+            currentData = null;
+        }
+
+        public virtual void UpdatePosition(Vector2? pointerPosition)
+        {
+            var screenPosition = GetScreenPosition(pointerPosition);
+            ValiateScreenPosition(ref screenPosition, out var pivot);
             RectTransform.pivot = pivot;
             RectTransform.position = screenPosition;
         }
@@ -56,7 +74,5 @@ namespace BroWar.UI.Tooltip
         /// Used internally by the tooltip system.
         /// </summary>
         internal int InstanceId { get; set; }
-
-        internal TooltipPositioningType PositioningType { get; private set; }
     }
 }

@@ -4,6 +4,6 @@ namespace BroWar.UI.Input
 {
     public interface IUiInputHandler
     {
-        Vector2 PointerPosition { get; }
+        Vector2? PointerPosition { get; }
     }
 }

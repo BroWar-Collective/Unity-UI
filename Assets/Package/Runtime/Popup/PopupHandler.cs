@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BroWar.UI.Handlers
+namespace BroWar.UI.Popup
 {
     /// <summary>
     /// Dedicated <see cref="IUiHandler"/> respnsible for displaying popup messages.
@@ -8,7 +8,7 @@ namespace BroWar.UI.Handlers
     /// TODO: implementation needed
     /// </summary>
     [DisallowMultipleComponent]
-    [AddComponentMenu("BroWar/UI/Handlers/Popup Handler")]
-    public class PopupHandler : UiHandlerBehaviour
+    [AddComponentMenu("BroWar/UI/Popup/Popup Handler")]
+    public class PopupHandler : UiHandlerBehaviour, IUiPopupHandler
     { }
 }

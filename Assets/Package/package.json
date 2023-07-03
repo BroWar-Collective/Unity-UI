@@ -9,7 +9,7 @@
   ],
   "category": "ui",
   "dependencies": {
-    "com.browar.common": "1.0.0",
+    "com.browar.common": "1.0.1",
     "com.browar.injection": "1.2.5",
     "com.browar.editor-toolbox": "0.12.0"
   },

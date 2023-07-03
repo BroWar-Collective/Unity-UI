@@ -5,12 +5,16 @@ namespace BroWar.UI.Management
 {
     using BroWar.Common;
 
-    //TODO: interface
+    /// <inheritdoc cref="IUiManager" />
     [DisallowMultipleComponent]
     [AddComponentMenu("BroWar/UI/UI Manager")]
-    public class UiManager : StandaloneManager
+    public class UiManager : StandaloneManager, IUiManager
     {
-        [SerializeField, ReorderableList(HasLabels = false, Foldable = true)]
+        //NOTE: main reason to have component-based handlers is to have easier way to extended Editor features
+        //this can be easily transferred into pure interface-based approach
+
+        /// <inheritdoc cref="IUiManager.Handlers" />
+        [SerializeField, ReorderableList(HasLabels = false, Foldable = true), InLineEditor]
         private UiHandlerBehaviour[] handlers;
 
         private void OnEnable()
@@ -53,10 +57,7 @@ namespace BroWar.UI.Management
             }
         }
 
-        /// <summary>
-        /// Collection of all available <see cref="IUiHandler"/>s.
-        /// Each handler is responsible for custom, UI-related feature.
-        /// </summary>
+        /// <inheritdoc cref="IUiManager" />
         public IReadOnlyList<IUiHandler> Handlers => handlers;
     }
 }
