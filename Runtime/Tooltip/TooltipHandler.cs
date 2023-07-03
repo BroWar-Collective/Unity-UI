@@ -87,6 +87,7 @@ namespace BroWar.UI.Tooltip
             ActiveTooltip = instance;
             ActiveTooltip.Prepare(data);
             ActiveTooltip.UpdatePosition(position);
+            ActiveTooltip.Hide(true);
             ActiveTooltip.Show(false);
         }
 
