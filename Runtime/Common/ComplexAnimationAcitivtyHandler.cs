@@ -1,10 +1,11 @@
 ﻿using System;
-using BroWar.UI.Animation;
 using DG.Tweening;
 using UnityEngine;
 
 namespace BroWar.UI.Common
 {
+    using BroWar.UI.Animation;
+
     /// <summary>
     /// Animation-based activity handler.
     /// Creates new sequences every time new operation is requested.
