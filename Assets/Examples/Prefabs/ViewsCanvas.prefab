@@ -227,7 +227,7 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: SimpleAnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
+      type: {class: StandardAnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
       data:
         animationContext:
           id: 1
@@ -1488,12 +1488,12 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: SimpleAnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
+      type: {class: StandardAnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
       data:
         animationContext:
           id: 1
     00000001:
-      type: {class: GroupAnimationsContext, ns: BroWar.UI.Animation, asm: BroWar.UI}
+      type: {class: GroupedAnimationsContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
       data:
         parallel: 1
         nestedContexts:
@@ -1639,7 +1639,7 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: SimpleAnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
+      type: {class: StandardAnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
       data:
         animationContext:
           id: 1
