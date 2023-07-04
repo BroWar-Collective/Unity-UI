@@ -1,13 +1,18 @@
 {
   "name": "com.browar.ui",
   "displayName": "UI",
-  "version": "0.0.1",
+  "version": "0.2.1",
   "unity": "2018.1",
   "description": "UI core system for the Unity engine.",
   "keywords": [
     "ui"
   ],
   "category": "ui",
+  "dependencies": {
+    "com.browar.common": "1.0.1",
+    "com.browar.injection": "1.2.5",
+    "com.browar.editor-toolbox": "0.12.0"
+  },
   "author": {
     "name": "BroWar Collective",
     "email": "browar.collective@gmail.com",
