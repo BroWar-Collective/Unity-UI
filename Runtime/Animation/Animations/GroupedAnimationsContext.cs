@@ -3,10 +3,10 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 
-namespace BroWar.UI.Animation
+namespace BroWar.UI.Animation.Animations
 {
-    [Serializable, MovedFrom(false, null, null, "MultipleAnimationsContext")]
-    public class GroupAnimationsContext : IAnimationContext
+    [Serializable, MovedFrom(false, "BroWar.UI.Animation", null, "GroupAnimationsContext")]
+    public class GroupedAnimationsContext : IAnimationContext
     {
         [SerializeField]
         private bool parallel = true;
