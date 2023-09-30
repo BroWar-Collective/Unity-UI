@@ -20,13 +20,13 @@ namespace BroWar.UI.Common
 
         public void Show(IActivityTarget target, bool immediately, Action onFinish = null)
         {
-            target.Show();
+            target.SetActive(true);
             onFinish?.Invoke();
         }
 
         public void Hide(IActivityTarget target, bool immediately, Action onFinish = null)
         {
-            target.Hide();
+            target.SetActive(false);
             onFinish?.Invoke();
         }
 

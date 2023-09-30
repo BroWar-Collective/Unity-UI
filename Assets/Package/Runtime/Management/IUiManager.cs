@@ -2,10 +2,12 @@
 
 namespace BroWar.UI.Management
 {
+    using BroWar.Common;
+
     /// <summary>
     /// Manager responsible for maintaining UI-related features.
     /// </summary>
-    public interface IUiManager
+    public interface IUiManager : IInitializable, IDeinitializable
     {
         /// <summary>
         /// Collection of all available <see cref="IUiHandler"/>s.

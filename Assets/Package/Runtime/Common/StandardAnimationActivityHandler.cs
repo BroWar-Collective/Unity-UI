@@ -85,7 +85,7 @@ namespace BroWar.UI.Common
 
         public void Show(IActivityTarget target, bool immediately, Action onFinish = null)
         {
-            target.Show();
+            target.SetActive(true);
 
             var sequence = GetAnimationSequence();
             if (sequence == null || sequence.IsComplete())
@@ -112,7 +112,7 @@ namespace BroWar.UI.Common
             var sequence = GetAnimationSequence();
             if (sequence == null)
             {
-                target.Hide();
+                target.SetActive(false);
                 onFinish?.Invoke();
                 return;
             }
@@ -120,7 +120,7 @@ namespace BroWar.UI.Common
             sequence.OnRewind(() =>
             {
                 OnAnimationFinish();
-                target.Hide();
+                target.SetActive(false);
                 onFinish?.Invoke();
             });
 
