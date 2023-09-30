@@ -78,7 +78,7 @@ namespace BroWar.UI.Common
 
         public void Show(IActivityTarget target, bool immediately, Action onFinish = null)
         {
-            target.Show();
+            target.SetActive(true);
             ResetAnimation();
             sequence = GetShowSequence();
             if (sequence == null)
@@ -108,7 +108,7 @@ namespace BroWar.UI.Common
             sequence = GetHideSequence();
             var callback = new TweenCallback(() =>
             {
-                target.Hide();
+                target.SetActive(false);
                 onFinish?.Invoke();
             });
 

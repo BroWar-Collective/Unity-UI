@@ -20,9 +20,6 @@ namespace BroWar.UI
         public event Action OnShow;
         public event Action OnHide;
 
-        protected virtual void Awake()
-        { }
-
         protected virtual void OnDestroy()
         {
             ResetActivity();
@@ -33,9 +30,26 @@ namespace BroWar.UI
             ResetActivity();
         }
 
+        protected virtual void OnStartShowing()
+        { }
+
+        protected virtual void OnStopShowing()
+        { }
+
+        protected virtual void OnStartHiding()
+        { }
+
+        protected virtual void OnStopHiding()
+        { }
+
         protected void ResetActivity()
         {
             activityHandler?.Dispose();
+        }
+
+        public void OverrideActivityHandler(IActivityHandler activityHandler)
+        {
+            this.activityHandler = activityHandler;
         }
 
         public virtual void SetActive(bool value)
@@ -53,40 +67,52 @@ namespace BroWar.UI
 
         public virtual void Show()
         {
-            SetActive(true);
+            Show(false);
         }
 
         public virtual void Show(bool immediately, Action onFinish = null)
         {
+            OnStartShowing();
             if (activityHandler == null)
             {
-                Show();
+                SetActive(true);
+                OnStopShowing();
                 onFinish?.Invoke();
                 return;
             }
 
-            activityHandler.Show(this, immediately, onFinish);
+            activityHandler.Show(this, immediately, () =>
+            {
+                OnStopShowing();
+                onFinish?.Invoke();
+            });
         }
 
         public virtual void Hide()
         {
-            SetActive(false);
+            Hide(false);
         }
 
         public virtual void Hide(bool immediately, Action onFinish = null)
         {
+            OnStartHiding();
             if (activityHandler == null)
             {
-                Hide();
+                SetActive(false);
+                OnStopHiding();
                 onFinish?.Invoke();
                 return;
             }
 
-            activityHandler.Hide(this, immediately, onFinish);
+            activityHandler.Hide(this, immediately, () =>
+            {
+                OnStopHiding();
+                onFinish?.Invoke();
+            });
         }
 
         /// <summary>
-        /// Indicates if <see cref="UiObject"/> is safe to show.
+        /// Indicates whether <see cref="UiObject"/> is safe to show.
         /// </summary>
         public virtual bool CanShow()
         {
@@ -94,7 +120,7 @@ namespace BroWar.UI
         }
 
         /// <summary>
-        /// Indicates if <see cref="UiObject"/> is safe to hide.
+        /// Indicates whether <see cref="UiObject"/> is safe to hide.
         /// </summary>
         public virtual bool CanHide()
         {
@@ -102,18 +128,18 @@ namespace BroWar.UI
         }
 
         /// <summary>
-        /// Indicates if <see cref="UiObject"/> is during the showing operation.
+        /// Indicates whether <see cref="UiObject"/> is during the showing operation.
         /// alid only for time-based operations, otherwise always <see langword="false"/>.
         /// </summary>
         public virtual bool Shows => activityHandler?.Shows ?? false;
         /// <summary>
-        /// Indicates if <see cref="UiObject"/> is during the hiding operation.
+        /// Indicates whether <see cref="UiObject"/> is during the hiding operation.
         /// Valid only for time-based operations, otherwise always <see langword="false"/>.
         /// </summary>
         public virtual bool Hides => activityHandler?.Hides ?? false;
 
         /// <summary>
-        /// Indicates if <see cref="UiObject"/> is going to be activated or deactivated but in time.
+        /// Indicates whether <see cref="UiObject"/> is going to be activated or deactivated but in time.
         /// </summary>
         public bool IsActivityChanging => Shows || Hides;
 
@@ -130,6 +156,11 @@ namespace BroWar.UI
 
                 return rectTransform;
             }
+        }
+
+        public IActivityHandler ActiveHandler
+        {
+            get => activityHandler;
         }
     }
 }

@@ -8,8 +8,6 @@ namespace BroWar.UI
         event Action OnHide;
 
         void SetActive(bool value);
-        void Show();
-        void Hide();
 
         bool IsActive { get; }
     }

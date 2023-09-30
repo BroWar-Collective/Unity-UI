@@ -6,6 +6,9 @@ namespace BroWar.UI.Views
 {
     using BroWar.Common;
 
+
+    //TODO: use events to indicate ActiveViews
+
     /// <inheritdoc cref="IUiViewsHandler"/>
     [DisallowMultipleComponent]
     [AddComponentMenu("BroWar/UI/Views/Views Handler")]
@@ -36,16 +39,16 @@ namespace BroWar.UI.Views
             for (var i = 0; i < contexts.Length; i++)
             {
                 var context = contexts[i];
-                InitializeView(context, data, i);
+                InitializeView(context, data);
             }
         }
 
-        private void InitializeView(ViewContext context, ViewData data, int index)
+        private void InitializeView(ViewContext context, ViewData data)
         {
             var view = context.view;
             if (view == null)
             {
-                LogHandler.Log($"[UI] {nameof(ViewContext)} at index {index} is invalid.", LogType.Warning);
+                LogHandler.Log($"[UI] {nameof(ViewContext)} is invalid.", LogType.Warning);
                 return;
             }
 
@@ -135,6 +138,11 @@ namespace BroWar.UI.Views
                 var settings = GetDefaultSettings();
                 Initialize(settings);
             }
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
         }
 
         public void Initialize(ViewsSettings settings)
@@ -249,6 +257,16 @@ namespace BroWar.UI.Views
             {
                 ShowInternally(view, false);
             }
+        }
+
+        public void AppendView()
+        {
+
+        }
+
+        public void RemoveView()
+        {
+
         }
 
         /// <inheritdoc cref="IUiViewsHandler"/>
