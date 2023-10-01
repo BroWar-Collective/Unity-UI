@@ -55,14 +55,14 @@ namespace BroWar.UI.Views
             var view = definition.view;
             if (view == null)
             {
-                LogHandler.Log($"[UI] Provided {nameof(ViewDefinition)} is invalid.", LogType.Warning);
+                LogHandler.Log($"[UI][View] Provided {nameof(ViewDefinition)} is invalid.", LogType.Warning);
                 return;
             }
 
             var type = view.GetType();
             if (ContainsView(type))
             {
-                LogHandler.Log($"[UI] View ({type.Name}) is cached multiple times.", LogType.Warning);
+                LogHandler.Log($"[UI][View] View ({type.Name}) is cached multiple times.", LogType.Warning);
                 return;
             }
 
@@ -173,6 +173,11 @@ namespace BroWar.UI.Views
         public override void Dispose()
         {
             base.Dispose();
+            if (!IsInitialized)
+            {
+                return;
+            }
+
             DeinitializeViews();
         }
 
@@ -180,7 +185,7 @@ namespace BroWar.UI.Views
         {
             if (IsInitialized)
             {
-                LogHandler.Log($"[UI] {nameof(ViewsHandler)} is already initialized.", LogType.Warning);
+                LogHandler.Log($"[UI][View] {nameof(ViewsHandler)} is already initialized.", LogType.Warning);
                 return;
             }
 
@@ -303,7 +308,7 @@ namespace BroWar.UI.Views
         {
             if (definition == null || definition.view == null)
             {
-                LogHandler.Log("[UI] Cannot register invalid definition.", LogType.Warning);
+                LogHandler.Log("[UI][View] Cannot register invalid definition.", LogType.Warning);
                 return;
             }
 
