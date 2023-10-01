@@ -172,7 +172,7 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: UiInstaller, ns: BroWar.UI.Injection, asm: BroWar.UI}
+      type: {class: UiSubInstaller, ns: BroWar.UI.Injection, asm: BroWar.UI}
       data:
         bindToParent: 1
         manager: {fileID: 1114633845645297974}
@@ -301,6 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6267095c11e6745ad150390e139a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfInitialize: 1
   handlers:
   - {fileID: 1114633846812842678}
   - {fileID: 1114633846812842677}
@@ -441,7 +442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selfInitialize: 1
-  contexts:
+  definitions:
   - showOnInitialize: 1
     showImmediately: 0
     view: {fileID: 1114633846218482264}

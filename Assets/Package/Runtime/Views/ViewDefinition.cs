@@ -3,10 +3,10 @@
 namespace BroWar.UI.Views
 {
     /// <summary>
-    /// Context used to pre-initialize <see cref="UiView"/>s.
+    /// Definition used to pre-initialize <see cref="UiView"/>s.
     /// </summary>
     [Serializable]
-    public class ViewContext
+    public class ViewDefinition
     {
         public bool showOnInitialize;
         public bool showImmediately;
