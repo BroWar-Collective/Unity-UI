@@ -6,9 +6,6 @@ namespace BroWar.UI.Views
 {
     using BroWar.Common;
 
-
-    //TODO: use events to indicate ActiveViews
-
     /// <inheritdoc cref="IUiViewsHandler"/>
     [DisallowMultipleComponent]
     [AddComponentMenu("BroWar/UI/Views/Views Handler")]
@@ -19,36 +16,46 @@ namespace BroWar.UI.Views
 
         [SerializeField]
         [Tooltip("Indicates if handler should be initialized during the 'Prepare' callback.")]
-        protected bool selfInitialize = true;
+        private bool selfInitialize = true;
         [SerializeField, ReorderableList]
-        protected ViewContext[] contexts;
+        private List<ViewDefinition> definitions;
 
         protected Camera canvasCamera;
+        /// <summary>
+        /// Shared <see cref="ViewData"/> used to initialize each associated <see cref="UiView"/>.
+        /// </summary>
+        protected ViewData viewData;
 
         public event Action<UiView> OnShowView;
         public event Action<UiView> OnHideView;
         public event Action OnInitialized;
 
-        private void InitializeViews()
+        protected void InitializeViews(ViewData data)
         {
-            var data = new ViewData()
+            var definitionsCount = definitions?.Count ?? 0;
+            for (var i = 0; i < definitionsCount; i++)
             {
-                UiCamera = canvasCamera
-            };
-
-            for (var i = 0; i < contexts.Length; i++)
-            {
-                var context = contexts[i];
-                InitializeView(context, data);
+                var definition = definitions[i];
+                InitializeView(definition, data);
             }
         }
 
-        private void InitializeView(ViewContext context, ViewData data)
+        protected void DeinitializeViews()
         {
-            var view = context.view;
+            var definitionsCount = definitions?.Count ?? 0;
+            for (var i = 0; i < definitionsCount; i++)
+            {
+                var definition = definitions[i];
+                DeinitializeView(definition);
+            }
+        }
+
+        protected void InitializeView(ViewDefinition definition, ViewData data)
+        {
+            var view = definition.view;
             if (view == null)
             {
-                LogHandler.Log($"[UI] {nameof(ViewContext)} is invalid.", LogType.Warning);
+                LogHandler.Log($"[UI] Provided {nameof(ViewDefinition)} is invalid.", LogType.Warning);
                 return;
             }
 
@@ -61,9 +68,11 @@ namespace BroWar.UI.Views
 
             viewsByTypes.Add(type, view);
             view.Initialize(data);
+            view.OnShowView += OnShowViewCallback;
+            view.OnHideView += OnHideViewCallback;
 
-            var setImmediately = context.showImmediately;
-            if (context.showOnInitialize)
+            var setImmediately = definition.showImmediately;
+            if (definition.showOnInitialize)
             {
                 if (!setImmediately)
                 {
@@ -81,6 +90,19 @@ namespace BroWar.UI.Views
             HideInternally(view, setImmediately, true);
         }
 
+        protected void DeinitializeView(ViewDefinition definition)
+        {
+            var view = definition.view;
+            if (view == null)
+            {
+                return;
+            }
+
+            view.Deinitialize();
+            view.OnShowView -= OnShowViewCallback;
+            view.OnHideView -= OnHideViewCallback;
+        }
+
         protected void ShowInternally(UiView view, bool immediately, bool force = false)
         {
             if (!CanShow(view) && !force)
@@ -89,8 +111,6 @@ namespace BroWar.UI.Views
             }
 
             view.Show(immediately);
-            activeViews.Add(view);
-            OnShowView?.Invoke(view);
         }
 
         protected void HideInternally(UiView view, bool immediately, bool force = false)
@@ -101,10 +121,6 @@ namespace BroWar.UI.Views
             }
 
             view.Hide(immediately);
-            if (activeViews.Remove(view))
-            {
-                OnHideView?.Invoke(view);
-            }
         }
 
         protected virtual bool CanShow(UiView view)
@@ -127,7 +143,21 @@ namespace BroWar.UI.Views
 
         protected virtual void OnInitialize()
         {
-            InitializeViews();
+            InitializeViews(viewData);
+        }
+
+        protected void OnShowViewCallback(UiView view)
+        {
+            activeViews.Add(view);
+            OnShowView?.Invoke(view);
+        }
+
+        protected void OnHideViewCallback(UiView view)
+        {
+            if (activeViews.Remove(view))
+            {
+                OnHideView?.Invoke(view);
+            }
         }
 
         public override void Prepare()
@@ -143,17 +173,23 @@ namespace BroWar.UI.Views
         public override void Dispose()
         {
             base.Dispose();
+            DeinitializeViews();
         }
 
         public void Initialize(ViewsSettings settings)
         {
             if (IsInitialized)
             {
-                LogHandler.Log($"[UI] {GetType().Name} is already initialized.", LogType.Warning);
+                LogHandler.Log($"[UI] {nameof(ViewsHandler)} is already initialized.", LogType.Warning);
                 return;
             }
 
             canvasCamera = settings.UiCamera;
+            viewData = new ViewData()
+            {
+                UiCamera = canvasCamera
+            };
+
             OnInitialize();
             IsInitialized = true;
             OnInitialized?.Invoke();
@@ -259,17 +295,34 @@ namespace BroWar.UI.Views
             }
         }
 
-        public void AppendView()
+        /// <summary>
+        /// Registers and add associated <see cref="UiView"/> to the handler.
+        /// If <see cref="ViewsHandler"/> is already initialized then <see cref="UiView"/> will also be initialized.
+        /// </summary>
+        public void RegisterView(ViewDefinition definition)
         {
+            if (definition == null || definition.view == null)
+            {
+                LogHandler.Log("[UI] Cannot register invalid definition.", LogType.Warning);
+                return;
+            }
 
+            definitions.Add(definition);
+            if (!IsInitialized)
+            {
+                return;
+            }
+
+            InitializeView(definition, new ViewData()
+            {
+                UiCamera = canvasCamera
+            });
         }
 
-        public void RemoveView()
-        {
-
-        }
-
-        /// <inheritdoc cref="IUiViewsHandler"/>
+        /// <summary>
+        /// Returns <see cref="List{T}"/> of all available <see cref="UiView"/>s.
+        /// A new collection is created with each invoke.
+        /// </summary>
         public List<UiView> GetAllViews()
         {
             return new List<UiView>(viewsByTypes.Values);
@@ -279,6 +332,6 @@ namespace BroWar.UI.Views
         public bool IsInitialized { get; private set; }
 
         /// <inheritdoc cref="IUiViewsHandler"/>
-        public IReadOnlyCollection<UiView> ActiveViews => activeViews;
+        public IReadOnlyList<UiView> ActiveViews => activeViews;
     }
 }

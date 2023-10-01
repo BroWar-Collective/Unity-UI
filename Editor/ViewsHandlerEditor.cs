@@ -14,7 +14,7 @@ namespace BroWar.Editor.UI
 
         private void OnEnable()
         {
-            const string contextsPropertyName = "contexts";
+            const string contextsPropertyName = "definitions";
             IgnoreProperty(contextsPropertyName);
             var listProperty = serializedObject.FindProperty(contextsPropertyName);
 

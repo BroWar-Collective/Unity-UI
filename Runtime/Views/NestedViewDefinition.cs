@@ -5,6 +5,7 @@ namespace BroWar.UI.Views
     [Serializable]
     public class NestedViewDefinition
     {
-        //TODO:
+        public bool performShowHide;
+        public UiView view;
     }
 }
