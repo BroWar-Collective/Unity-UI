@@ -14,7 +14,7 @@ namespace BroWar.UI.Views
         [Title("General")]
         [SerializeField, ReorderableList]
         [Tooltip("Optional nested views, usually defined (registered) internally by the custom implementation.")]
-        private List<NestedViewDefinition> nestedViews = new List<NestedViewDefinition>();
+        private List<SubViewDefinition> subViews = new List<SubViewDefinition>();
 
         /// <summary>
         /// <see cref="ViewData"/> used to initialize this view.
@@ -38,7 +38,7 @@ namespace BroWar.UI.Views
             OnHideView?.Invoke(this);
         }
 
-        protected void RegisterNestedView(NestedViewDefinition definition)
+        protected void RegisterSubView(SubViewDefinition definition)
         {
             if (definition == null || definition.view == null)
             {
@@ -46,7 +46,7 @@ namespace BroWar.UI.Views
                 return;
             }
 
-            nestedViews.Add(definition);
+            subViews.Add(definition);
             var view = definition.view;
             if (IsInitialized)
             {
@@ -67,7 +67,7 @@ namespace BroWar.UI.Views
         public override void Show(bool immediately, Action onFinish = null)
         {
             base.Show(immediately);
-            foreach (NestedViewDefinition viewDefinition in nestedViews)
+            foreach (SubViewDefinition viewDefinition in subViews)
             {
                 if (!viewDefinition.performShowHide)
                 {
@@ -87,7 +87,7 @@ namespace BroWar.UI.Views
         public override void Hide(bool immediately, Action onFinish = null)
         {
             base.Hide(immediately);
-            foreach (NestedViewDefinition viewDefinition in nestedViews)
+            foreach (SubViewDefinition viewDefinition in subViews)
             {
                 if (!viewDefinition.performShowHide)
                 {
@@ -107,7 +107,7 @@ namespace BroWar.UI.Views
         public virtual void Initialize(ViewData data)
         {
             OnInitialize(data);
-            foreach (NestedViewDefinition viewDefinition in nestedViews)
+            foreach (SubViewDefinition viewDefinition in subViews)
             {
                 UiView view = viewDefinition.view;
                 if (view == null)
@@ -125,7 +125,7 @@ namespace BroWar.UI.Views
         public virtual void Deinitialize()
         {
             OnDeinitialize();
-            foreach (NestedViewDefinition viewDefinition in nestedViews)
+            foreach (SubViewDefinition viewDefinition in subViews)
             {
                 UiView view = viewDefinition.view;
                 if (view == null)
@@ -155,7 +155,7 @@ namespace BroWar.UI.Views
                     return true;
                 }
 
-                foreach (NestedViewDefinition viewDefinition in nestedViews)
+                foreach (SubViewDefinition viewDefinition in subViews)
                 {
                     UiView view = viewDefinition.view;
                     if (view.IsTransitioning)
@@ -168,6 +168,6 @@ namespace BroWar.UI.Views
             }
         }
 
-        protected IReadOnlyList<NestedViewDefinition> NestedViews => nestedViews;
+        protected IReadOnlyList<SubViewDefinition> NestedViews => subViews;
     }
 }
