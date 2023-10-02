@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activityHandler:
     id: 0
-  nestedViews:
+  subViews:
   - performShowHide: 1
     view: {fileID: 234373297546641517}
   - performShowHide: 1
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 7107836797322863218}
   - component: {fileID: 5819287575315200493}
   m_Layer: 5
-  m_Name: Panel2
+  m_Name: SubView2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activityHandler:
     id: 0
-  nestedViews: []
+  subViews: []
   references:
     version: 1
     00000000:
@@ -1427,7 +1427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activityHandler:
     id: 0
-  nestedViews: []
+  subViews: []
   canvas: {fileID: 6334383523745798280}
   references:
     version: 1
@@ -1703,7 +1703,7 @@ GameObject:
   - component: {fileID: 5292434366015658673}
   - component: {fileID: 234373297546641517}
   m_Layer: 5
-  m_Name: Panel1
+  m_Name: SubView1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1743,7 +1743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activityHandler:
     id: 0
-  nestedViews: []
+  subViews: []
   references:
     version: 1
     00000000:

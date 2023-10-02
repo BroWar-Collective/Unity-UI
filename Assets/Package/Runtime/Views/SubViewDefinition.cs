@@ -3,7 +3,7 @@
 namespace BroWar.UI.Views
 {
     [Serializable]
-    public class NestedViewDefinition
+    public class SubViewDefinition
     {
         public bool performShowHide;
         public UiView view;
