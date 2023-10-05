@@ -2,7 +2,6 @@
     "name": "BroWar.UI",
     "rootNamespace": "",
     "references": [
-        "GUID:0d8efc41c8da7c944a8d3a3ef69020a4",
         "GUID:6055be8ebefd69e48b49212b09b47b2f",
         "GUID:75469ad4d38634e559750d17036d5f7c",
         "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",

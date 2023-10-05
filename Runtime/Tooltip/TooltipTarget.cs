@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using Zenject;
@@ -24,7 +23,6 @@ namespace BroWar.UI.Tooltip
         private T customPrefab;
 
         private ITooltipHandler tooltipHandler;
-        private Sequence sequence;
 
         private void OnDisable()
         {
@@ -74,19 +72,15 @@ namespace BroWar.UI.Tooltip
                 return false;
             }
 
-            sequence = DOTween.Sequence();
-            sequence.AppendInterval(offsetTime);
-            sequence.AppendCallback(ShowTooltip);
+            ShowTooltip();
             return true;
         }
 
-        public void ClearTooltip()
+        public virtual void ClearTooltip()
         {
-            sequence?.Kill();
-            sequence = null;
             HideTooltip();
         }
 
-        protected virtual bool ShouldShowContent => sequence == null || sequence.IsComplete();
+        protected virtual bool ShouldShowContent => true;
     }
 }
