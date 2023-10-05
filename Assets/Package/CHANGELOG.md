@@ -1,7 +1,7 @@
 ## 0.3.0 [06.10.2023]
 
 ### Changed
-- Temporary removed all animations-related code & DOTween reference 
+- Temporarily removed all animations-related code & DOTween reference 
 - ViewsHandler now tracks active views using associated Show/Hide events
 - New approach for defining nested views (sub panels) in the UiView class
 
