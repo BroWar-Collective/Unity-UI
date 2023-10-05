@@ -166,26 +166,7 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: ComplexAnimationAcitivtyHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
-      data:
-        showAnimationContext:
-          id: 1
-        hideAnimationContext:
-          id: 2
-    00000001:
-      type: {class: SlideInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        transform: {fileID: 2187782931675356647}
-        direction: 1
-        ease: 9
-        duration: 1
-    00000002:
-      type: {class: SlideOutAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        transform: {fileID: 2187782931675356647}
-        direction: 0
-        ease: 8
-        duration: 1
+      type: {class: StandardActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
 --- !u!223 &7256615792312014793
 Canvas:
   m_ObjectHideFlags: 0
@@ -301,15 +282,7 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: StandardAnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
-      data:
-        animationContext:
-          id: 1
-    00000001:
-      type: {class: FadeInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        group: {fileID: 5819287575315200493}
-        duration: 0.75
+      type: {class: StandardActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
 --- !u!225 &5819287575315200493
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1432,53 +1405,7 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: StandardAnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
-      data:
-        animationContext:
-          id: 1
-    00000001:
-      type: {class: GroupedAnimationsContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        parallel: 1
-        nestedContexts:
-        - id: 2
-        - id: 3
-    00000002:
-      type: {class: SlideInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        transform: {fileID: 6334383523745798278}
-        direction: 3
-        ease: 9
-        duration: 1
-    00000003:
-      type: {class: FadeAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        group: {fileID: 6386027112681158046}
-        curve:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 2
-            outSlope: 2
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        duration: 1
+      type: {class: StandardActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
 --- !u!223 &6334383523745798280
 Canvas:
   m_ObjectHideFlags: 0
@@ -1747,14 +1674,4 @@ MonoBehaviour:
   references:
     version: 1
     00000000:
-      type: {class: StandardAnimationActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
-      data:
-        animationContext:
-          id: 1
-    00000001:
-      type: {class: SlideInAnimationContext, ns: BroWar.UI.Animation.Animations, asm: BroWar.UI}
-      data:
-        transform: {fileID: 5292434366015658673}
-        direction: 1
-        ease: 9
-        duration: 2
+      type: {class: StandardActivityHandler, ns: BroWar.UI.Common, asm: BroWar.UI}
