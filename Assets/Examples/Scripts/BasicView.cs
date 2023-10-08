@@ -2,6 +2,6 @@
 
 namespace Examples
 {
-    public class LeftView : ScreenSpaceView
+    public class BasicView : UiView
     { }
 }

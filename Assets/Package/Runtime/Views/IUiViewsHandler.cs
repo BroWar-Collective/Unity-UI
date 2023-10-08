@@ -7,6 +7,9 @@ namespace BroWar.UI.Views
 
     public interface IUiViewsHandler : IInitializableWithArgument<ViewsSettings>
     {
+        event Action<UiView> OnShowView;
+        event Action<UiView> OnHideView;
+
         void Show<T>() where T : UiView;
         void Show(Type viewType);
         void Show(UiView view);
@@ -22,7 +25,8 @@ namespace BroWar.UI.Views
         List<UiView> GetAllViews();
         void HideAll();
         void ShowAll();
+        void RegisterView(ViewDefinition definition);
 
-        IReadOnlyCollection<UiView> ActiveViews { get; }
+        IReadOnlyList<UiView> ActiveViews { get; }
     }
 }

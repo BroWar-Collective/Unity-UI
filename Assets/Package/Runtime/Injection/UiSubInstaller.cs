@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace BroWar.UI.Injection
@@ -9,7 +10,8 @@ namespace BroWar.UI.Injection
     using BroWar.UI.Management;
 
     [Serializable]
-    public class UiInstaller : ExposableSubInstaller
+    [MovedFrom(false, null, null, "UiInstaller")]
+    public class UiSubInstaller : ExposableSubInstaller
     {
         [SerializeField, NotNull]
         private UiManager manager;
