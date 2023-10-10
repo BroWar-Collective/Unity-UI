@@ -42,14 +42,18 @@ namespace BroWar.UI
         protected virtual void OnStopHiding()
         { }
 
-        protected void ResetActivity()
-        {
-            activityHandler?.Dispose();
-        }
-
+        /// <summary>
+        /// Overrides currently active <see cref="IActivityHandler"/>.
+        /// Previous one is not stored internally.
+        /// </summary>
         public void OverrideActivityHandler(IActivityHandler activityHandler)
         {
             this.activityHandler = activityHandler;
+        }
+
+        public void ResetActivity()
+        {
+            activityHandler?.Dispose();
         }
 
         public virtual void SetActive(bool value)
