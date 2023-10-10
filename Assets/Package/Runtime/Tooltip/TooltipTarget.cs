@@ -15,9 +15,6 @@ namespace BroWar.UI.Tooltip
     {
         [SerializeField, FormerlySerializedAs("settings")]
         private TooltipData data;
-        [SerializeField, Min(0)]
-        [Tooltip("Time needed to show tooltip content.")]
-        private float offsetTime = 0.0f;
         [SerializeField]
         [Tooltip("Optional, custom tooltip prefab. If null, the default one will be used.")]
         private T customPrefab;
