@@ -46,17 +46,17 @@ namespace BroWar.UI.Common
         }
 
         /// <summary>
-        /// Indicates if <see cref="Button"/> has associated label component.
+        /// Indicates whether <see cref="Button"/> has associated label component.
         /// </summary>
         public bool HasText => labelText != null;
 
         /// <summary>
-        /// Indicates if <see cref="Button"/> is interactable.
+        /// Indicates whether <see cref="Button"/> is interactable.
         /// </summary>
         public bool IsInteractable
         {
             get => Button.interactable;
-            set => Button.interactable = true;
+            set => Button.interactable = value;
         }
 
         public string Text
