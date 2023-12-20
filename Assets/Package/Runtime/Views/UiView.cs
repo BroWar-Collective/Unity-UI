@@ -66,7 +66,7 @@ namespace BroWar.UI.Views
 
         public override void Show(bool immediately, Action onFinish = null)
         {
-            base.Show(immediately);
+            base.Show(immediately, onFinish);
             foreach (SubViewDefinition viewDefinition in subViews)
             {
                 if (!viewDefinition.performShowHide)
@@ -86,7 +86,7 @@ namespace BroWar.UI.Views
 
         public override void Hide(bool immediately, Action onFinish = null)
         {
-            base.Hide(immediately);
+            base.Hide(immediately, onFinish);
             foreach (SubViewDefinition viewDefinition in subViews)
             {
                 if (!viewDefinition.performShowHide)

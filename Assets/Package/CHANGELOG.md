@@ -1,3 +1,13 @@
+## 0.3.1 [20.12.2023]
+
+### Changed
+- Fix UiButton's IsInteractable property
+
+### Added
+- UiImage - basic UiObject that wraps UnityEngine.UI.Image
+- UiContentRefresh & IContentRefreshAction for performing typical UI-related operations on demand
+
+
 ## 0.3.0 [06.10.2023]
 
 ### Changed
