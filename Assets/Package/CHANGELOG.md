@@ -1,3 +1,8 @@
+## 0.3.2 [23.12.2023]
+
+### Added
+- IUiManager binding in the UiSubInstaller installation process
+
 ## 0.3.1 [20.12.2023]
 
 ### Changed
@@ -6,7 +11,6 @@
 ### Added
 - UiImage - basic UiObject that wraps UnityEngine.UI.Image
 - UiContentRefresh & IContentRefreshAction for performing typical UI-related operations on demand
-
 
 ## 0.3.0 [06.10.2023]
 
