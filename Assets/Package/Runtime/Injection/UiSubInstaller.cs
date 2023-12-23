@@ -19,6 +19,8 @@ namespace BroWar.UI.Injection
         protected override void OnInstall(DiContainer container)
         {
             Assert.IsNotNull(manager, $"[UI][Injection] {nameof(UiManager)} not available.");
+            container.Bind<IUiManager>()
+                .FromInstance(manager);
             var handlers = manager.Handlers;
             foreach (var handler in handlers)
             {
