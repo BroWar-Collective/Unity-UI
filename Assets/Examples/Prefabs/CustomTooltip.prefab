@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3359148381745167703, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
+      propertyPath: m_text
+      value: Lorem ipsum
+      objectReference: {fileID: 0}
     - target: {fileID: 3359148382322358947, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
       propertyPath: m_Name
       value: CustomTooltip
@@ -157,102 +161,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3359148382322358972, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler
-      value: BroWar.UI BroWar.UI.Common.StandardAnimationActivityHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext
-      value: BroWar.UI BroWar.UI.Animation.Animations.FadeAnimationContext
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.group
-      value: 
-      objectReference: {fileID: 2415075264877997073}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.duration
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_PreInfinity
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_PostInfinity
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_RotationOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[1].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[0].value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[0].inSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[1].inSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[0].inWeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[0].outSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[1].inWeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[1].outSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[0].outWeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[1].outWeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[0].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[1].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[0].weightedMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452575055888138041, guid: 53b2d8eee57738d48aa8ea5891057224, type: 3}
-      propertyPath: activityHandler.animationContext.curve.m_Curve.Array.data[1].weightedMode
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
