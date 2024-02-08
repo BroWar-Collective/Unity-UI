@@ -98,6 +98,7 @@ namespace BroWar.UI.Views
                 return;
             }
 
+            view.SetActive(false);
             view.Deinitialize();
             view.OnShowView -= OnShowViewCallback;
             view.OnHideView -= OnHideViewCallback;
@@ -179,6 +180,7 @@ namespace BroWar.UI.Views
             }
 
             DeinitializeViews();
+            IsInitialized = false;
         }
 
         public void Initialize(ViewsSettings settings)
