@@ -22,8 +22,9 @@ namespace BroWar.UI.Common
 
         public event Action OnClicked;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             Button.onClick.AddListener(OnClick);
         }
 
