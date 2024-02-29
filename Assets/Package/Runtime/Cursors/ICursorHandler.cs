@@ -1,5 +1,5 @@
 ﻿namespace BroWar.UI.Cursors
 {
-    public interface IUiCursorHandler
+    public interface ICursorHandler
     { }
 }

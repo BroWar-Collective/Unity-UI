@@ -2,7 +2,7 @@
 
 namespace BroWar.UI.Input
 {
-    public interface IUiInputHandler
+    public interface IInputHandler
     {
         Vector2? PointerPosition { get; }
     }

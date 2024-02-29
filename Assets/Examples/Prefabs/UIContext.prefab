@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 1114633846812842680}
   - component: {fileID: 1114633846812842679}
   m_Layer: 0
-  m_Name: HandlersContainer [UI]
+  m_Name: UIHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

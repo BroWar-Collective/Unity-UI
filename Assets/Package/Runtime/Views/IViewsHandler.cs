@@ -5,7 +5,7 @@ namespace BroWar.UI.Views
 {
     using BroWar.Common;
 
-    public interface IUiViewsHandler : IInitializableWithArgument<ViewsSettings>
+    public interface IViewsHandler : IInitializableWithArgument<ViewsSettings>
     {
         event Action<UiView> OnShowView;
         event Action<UiView> OnHideView;
