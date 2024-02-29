@@ -9,6 +9,6 @@ namespace BroWar.UI.Popup
     /// </summary>
     [DisallowMultipleComponent]
     [AddComponentMenu("BroWar/UI/Popup/Popup Handler")]
-    public class PopupHandler : UiHandlerBehaviour, IUiPopupHandler
+    public class PopupHandler : UiHandlerBehaviour, IPopupHandler
     { }
 }

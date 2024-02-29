@@ -6,10 +6,10 @@ namespace BroWar.UI.Views
 {
     using BroWar.Common;
 
-    /// <inheritdoc cref="IUiViewsHandler"/>
+    /// <inheritdoc cref="IViewsHandler"/>
     [DisallowMultipleComponent]
     [AddComponentMenu("BroWar/UI/Views/Views Handler")]
-    public class ViewsHandler : UiHandlerBehaviour, IUiViewsHandler
+    public class ViewsHandler : UiHandlerBehaviour, IViewsHandler
     {
         protected readonly IDictionary<Type, UiView> viewsByTypes = new Dictionary<Type, UiView>();
         protected readonly List<UiView> activeViews = new List<UiView>();
@@ -338,7 +338,7 @@ namespace BroWar.UI.Views
         /// <inheritdoc cref="IInitializable"/>
         public bool IsInitialized { get; private set; }
 
-        /// <inheritdoc cref="IUiViewsHandler"/>
+        /// <inheritdoc cref="IViewsHandler"/>
         public IReadOnlyList<UiView> ActiveViews => activeViews;
     }
 }
