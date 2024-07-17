@@ -142,6 +142,7 @@ namespace BroWar.UI
         /// alid only for time-based operations, otherwise always <see langword="false"/>.
         /// </summary>
         public virtual bool Shows => activityHandler?.Shows ?? false;
+
         /// <summary>
         /// Indicates whether <see cref="UiObject"/> is during the hiding operation.
         /// Valid only for time-based operations, otherwise always <see langword="false"/>.
@@ -153,6 +154,10 @@ namespace BroWar.UI
         /// </summary>
         public bool IsActivityChanging => Shows || Hides;
 
+        /// <summary>
+        /// Indicates whether <see cref="UiObject"/> is activated. 
+        /// Still <see cref="IsVisible"/> returns <see langword="false"/> if parent is deactivated.
+        /// </summary>
         public bool IsActive => gameObject.activeSelf;
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BroWar.UI.Views
 {
@@ -12,41 +13,43 @@ namespace BroWar.UI.Views
     public abstract class UiView : UiObject, IInitializableWithArgument<ViewData>, IDeinitializable
     {
         [Title("General")]
-        [SerializeField, ReorderableList]
+        [SerializeField, ReorderableList, FormerlySerializedAs("subViews")]
         [Tooltip("Optional nested views, usually defined (registered) internally by the custom implementation.")]
-        private List<SubViewDefinition> subViews = new List<SubViewDefinition>();
+        private List<SubViewDefinition> predefinedSubViews = new List<SubViewDefinition>();
+        [SerializeField, ReorderableList, Disable]
+        private List<SubViewDefinition> registeredSubViews;
 
+        private bool isPrewarmed;
         /// <summary>
         /// <see cref="ViewData"/> used to initialize this view.
         /// </summary>
         private ViewData data;
 
-        public event Action<UiView> OnShowView;
-        public event Action<UiView> OnHideView;
+        public event Action<UiView, bool> OnShowView;
+        public event Action<UiView, bool> OnHideView;
         public event Action OnInitialized;
         public event Action OnDeinitialized;
 
-        protected override void OnStartShowing()
+        private void PrewarmSubViews()
         {
-            base.OnStartShowing();
-            OnShowView?.Invoke(this);
-        }
+            if (isPrewarmed)
+            {
+                return;
+            }
 
-        protected override void OnStopHiding()
-        {
-            base.OnStopHiding();
-            OnHideView?.Invoke(this);
+            registeredSubViews = new List<SubViewDefinition>(predefinedSubViews);
+            isPrewarmed = true;
         }
 
         protected void RegisterSubView(SubViewDefinition definition)
         {
             if (definition == null || definition.view == null)
             {
-                LogHandler.Log("[UI][View] Cannot register invalid definition.", LogType.Warning);
+                LogHandler.Log("[UI][Views] Cannot register invalid definition.", LogType.Warning);
                 return;
             }
 
-            subViews.Add(definition);
+            registeredSubViews.Add(definition);
             var view = definition.view;
             if (IsInitialized)
             {
@@ -64,10 +67,14 @@ namespace BroWar.UI.Views
             data = null;
         }
 
+        protected virtual void OnUpdateData(ViewData data)
+        { }
+
         public override void Show(bool immediately, Action onFinish = null)
         {
             base.Show(immediately, onFinish);
-            foreach (SubViewDefinition viewDefinition in subViews)
+            OnShowView?.Invoke(this, immediately);
+            foreach (SubViewDefinition viewDefinition in SubViews)
             {
                 if (!viewDefinition.performShowHide)
                 {
@@ -87,7 +94,8 @@ namespace BroWar.UI.Views
         public override void Hide(bool immediately, Action onFinish = null)
         {
             base.Hide(immediately, onFinish);
-            foreach (SubViewDefinition viewDefinition in subViews)
+            OnHideView?.Invoke(this, immediately);
+            foreach (SubViewDefinition viewDefinition in SubViews)
             {
                 if (!viewDefinition.performShowHide)
                 {
@@ -106,11 +114,20 @@ namespace BroWar.UI.Views
 
         public virtual void Initialize(ViewData data)
         {
+            if (IsInitialized || IsInitializing)
+            {
+                LogHandler.Log($"[UI][Views] {nameof(UiView)} is already initialized.", LogType.Warning);
+                return;
+            }
+
+            IsInitializing = true;
+            PrewarmSubViews();
             OnInitialize(data);
-            foreach (SubViewDefinition viewDefinition in subViews)
+            IsInitializing = false;
+            foreach (SubViewDefinition viewDefinition in SubViews)
             {
                 UiView view = viewDefinition.view;
-                if (view == null)
+                if (view == null || view.IsInitialized)
                 {
                     continue;
                 }
@@ -125,7 +142,7 @@ namespace BroWar.UI.Views
         public virtual void Deinitialize()
         {
             OnDeinitialize();
-            foreach (SubViewDefinition viewDefinition in subViews)
+            foreach (SubViewDefinition viewDefinition in SubViews)
             {
                 UiView view = viewDefinition.view;
                 if (view == null)
@@ -136,12 +153,37 @@ namespace BroWar.UI.Views
                 view.Deinitialize();
             }
 
+            registeredSubViews = null;
+            isPrewarmed = false;
             IsInitialized = false;
             OnDeinitialized?.Invoke();
         }
 
+        public virtual void UpdateData(ViewData data)
+        {
+            if (!IsInitialized)
+            {
+                return;
+            }
+
+            this.data = data;
+            OnUpdateData(data);
+            foreach (SubViewDefinition viewDefinition in SubViews)
+            {
+                UiView view = viewDefinition.view;
+                if (view == null || view.IsInitialized)
+                {
+                    continue;
+                }
+
+                view.UpdateData(data);
+            }
+        }
+
         /// <inheritdoc cref="IInitializableWithArgument{T}"/>
         public bool IsInitialized { get; private set; }
+
+        public bool IsInitializing { get; private set; }
 
         /// <summary>
         /// Indicates whether this <see cref="UiView"/> or any nested <see cref="UiView"/> is changing it's activity state.
@@ -155,7 +197,7 @@ namespace BroWar.UI.Views
                     return true;
                 }
 
-                foreach (SubViewDefinition viewDefinition in subViews)
+                foreach (SubViewDefinition viewDefinition in SubViews)
                 {
                     UiView view = viewDefinition.view;
                     if (view.IsTransitioning)
@@ -168,6 +210,13 @@ namespace BroWar.UI.Views
             }
         }
 
-        protected IReadOnlyList<SubViewDefinition> NestedViews => subViews;
+        public IReadOnlyList<SubViewDefinition> SubViews
+        {
+            get
+            {
+                PrewarmSubViews();
+                return registeredSubViews;
+            }
+        }
     }
 }
