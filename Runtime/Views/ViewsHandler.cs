@@ -147,13 +147,13 @@ namespace BroWar.UI.Views
             InitializeViews(viewData);
         }
 
-        protected void OnShowViewCallback(UiView view)
+        protected void OnShowViewCallback(UiView view, bool immediately)
         {
             activeViews.Add(view);
             OnShowView?.Invoke(view);
         }
 
-        protected void OnHideViewCallback(UiView view)
+        protected void OnHideViewCallback(UiView view, bool immediately)
         {
             if (activeViews.Remove(view))
             {
