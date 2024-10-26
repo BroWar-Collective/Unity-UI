@@ -22,9 +22,26 @@ namespace BroWar.UI.Views
         bool ContainsView(Type type);
         bool TryGetView(Type type, out UiView view);
         bool TryGetView<T>(out T view) where T : UiView;
+
+        /// <summary>
+        /// Returns <see cref="List{T}"/> of all available <see cref="UiView"/>s.
+        /// A new collection is created with each invoke.
+        /// </summary>
         List<UiView> GetAllViews();
+
+        /// <summary>
+        /// Hides all <see cref="UiView"/>s.
+        /// </summary>
         void HideAll();
+        /// <summary>
+        /// Shows all <see cref="UiView"/>s.
+        /// </summary>
         void ShowAll();
+
+        /// <summary>
+        /// Registers and add associated <see cref="UiView"/> to the handler.
+        /// If <see cref="ViewsHandler"/> is already initialized then <see cref="UiView"/> will also be initialized.
+        /// </summary>
         void RegisterView(ViewDefinition definition);
 
         IReadOnlyList<UiView> ActiveViews { get; }

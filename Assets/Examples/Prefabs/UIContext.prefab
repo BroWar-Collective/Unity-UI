@@ -444,10 +444,10 @@ MonoBehaviour:
   selfInitialize: 1
   definitions:
   - showOnInitialize: 1
-    showImmediately: 0
+    setImmediately: 0
     view: {fileID: 1114633846218482264}
   - showOnInitialize: 1
-    showImmediately: 1
+    setImmediately: 1
     view: {fileID: 5751484812887521402}
 --- !u!114 &1114633846812842680
 MonoBehaviour:
