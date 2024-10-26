@@ -74,14 +74,14 @@ namespace BroWar.UI.Views
         {
             base.Show(immediately, onFinish);
             OnShowView?.Invoke(this, immediately);
-            foreach (SubViewDefinition viewDefinition in SubViews)
+            foreach (var viewDefinition in SubViews)
             {
                 if (!viewDefinition.performShowHide)
                 {
                     continue;
                 }
 
-                UiView view = viewDefinition.view;
+                var view = viewDefinition.view;
                 if (view == null || !view.CanShow())
                 {
                     continue;
@@ -95,14 +95,14 @@ namespace BroWar.UI.Views
         {
             base.Hide(immediately, onFinish);
             OnHideView?.Invoke(this, immediately);
-            foreach (SubViewDefinition viewDefinition in SubViews)
+            foreach (var viewDefinition in SubViews)
             {
                 if (!viewDefinition.performShowHide)
                 {
                     continue;
                 }
 
-                UiView view = viewDefinition.view;
+                var view = viewDefinition.view;
                 if (view == null || !view.CanHide())
                 {
                     continue;
@@ -124,9 +124,9 @@ namespace BroWar.UI.Views
             PrewarmSubViews();
             OnInitialize(data);
             IsInitializing = false;
-            foreach (SubViewDefinition viewDefinition in SubViews)
+            foreach (var viewDefinition in SubViews)
             {
-                UiView view = viewDefinition.view;
+                var view = viewDefinition.view;
                 if (view == null || view.IsInitialized)
                 {
                     continue;
@@ -142,9 +142,9 @@ namespace BroWar.UI.Views
         public virtual void Deinitialize()
         {
             OnDeinitialize();
-            foreach (SubViewDefinition viewDefinition in SubViews)
+            foreach (var viewDefinition in SubViews)
             {
-                UiView view = viewDefinition.view;
+                var view = viewDefinition.view;
                 if (view == null)
                 {
                     continue;
@@ -168,9 +168,9 @@ namespace BroWar.UI.Views
 
             this.data = data;
             OnUpdateData(data);
-            foreach (SubViewDefinition viewDefinition in SubViews)
+            foreach (var viewDefinition in SubViews)
             {
-                UiView view = viewDefinition.view;
+                var view = viewDefinition.view;
                 if (view == null || view.IsInitialized)
                 {
                     continue;
@@ -197,9 +197,9 @@ namespace BroWar.UI.Views
                     return true;
                 }
 
-                foreach (SubViewDefinition viewDefinition in SubViews)
+                foreach (var viewDefinition in SubViews)
                 {
-                    UiView view = viewDefinition.view;
+                    var view = viewDefinition.view;
                     if (view.IsTransitioning)
                     {
                         return true;

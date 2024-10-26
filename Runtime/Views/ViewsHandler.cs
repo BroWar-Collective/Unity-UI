@@ -71,7 +71,7 @@ namespace BroWar.UI.Views
             view.OnShowView += OnShowViewCallback;
             view.OnHideView += OnHideViewCallback;
 
-            var setImmediately = definition.showImmediately;
+            var setImmediately = definition.setImmediately;
             if (definition.showOnInitialize)
             {
                 if (!setImmediately)
@@ -202,11 +202,13 @@ namespace BroWar.UI.Views
             OnInitialized?.Invoke();
         }
 
+        /// <inheritdoc cref="IViewsHandler"/>
         public void Show<T>() where T : UiView
         {
             Show(typeof(T));
         }
 
+        /// <inheritdoc cref="IViewsHandler"/>
         public void Show(Type viewType)
         {
             if (TryGetView(viewType, out var view))
@@ -215,21 +217,25 @@ namespace BroWar.UI.Views
             }
         }
 
+        /// <inheritdoc cref="IViewsHandler"/>
         public void Show(UiView view)
         {
             Show(view, false);
         }
 
+        /// <inheritdoc cref="IViewsHandler"/>
         public void Show(UiView view, bool immediately)
         {
             ShowInternally(view, immediately);
         }
 
+        /// <inheritdoc cref="IViewsHandler"/>
         public void Hide<T>() where T : UiView
         {
             Hide(typeof(T));
         }
 
+        /// <inheritdoc cref="IViewsHandler"/>
         public void Hide(Type viewType)
         {
             if (TryGetView(viewType, out var view))
@@ -238,26 +244,31 @@ namespace BroWar.UI.Views
             }
         }
 
+        /// <inheritdoc cref="IViewsHandler"/>
         public void Hide(UiView view)
         {
             Hide(view, false);
         }
 
+        /// <inheritdoc cref="IViewsHandler"/>
         public void Hide(UiView view, bool immediately)
         {
             HideInternally(view, immediately);
         }
 
+        /// <inheritdoc cref="IViewsHandler"/>
         public bool ContainsView<T>() where T : UiView
         {
             return ContainsView(typeof(T));
         }
 
+        /// <inheritdoc cref="IViewsHandler"/>
         public bool ContainsView(Type type)
         {
             return viewsByTypes.ContainsKey(type);
         }
 
+        /// <inheritdoc cref="IViewsHandler"/>
         public bool TryGetView(Type type, out UiView view)
         {
             if (viewsByTypes.TryGetValue(type, out view))
@@ -269,6 +280,7 @@ namespace BroWar.UI.Views
             return false;
         }
 
+        /// <inheritdoc cref="IViewsHandler"/>
         public bool TryGetView<T>(out T view) where T : UiView
         {
             if (TryGetView(typeof(T), out var cachedView))
@@ -281,6 +293,13 @@ namespace BroWar.UI.Views
             return false;
         }
 
+        /// <inheritdoc cref="IViewsHandler"/>
+        public List<UiView> GetAllViews()
+        {
+            return new List<UiView>(viewsByTypes.Values);
+        }
+
+        /// <inheritdoc cref="IViewsHandler"/>
         public void HideAll()
         {
             var views = GetAllViews();
@@ -293,6 +312,7 @@ namespace BroWar.UI.Views
             }
         }
 
+        /// <inheritdoc cref="IViewsHandler"/>
         public void ShowAll()
         {
             var views = GetAllViews();
@@ -302,10 +322,7 @@ namespace BroWar.UI.Views
             }
         }
 
-        /// <summary>
-        /// Registers and add associated <see cref="UiView"/> to the handler.
-        /// If <see cref="ViewsHandler"/> is already initialized then <see cref="UiView"/> will also be initialized.
-        /// </summary>
+        /// <inheritdoc cref="IViewsHandler"/>
         public void RegisterView(ViewDefinition definition)
         {
             if (definition == null || definition.view == null)
@@ -326,19 +343,10 @@ namespace BroWar.UI.Views
             });
         }
 
-        /// <summary>
-        /// Returns <see cref="List{T}"/> of all available <see cref="UiView"/>s.
-        /// A new collection is created with each invoke.
-        /// </summary>
-        public List<UiView> GetAllViews()
-        {
-            return new List<UiView>(viewsByTypes.Values);
-        }
+        /// <inheritdoc cref="IViewsHandler"/>
+        public IReadOnlyList<UiView> ActiveViews => activeViews;
 
         /// <inheritdoc cref="IInitializable"/>
         public bool IsInitialized { get; private set; }
-
-        /// <inheritdoc cref="IViewsHandler"/>
-        public IReadOnlyList<UiView> ActiveViews => activeViews;
     }
 }
