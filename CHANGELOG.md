@@ -1,3 +1,8 @@
+## 0.3.3 [02.11.2026]
+
+### Changed
+- Injection package update
+
 ## 0.3.2 [23.12.2023]
 
 ### Added
