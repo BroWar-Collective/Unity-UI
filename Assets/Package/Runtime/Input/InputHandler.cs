@@ -10,7 +10,7 @@ namespace BroWar.UI.Input
     /// </summary>
     [DisallowMultipleComponent]
     [AddComponentMenu("BroWar/UI/Input/Input Handler")]
-    public class InputHandler : UiHandlerBehaviour, IUiInputHandler
+    public class InputHandler : UiHandlerBehaviour, IInputHandler
     {
         [SerializeField, NotNull]
         private InputSystemUIInputModule inputModule;

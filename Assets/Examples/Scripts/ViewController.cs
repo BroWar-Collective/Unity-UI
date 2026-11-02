@@ -14,7 +14,7 @@ namespace Examples
         [SerializeField, TypeConstraint(typeof(UiView))]
         private SerializedType viewType;
 
-        private IUiViewsHandler viewsHandler;
+        private IViewsHandler viewsHandler;
 
         private void Start()
         {
@@ -25,7 +25,7 @@ namespace Examples
         }
 
         [Inject]
-        internal void Inject(IUiViewsHandler viewsHandler)
+        internal void Inject(IViewsHandler viewsHandler)
         {
             this.viewsHandler = viewsHandler;
         }

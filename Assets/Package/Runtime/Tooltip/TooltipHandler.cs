@@ -20,10 +20,10 @@ namespace BroWar.UI.Tooltip
         [Tooltip("Currently active tooltip instance.")]
         private TooltipBehaviour activeTooltip;
 
-        private IUiInputHandler inputHandler;
+        private IInputHandler inputHandler;
 
         [Inject]
-        internal void Inject(IUiInputHandler inputHandler)
+        internal void Inject(IInputHandler inputHandler)
         {
             this.inputHandler = inputHandler;
         }

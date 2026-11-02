@@ -1,16 +1,14 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
-namespace BroWar.UI.Injection
+namespace BroWar.UI.Composition
 {
-    using BroWar.Injection;
+    using BroWar.Injection.Installers;
     using BroWar.UI.Management;
 
     [Serializable]
-    [MovedFrom(false, null, null, "UiInstaller")]
     public class UiSubInstaller : ExposableSubInstaller
     {
         [SerializeField, NotNull]
